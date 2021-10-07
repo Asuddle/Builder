@@ -1,7 +1,7 @@
 import React from "react";
 
 const AddFiles = React.lazy(() => import("./views/files/index"));
-const FilesTable = React.lazy(() => import("./views/files/table"));
+const FilesTable = React.lazy(() => import("./views/files/table-wrapper"));
 const Toaster = React.lazy(() =>
   import("./views/notifications/toaster/Toaster")
 );
@@ -64,8 +64,8 @@ const User = React.lazy(() => import("./views/users/User"));
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
-  { path: "/files", exact: true, name: "File", component: FilesTable },
-  { path: "/files/add", exact: true, name: "File", component: AddFiles },
+  { path: "/files", exact: true, name: "Files", component: FilesTable },
+  { path: "/files/add", exact: true, name: "Add", component: AddFiles },
 
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/theme", name: "Theme", component: Colors, exact: true },

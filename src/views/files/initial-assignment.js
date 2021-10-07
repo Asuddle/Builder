@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CButton,
   CCard,
@@ -10,21 +10,24 @@ import {
   CInput,
   CLabel,
   CInvalidFeedback,
+  CSwitch,
+  CRow,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { Formik } from "formik";
+import logo from "../../assets/icons/alfursanlog.png";
 import * as yup from "yup";
-
-const AddInitialAssignment = ({ handleFormData, data }) => {
+const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
+  const [receivingSwitch, setReceivingSwitch] = useState(true);
   let schema = yup.object().shape({
     assignment_date: yup.string().required(),
     received_by: yup.string().required(),
     received_date: yup.string().required(),
-    company: yup.string().required(),
+    assigned_to: yup.string().required(),
   });
   return (
     <>
-      <CCol xs="12" sm="6">
+      <CCol xs="12" sm={col}>
         <CCard className="m-4 p-4" className="form-shadow">
           <CCardHeader>
             <strong>Initial Assignment</strong>
@@ -36,21 +39,97 @@ const AddInitialAssignment = ({ handleFormData, data }) => {
               handleFormData(values, 2);
             }}
           >
-            {({ errors, touched, handleSubmit, handleChange, values }) => (
+            {({
+              errors,
+              touched,
+              handleSubmit,
+              handleChange,
+              values,
+              setFieldValue,
+            }) => (
               <form onSubmit={handleSubmit}>
                 <CCardBody>
+                  <div style={{ textAlign: "center" }}>
+                    <img src={logo} width={100} height={100} />
+                  </div>
+                  <br />
+                  <CCard
+                    style={{
+                      padding: "6px",
+                      boxShadow: "#edcf82 5px 5px",
+                    }}
+                  >
+                    <CRow>
+                      <CCol>
+                        <img
+                          style={{ float: "right" }}
+                          src={logo}
+                          width={70}
+                          height={70}
+                        />
+                      </CCol>
+                      <CCol xs={9}>
+                        {/* <CLabel htmlFor="street">Company </CLabel>*/}
+                        <h2 style={{ paddingTop: "15px" }}>
+                          Al-Fursan Properties
+                        </h2>
+                        <p className="subtitle">
+                          The Ultimate Insider's Guide to City Real Estate
+                        </p>
+                      </CCol>
+                    </CRow>
+                  </CCard>
+                  <CCard
+                    style={{
+                      boxShadow:
+                        "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
+                    }}
+                  >
+                    <CCardHeader>
+                      <strong>Company</strong>
+                    </CCardHeader>
+                    <CCardBody style={{ padding: "14px" }}>
+                      <CRow>
+                        <CCol xs={4}>
+                          <img
+                            src={logo}
+                            style={{ float: "right" }}
+                            width={60}
+                            height={60}
+                          />
+                        </CCol>
+                        <CCol xs={8}>
+                          {/* <CLabel htmlFor="street">Company </CLabel>*/}
+                          <h4 style={{ paddingTop: "5px" }}>
+                            Al-Fursan Properties
+                          </h4>
+                          <p className="subtitle">
+                            The Ultimate Insider's Guide to City Real Estate
+                          </p>
+                        </CCol>
+                      </CRow>
+                    </CCardBody>
+                  </CCard>
+                  <br />
                   <CFormGroup>
-                    <CLabel htmlFor="company">Assigned To </CLabel>
+                    <CLabel htmlFor="assigned_to">
+                      Assigned To <span className="sterick-field">*</span>
+                    </CLabel>
                     <CInput
-                      invalid={touched["company"] && errors["company"]}
-                      id="company"
-                      name="company"
-                      onChange={handleChange}
-                      value={values["company"]}
+                      invalid={touched["assigned_to"] && errors["assigned_to"]}
+                      id="assigned_to"
+                      name="assigned_to"
+                      onChange={(e) => {
+                        handleChange(e);
+                        setFieldValue("received_by", e.target.value);
+                      }}
+                      value={values["assigned_to"]}
                       placeholder="123457"
                     />
-                    {touched["company"] && errors["company"] && (
-                      <CInvalidFeedback>{errors["company"]}</CInvalidFeedback>
+                    {touched["assigned_to"] && errors["assigned_to"] && (
+                      <CInvalidFeedback>
+                        {errors["assigned_to"]}
+                      </CInvalidFeedback>
                     )}
                   </CFormGroup>
                   <CFormGroup>
@@ -74,45 +153,70 @@ const AddInitialAssignment = ({ handleFormData, data }) => {
                       )}
                   </CFormGroup>
                   <CFormGroup>
-                    <CLabel htmlFor="street">Received By </CLabel>
-                    <CInput
-                      id="street"
-                      value={values["received_by"]}
-                      name="received_by"
-                      onChange={handleChange}
-                      invalid={touched["received_by"] && errors["received_by"]}
-                      placeholder="Enter street name"
+                    <CSwitch
+                      className={"mx-1"}
+                      variant={"3d"}
+                      color={"primary"}
+                      checked={receivingSwitch}
+                      onChange={() => {
+                        setReceivingSwitch(!receivingSwitch);
+                      }}
+                      size={"lg"}
                     />
-                    {touched["received_by"] && errors["received_by"] && (
-                      <CInvalidFeedback>
-                        {errors["received_by"]}
-                      </CInvalidFeedback>
-                    )}
+                    <br />
+                    <CLabel>
+                      Please uncheck it if you want recieved date and recieving
+                      person to be different
+                    </CLabel>
                   </CFormGroup>
+                  {!receivingSwitch && (
+                    <>
+                      <CFormGroup>
+                        <CLabel htmlFor="street">
+                          Received By <span className="sterick-field">*</span>
+                        </CLabel>
+                        <CInput
+                          id="street"
+                          value={values["received_by"]}
+                          name="received_by"
+                          onChange={handleChange}
+                          invalid={
+                            touched["received_by"] && errors["received_by"]
+                          }
+                          placeholder="Enter street name"
+                        />
+                        {touched["received_by"] && errors["received_by"] && (
+                          <CInvalidFeedback>
+                            {errors["received_by"]}
+                          </CInvalidFeedback>
+                        )}
+                      </CFormGroup>
 
-                  <CFormGroup>
-                    <CLabel htmlFor="vat">Receiving Date </CLabel>
-                    <CInput
-                      invalid={
-                        touched["received_date"] && errors["received_date"]
-                      }
-                      value={values["received_date"]}
-                      name="received_date"
-                      onChange={handleChange}
-                      type="date"
-                      id="vat"
-                      placeholder="ABC12345XTZ"
-                    />
-                    {touched["received_date"] && errors["received_date"] && (
-                      <CInvalidFeedback>
-                        {errors["received_date"]}
-                      </CInvalidFeedback>
-                    )}
-                  </CFormGroup>
-                  <CFormGroup>
-                    <CLabel htmlFor="street">Company </CLabel>
-                    <h6>Al-Fursan Properties</h6>
-                  </CFormGroup>
+                      <CFormGroup>
+                        <CLabel htmlFor="vat">
+                          Receiving Date{" "}
+                          <span className="sterick-field">*</span>
+                        </CLabel>
+                        <CInput
+                          invalid={
+                            touched["received_date"] && errors["received_date"]
+                          }
+                          value={values["received_date"]}
+                          name="received_date"
+                          onChange={handleChange}
+                          type="date"
+                          id="vat"
+                          placeholder="ABC12345XTZ"
+                        />
+                        {touched["received_date"] &&
+                          errors["received_date"] && (
+                            <CInvalidFeedback>
+                              {errors["received_date"]}
+                            </CInvalidFeedback>
+                          )}
+                      </CFormGroup>
+                    </>
+                  )}
                 </CCardBody>
 
                 <CCardFooter>

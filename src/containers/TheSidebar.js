@@ -12,7 +12,6 @@ import {
   CSidebarNavItem,
 } from "@coreui/react";
 import logo from "../assets/icons/alfursanlog.png";
-import CIcon from "@coreui/icons-react";
 
 // sidebar nav config
 import navigation from "./_nav";

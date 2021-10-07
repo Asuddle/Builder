@@ -10,17 +10,17 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Files"],
+    _children: ["Files Managment"],
   },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Add Files",
+  //   to: "/files/add",
+  //   icon: "cil-drop",
+  // },
   {
     _tag: "CSidebarNavItem",
-    name: "Add Files",
-    to: "/files/add",
-    icon: "cil-drop",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Show Files",
+    name: "Inventory",
     to: "/files",
     icon: "cil-pencil",
   },
@@ -223,88 +223,88 @@ const _nav = [
   //   _tag: "CSidebarNavTitle",
   //   _children: ["Extras"],
   // },
-  {
-    _tag: "CSidebarNavDropdown",
-    name: "Pages",
-    route: "/pages",
-    icon: "cil-star",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Login",
-        to: "/login",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Register",
-        to: "/register",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Error 404",
-        to: "/404",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Error 500",
-        to: "/500",
-      },
-    ],
-  },
-  // },
   // {
-  //   _tag: 'CSidebarNavItem',
-  //   name: 'Disabled',
-  //   icon: 'cil-ban',
+  //   _tag: "CSidebarNavDropdown",
+  //   name: "Pages",
+  //   route: "/pages",
+  //   icon: "cil-star",
+  //   _children: [
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Login",
+  //       to: "/login",
+  //     },
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Register",
+  //       to: "/register",
+  //     },
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Error 404",
+  //       to: "/404",
+  //     },
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Error 500",
+  //       to: "/500",
+  //     },
+  //   ],
+  // },
+
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Disabled",
+  //   icon: "cil-ban",
   //   badge: {
-  //     color: 'secondary',
-  //     text: 'NEW',
+  //     color: "secondary",
+  //     text: "NEW",
   //   },
-  //   addLinkClass: 'c-disabled',
-  //   'disabled': true
+  //   addLinkClass: "c-disabled",
+  //   disabled: true,
   // },
   // {
-  //   _tag: 'CSidebarNavDivider',
-  //   className: 'm-2'
+  //   _tag: "CSidebarNavDivider",
+  //   className: "m-2",
   // },
   // {
-  //   _tag: 'CSidebarNavTitle',
-  //   _children: ['Labels']
+  //   _tag: "CSidebarNavTitle",
+  //   _children: ["Labels"],
   // },
   // {
-  //   _tag: 'CSidebarNavItem',
-  //   name: 'Label danger',
-  //   to: '',
+  //   _tag: "CSidebarNavItem",
+  //   name: "Label danger",
+  //   to: "",
   //   icon: {
-  //     name: 'cil-star',
-  //     className: 'text-danger'
+  //     name: "cil-star",
+  //     className: "text-danger",
   //   },
-  //   label: true
+  //   label: true,
   // },
   // {
-  //   _tag: 'CSidebarNavItem',
-  //   name: 'Label info',
-  //   to: '',
+  //   _tag: "CSidebarNavItem",
+  //   name: "Label info",
+  //   to: "",
   //   icon: {
-  //     name: 'cil-star',
-  //     className: 'text-info'
+  //     name: "cil-star",
+  //     className: "text-info",
   //   },
-  //   label: true
+  //   label: true,
   // },
   // {
-  //   _tag: 'CSidebarNavItem',
-  //   name: 'Label warning',
-  //   to: '',
+  //   _tag: "CSidebarNavItem",
+  //   name: "Label warning",
+  //   to: "",
   //   icon: {
-  //     name: 'cil-star',
-  //     className: 'text-warning'
+  //     name: "cil-star",
+  //     className: "text-warning",
   //   },
-  //   label: true
+  //   label: true,
   // },
   // {
-  //   _tag: 'CSidebarNavDivider',
-  //   className: 'm-2'
-  // }
+  //   _tag: "CSidebarNavDivider",
+  //   className: "m-2",
+  // },
 ];
 
 export default _nav;

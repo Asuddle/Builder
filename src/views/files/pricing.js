@@ -11,13 +11,22 @@ import {
   CInput,
   CLabel,
   CRow,
+  CInputGroupAppend,
+  CInputGroupText,
+  CInputGroup,
 } from "@coreui/react";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+
+import { useHistory } from "react-router";
 const PricingComponent = ({ data, handleFormData }) => {
   let schema = yup.object().shape({
     price: yup.number().required(),
+    deposit: yup.number().required(),
+    deposit_percentage: yup.number().max(100),
   });
+  const history = useHistory();
   return (
     <>
       <CCol xs="12" sm="6">
@@ -31,6 +40,18 @@ const PricingComponent = ({ data, handleFormData }) => {
             validationSchema={schema}
             onSubmit={(values) => {
               handleFormData(values, 3);
+              toast.success("The file is Added! ", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+              setTimeout(() => {
+                history.push("/files");
+              }, 1000);
             }}
           >
             {({
@@ -70,10 +91,19 @@ const PricingComponent = ({ data, handleFormData }) => {
                     <CRow>
                       <CCol>
                         <CInput
+                          invalid={touched["deposit"] && errors["deposit"]}
                           onChange={(e) => {
                             if (values["price"] !== "") {
                               let perc =
                                 (e.target.value * 100) / values["price"];
+                              if (!Number.isInteger(perc)) {
+                                perc = parseFloat(perc).toFixed(2);
+                              }
+                              // 23 % 1 = 0
+                              // 23.5 % 1 = 0.5
+                              // if (perc > 100) {
+                              //   perc = 100;
+                              // }
                               setFieldValue("deposit_percentage", perc);
                             }
                             handleChange(e);
@@ -82,22 +112,44 @@ const PricingComponent = ({ data, handleFormData }) => {
                           name="deposit"
                           placeholder="Deposit"
                         />
+                        {touched["deposit"] && errors["deposit"] && (
+                          <CInvalidFeedback>
+                            {errors["deposit"]}
+                          </CInvalidFeedback>
+                        )}
                       </CCol>
                       <CCol>
-                        <CInput
-                          onChange={(e) => {
-                            if (values["price"] !== "") {
-                              let perc =
-                                (e.target.value / 100) * values["price"];
-                              console.log("values", perc);
-                              setFieldValue("deposit", perc);
+                        <CInputGroup>
+                          <CInput
+                            invalid={
+                              touched["deposit_percentage"] &&
+                              errors["deposit_percentage"]
                             }
-                            handleChange(e);
-                          }}
-                          value={values["deposit_percentage"]}
-                          name="deposit_percentage"
-                          placeholder="Percentage"
-                        />
+                            onChange={(e) => {
+                              if (e.target.value < 101) {
+                                if (values["price"] !== "") {
+                                  let perc =
+                                    (e.target.value / 100) * values["price"];
+                                  console.log("values", perc);
+                                  setFieldValue("deposit", perc);
+                                }
+                                handleChange(e);
+                              }
+                            }}
+                            value={values["deposit_percentage"]}
+                            name="deposit_percentage"
+                            placeholder="Percentage"
+                          />
+                          <CInputGroupAppend>
+                            <CInputGroupText>%</CInputGroupText>
+                          </CInputGroupAppend>
+                          {touched["deposit_percentage"] &&
+                            errors["deposit_percentage"] && (
+                              <CInvalidFeedback>
+                                {errors["deposit_percentage"]}
+                              </CInvalidFeedback>
+                            )}
+                        </CInputGroup>
                       </CCol>
                     </CRow>
                   </CFormGroup>

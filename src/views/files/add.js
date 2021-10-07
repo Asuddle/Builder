@@ -16,7 +16,7 @@ import {
 import CIcon from "@coreui/icons-react";
 import { Field, Formik } from "formik";
 import * as yup from "yup";
-const AddFiles = ({ nextForm, data, handleFormData }) => {
+const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
   let schema = yup.object().shape({
     file_name: yup.string().required(),
     security_code: yup.string().required(),
@@ -25,7 +25,7 @@ const AddFiles = ({ nextForm, data, handleFormData }) => {
 
   return (
     <>
-      <CCol xs="12" sm="6">
+      <CCol xs="12" sm={col}>
         <CCard className="m-4 p-4" className="form-shadow">
           <CCardHeader>
             <strong>Basic Information</strong>
@@ -41,7 +41,9 @@ const AddFiles = ({ nextForm, data, handleFormData }) => {
               <form onSubmit={handleSubmit}>
                 <CCardBody>
                   <CFormGroup>
-                    <CLabel htmlFor="company">File number </CLabel>
+                    <CLabel htmlFor="company">
+                      File number <span className="sterick-field">*</span>{" "}
+                    </CLabel>
                     <CInput
                       invalid={touched["file_name"] && errors["file_name"]}
                       name="file_name"
@@ -56,7 +58,9 @@ const AddFiles = ({ nextForm, data, handleFormData }) => {
                     )}
                   </CFormGroup>
                   <CFormGroup>
-                    <CLabel htmlFor="vat">Security Code </CLabel>
+                    <CLabel htmlFor="vat">
+                      Security Code <span className="sterick-field">*</span>{" "}
+                    </CLabel>
                     <CInput
                       invalid={
                         touched["security_code"] && errors["security_code"]
@@ -74,7 +78,9 @@ const AddFiles = ({ nextForm, data, handleFormData }) => {
                     )}
                   </CFormGroup>
                   <CFormGroup>
-                    <CLabel htmlFor="ccmonth">Type</CLabel>
+                    <CLabel htmlFor="ccmonth">
+                      Type <span className="sterick-field">*</span>
+                    </CLabel>
                     <CSelect
                       name="type"
                       value={values["type"]}

@@ -22,7 +22,7 @@ const FilesComponent = () => {
       project_name: "",
     },
     form2: {
-      company: "",
+      assigned_to: "",
       assignment_date: new Date().toISOString().split("T")[0],
       received_by: "",
       received_date: new Date().toISOString().split("T")[0],
@@ -53,70 +53,7 @@ const FilesComponent = () => {
             <CCardHeader>
               <strong>Files</strong>
             </CCardHeader>
-            <CRow>
-              <CCol xs="12" sm="12">
-                <CRow>
-                  <CCol xs={2}></CCol>
-                  <CCol xs={2}>
-                    <CCard
-                      className={`icon-cards ${
-                        active == 1 ? "active-class" : ""
-                      }`}
-                      onClick={() => {
-                        setActive(1);
-                      }}
-                    >
-                      <CIcon content={cilFile} height={40} />
-                    </CCard>
-                    <h6 className="align-center">Basic Information</h6>
-                  </CCol>
-                  <CCol xs={1}>
-                    <CIcon
-                      className="arrow-icon"
-                      content={cilArrowRight}
-                      width={35}
-                    />
-                  </CCol>
-                  <CCol xs={2}>
-                    <CCard
-                      className={`icon-cards ${
-                        active == 2 ? "active-class" : ""
-                      }`}
-                      onClick={() => {
-                        if (active !== 1) {
-                          setActive(2);
-                        }
-                      }}
-                    >
-                      <CIcon name="cil-basket" height={40} />
-                    </CCard>
-                    <h6 className="align-center"> Initial Assignment</h6>
-                  </CCol>
-                  <CCol xs={1}>
-                    <CIcon
-                      className="arrow-icon"
-                      content={cilArrowRight}
-                      width={35}
-                    />
-                  </CCol>
-                  <CCol xs={2}>
-                    <CCard
-                      onClick={() => {
-                        // setActive(3);
-                      }}
-                      className={`icon-cards ${
-                        active == 3 ? "active-class" : ""
-                      }`}
-                    >
-                      <CIcon content={cilMoney} height={40} />
-                    </CCard>
-                    <h6 className="align-center">Pricing</h6>
-                  </CCol>
-                </CRow>
-              </CCol>
-            </CRow>
-            <br />
-            <br />
+
             <br />
             <CRow>
               <CCol xs="12" sm="12">
@@ -217,3 +154,73 @@ const FilesComponent = () => {
 };
 
 export default FilesComponent;
+{
+  /* <CRow>
+              <CCol xs="12" sm="12">
+                <CRow>
+                  <CCol xs={2}></CCol>
+                  <CCol xs={2}> 
+                    <CCard
+                      className={`icon-cards ${
+                        active == 1 ? "active-class" : ""
+                      }`}
+                      onClick={() => {
+                        setActive(1);
+                      }}
+                    >
+                      <CIcon content={cilFile} height={40} />
+                    </CCard>
+                    <h6 className="align-center">Basic Information</h6>
+                  </CCol>
+                  <CCol xs={1}>
+                    <CIcon
+                      className="arrow-icon"
+                      content={cilArrowRight}
+                      width={35}
+                    />
+                  </CCol>
+                  <CCol xs={2}>
+                    <CCard
+                      className={`icon-cards ${
+                        active == 2 ? "active-class" : ""
+                      }`}
+                      onClick={() => {
+                        if (active !== 1) {
+                          setActive(2);
+                        }
+                      }}
+                    >
+                      <CIcon name="cil-basket" height={40} />
+                    </CCard>
+                    <h6 className="align-center"> Initial Assignment</h6>
+                  </CCol>
+                  <CCol xs={1}>
+                    <CIcon
+                      className="arrow-icon"
+                      content={cilArrowRight}
+                      width={35}
+                    />
+                  </CCol>
+                  <CCol xs={2}>
+                    <CCard
+                      onClick={() => {
+                        // setActive(3);
+                      }}
+                      className={`icon-cards ${
+                        active == 3 ? "active-class" : ""
+                      }`}
+                    >
+                      <CIcon content={cilMoney} height={40} />
+                    </CCard>
+                    <h6 className="align-center">Pricing</h6>
+                  </CCol>
+                </CRow>
+              </CCol>
+            </CRow>*/
+}
+{
+  /* <br /> */
+}
+{
+  /* <br /> */
+}
