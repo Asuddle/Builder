@@ -122,7 +122,7 @@ const FilesTable = ({ isEdit, isDelete }) => {
                     marginRight: "10px",
                   }}
                   color="primary"
-                  size="lg"
+                  size="md"
                 >
                   Transfer File
                 </CButton>{" "}
@@ -134,7 +134,7 @@ const FilesTable = ({ isEdit, isDelete }) => {
                     history.push("/files/add");
                   }}
                   color="success"
-                  size="lg"
+                  size="md"
                 >
                   {/* <AddIcon />  */}
                   Add File

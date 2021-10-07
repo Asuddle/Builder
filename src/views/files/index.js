@@ -58,8 +58,8 @@ const FilesComponent = () => {
             <CRow>
               <CCol xs="12" sm="12">
                 <CRow>
-                  <CCol xs={2}></CCol>
-                  <CCol xs={2}>
+                  <CCol xs={1}></CCol>
+                  <CCol xs={3}>
                     <div
                       className={`multistep-icon ${
                         active == 1 ? "active-class2" : ""
@@ -81,7 +81,7 @@ const FilesComponent = () => {
                       width={20}
                     />
                   </CCol>
-                  <CCol xs={2}>
+                  <CCol xs={3}>
                     <CRow>
                       <div
                         className={`multistep-icon ${
@@ -109,7 +109,7 @@ const FilesComponent = () => {
                       width={20}
                     />
                   </CCol>
-                  <CCol xs={2}>
+                  <CCol xs={3}>
                     <div
                       className={`multistep-icon ${
                         active == 3 ? "active-class2" : ""

@@ -59,7 +59,7 @@ $primary-color: #edcf82;
 }
 
 .arrow-icon2 {
-  padding-top: 12px;
+  padding-top: 32px !important;
   // padding-top: 43px;
 }
 
@@ -139,7 +139,8 @@ $primary-color: #edcf82;
 .multistep-icon {
   // padding: 9px;
   display: inline-flex;
-  padding: 5px;
+  padding: 10px !important;
+  margin-top:10px;
   border: 1px solid white;
   &:hover {
     color: white;
