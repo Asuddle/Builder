@@ -8,13 +8,18 @@ function TableWrapper(props) {
   const [deleteModal, setDeleteModal] = useState(false);
   const [data, setData] = useState({});
   const handleEdit = (data) => {
-    console.log("here is the data", data);
-    setData(data);
+    if(isEdit===true){
+      setData({})
+    }else{
+      setData(data);
+    
+    }
     setIsEdit(!isEdit);
   };
   const handleDelete = (data) => {
     setDeleteModal(!deleteModal);
   };
+
   return (
     <div>
       <FilesTable isEdit={handleEdit} isDelete={handleDelete} />

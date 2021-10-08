@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   CButton,
+  CSelect,
   CCard,
   CCardBody,
   CCardFooter,
@@ -23,7 +24,7 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
     assignment_date: yup.string().required(),
     received_by: yup.string().required(),
     received_date: yup.string().required(),
-    assigned_to: yup.string().required(),
+    assigned_to: yup.string().trim().required(),
   });
   return (
     <>
@@ -49,10 +50,6 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
             }) => (
               <form onSubmit={handleSubmit}>
                 <CCardBody>
-                  <div style={{ textAlign: "center" }}>
-                    <img src={logo} width={100} height={100} />
-                  </div>
-                  <br />
                   <CCard
                     style={{
                       padding: "6px",
@@ -79,58 +76,39 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
                       </CCol>
                     </CRow>
                   </CCard>
-                  <CCard
-                    style={{
-                      boxShadow:
-                        "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
-                    }}
-                  >
-                    <CCardHeader>
-                      <strong>Company</strong>
-                    </CCardHeader>
-                    <CCardBody style={{ padding: "14px" }}>
-                      <CRow>
-                        <CCol xs={4}>
-                          <img
-                            src={logo}
-                            style={{ float: "right" }}
-                            width={60}
-                            height={60}
-                          />
-                        </CCol>
-                        <CCol xs={8}>
-                          {/* <CLabel htmlFor="street">Company </CLabel>*/}
-                          <h4 style={{ paddingTop: "5px" }}>
-                            Al-Fursan Properties
-                          </h4>
-                          <p className="subtitle">
-                            The Ultimate Insider's Guide to City Real Estate
-                          </p>
-                        </CCol>
-                      </CRow>
-                    </CCardBody>
-                  </CCard>
-                  <br />
                   <CFormGroup>
                     <CLabel htmlFor="assigned_to">
-                      Assigned To <span className="sterick-field">*</span>
+                    Assigned To <span className="sterick-field">*</span>
                     </CLabel>
-                    <CInput
-                      invalid={touched["assigned_to"] && errors["assigned_to"]}
-                      id="assigned_to"
+                    <CSelect
                       name="assigned_to"
-                      onChange={(e) => {
-                        handleChange(e);
-                        setFieldValue("received_by", e.target.value);
-                      }}
                       value={values["assigned_to"]}
-                      placeholder="123457"
-                    />
+                      invalid={touched["assigned_to"] && errors["assigned_to"]}
+                      onChange={(e)=>{  
+                        console.log('vlue',e.target.value)
+                          if(e.target.value===''){
+                            setFieldValue('assigned_to','')
+                          }else{
+                            handleChange(e)
+                            setFieldValue('received_by',e.target.value)
+                          }
+                      }}
+                      custom
+                      name="assigned_to"
+                      id="assigned_to"
+                    >
+                      <option value="" disbled>Enter Assigned To</option>
+                      <option value="5 Marla">Ali</option>
+                      <option value="10 Marla">Usman</option>
+                      <option value="15 Marla">Daniel</option>
+                      <option value="20 Marla">Usman</option>
+                    </CSelect>
                     {touched["assigned_to"] && errors["assigned_to"] && (
                       <CInvalidFeedback>
                         {errors["assigned_to"]}
                       </CInvalidFeedback>
                     )}
+                   
                   </CFormGroup>
                   <CFormGroup>
                     <CLabel htmlFor="vat">Assignment Date </CLabel>
@@ -171,21 +149,34 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
                   </CFormGroup>
                   {!receivingSwitch && (
                     <>
-                      <CFormGroup>
-                        <CLabel htmlFor="street">
-                          Received By <span className="sterick-field">*</span>
-                        </CLabel>
-                        <CInput
-                          id="street"
-                          value={values["received_by"]}
-                          name="received_by"
-                          onChange={handleChange}
-                          invalid={
-                            touched["received_by"] && errors["received_by"]
+                    <CFormGroup>
+                    <CLabel htmlFor="received_by">
+                    Received By <span className="sterick-field">*</span>
+                    </CLabel>
+                    <CSelect
+                      name="received_by"
+                      value={values["received_by"]}
+                      invalid={
+                        touched["received_by"] && errors["received_by"]
+                      }
+                      invalid={touched["received_by"] && errors["received_by"]}
+                      onChange={(e)=>{ 
+                          if(e.target.value===''){
+                            setFieldValue('assigned_to','')
+                          }else{
+                            handleChange(e)
                           }
-                          placeholder="Enter street name"
-                        />
-                        {touched["received_by"] && errors["received_by"] && (
+                      }}
+                      custom
+                      id="assigned_to"
+                    >
+                      <option value="" disbled>Enter Received By</option>
+                      <option value="5 Marla">Ali</option>
+                      <option value="10 Marla">Usman</option>
+                      <option value="15 Marla">Daniel</option>
+                      <option value="20 Marla">Usman</option>
+                    </CSelect>
+                    {touched["received_by"] && errors["received_by"] && (
                           <CInvalidFeedback>
                             {errors["received_by"]}
                           </CInvalidFeedback>

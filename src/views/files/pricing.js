@@ -22,11 +22,17 @@ import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router";
 const PricingComponent = ({ data, handleFormData }) => {
   let schema = yup.object().shape({
-    price: yup.number().required(),
-    deposit: yup.number().required(),
+    price: yup.string().required(),
+    deposit: yup.string().required(),
     deposit_percentage: yup.number().max(100),
   });
   const history = useHistory();
+  function addCommas(str){
+    return str.replace(/^0+/, '').replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function removeCommas(str){
+  return str.replaceAll(',','')
+}
   return (
     <>
       <CCol xs="12" sm="6">
@@ -77,7 +83,9 @@ const PricingComponent = ({ data, handleFormData }) => {
                           setFieldValue("deposit", "");
                           setFieldValue("deposit_percentage", "");
                         }
-                        handleChange(e);
+                        
+                        setFieldValue('price',addCommas(e.target.value))
+                        // handleChange(e);
                       }}
                       value={values["price"]}
                       placeholder="123457"
@@ -94,8 +102,8 @@ const PricingComponent = ({ data, handleFormData }) => {
                           invalid={touched["deposit"] && errors["deposit"]}
                           onChange={(e) => {
                             if (values["price"] !== "") {
-                              let perc =
-                                (e.target.value * 100) / values["price"];
+                              let val=removeCommas(e.target.value)
+                              let perc =(val * 100) / removeCommas(values["price"]);
                               if (!Number.isInteger(perc)) {
                                 perc = parseFloat(perc).toFixed(2);
                               }
@@ -106,7 +114,7 @@ const PricingComponent = ({ data, handleFormData }) => {
                               // }
                               setFieldValue("deposit_percentage", perc);
                             }
-                            handleChange(e);
+                            setFieldValue('deposit',addCommas(e.target.value))
                           }}
                           value={values["deposit"]}
                           name="deposit"
@@ -129,9 +137,8 @@ const PricingComponent = ({ data, handleFormData }) => {
                               if (e.target.value < 101) {
                                 if (values["price"] !== "") {
                                   let perc =
-                                    (e.target.value / 100) * values["price"];
-                                  console.log("values", perc);
-                                  setFieldValue("deposit", perc);
+                                    (e.target.value / 100) * removeCommas(values["price"]);
+                                  setFieldValue("deposit", addCommas(perc+''));
                                 }
                                 handleChange(e);
                               }

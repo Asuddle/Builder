@@ -37,7 +37,7 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
               handleFormData(values, 1);
             }}
           >
-            {({ errors, touched, handleSubmit, handleChange, values }) => (
+            {({ errors, touched, handleSubmit, handleChange, values,setFieldValue }) => (
               <form onSubmit={handleSubmit}>
                 <CCardBody>
                   <CFormGroup>
@@ -85,12 +85,18 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
                       name="type"
                       value={values["type"]}
                       invalid={touched["type"] && errors["type"]}
-                      onChange={handleChange}
+                      onChange={(e)=>{
+                        if(e.target.value!==''){
+                          handleChange(e)
+                        }else{
+                          setFieldValue('type','') 
+                        }
+                      }}
                       custom
                       name="type"
                       id="ccmonth"
                     >
-                      <option value="Enter Type"></option>
+                      <option value="">Enter Type</option>
                       <option value="5 Marla">5 Marla</option>
                       <option value="10 Marla">10 Marla</option>
                       <option value="15 Marla">15 Marla</option>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   CButton,
@@ -21,6 +21,8 @@ import { Field, Formik } from "formik";
 import * as yup from "yup";
 function FileLongForm({ data, col = 12, handleFormData = () => {} }) {
   const [receivingSwitch, setReceivingSwitch] = useState(true);
+  const [initialState, setInitialState] = useState(data);
+
   let schema = yup.object().shape({
     file_name: yup.string().required(),
     security_code: yup.string().required(),
@@ -30,22 +32,22 @@ function FileLongForm({ data, col = 12, handleFormData = () => {} }) {
     received_date: yup.string().required(),
     assigned_to: yup.string().required(),
   });
+  useEffect(() => {
+    if (typeof data !== "undefined") {
+      setInitialState(data);
+    }else{
+      setInitialState({});
+      
+    }
+  }, [data]);
+
+  console.log(initialState);
 
   return (
     <div>
       <CCol xs="12" sm={12}>
-        <Formik
-          initialValues={{
-            file_name: "",
-            security_code: "",
-            type: "",
-            project_name: "",
-            assigned_to: "",
-            assignment_date: new Date().toISOString().split("T")[0],
-            received_by: "",
-            received_date: new Date().toISOString().split("T")[0],
-            ...data,
-          }}
+       {Object.entries(initialState).length>0&& <Formik
+          initialValues={initialState}
           validationSchema={schema}
           onSubmit={(values) => {
             handleFormData(values, 2);
@@ -106,12 +108,18 @@ function FileLongForm({ data, col = 12, handleFormData = () => {} }) {
                     name="type"
                     value={values["type"]}
                     invalid={touched["type"] && errors["type"]}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      if (e.target.value !== "") {
+                        handleChange(e);
+                      } else {
+                        setFieldValue("type", "");
+                      }
+                    }}
                     custom
                     name="type"
                     id="ccmonth"
                   >
-                    <option value="Enter Type"></option>
+                    <option value="">Enter Type</option>
                     <option value="5 Marla">5 Marla</option>
                     <option value="10 Marla">10 Marla</option>
                     <option value="15 Marla">15 Marla</option>
@@ -184,17 +192,31 @@ function FileLongForm({ data, col = 12, handleFormData = () => {} }) {
                   <CLabel htmlFor="assigned_to">
                     Assigned To <span className="sterick-field">*</span>
                   </CLabel>
-                  <CInput
-                    invalid={touched["assigned_to"] && errors["assigned_to"]}
-                    id="assigned_to"
+                  <CSelect
                     name="assigned_to"
-                    onChange={(e) => {
-                      handleChange(e);
-                      setFieldValue("received_by", e.target.value);
-                    }}
                     value={values["assigned_to"]}
-                    placeholder="123457"
-                  />
+                    invalid={touched["assigned_to"] && errors["assigned_to"]}
+                    onChange={(e) => {
+                      console.log("vlue", e.target.value);
+                      if (e.target.value === "") {
+                        setFieldValue("assigned_to", "");
+                      } else {
+                        handleChange(e);
+                        setFieldValue("received_by", e.target.value);
+                      }
+                    }}
+                    custom
+                    name="assigned_to"
+                    id="assigned_to"
+                  >
+                    <option value="" disbled>
+                      Enter Assigned To
+                    </option>
+                    <option value="Ali">Ali</option>
+                    <option value="Usman">Usman</option>
+                    <option value="Daniel">Daniel</option>
+                    <option value="Usman">Usman</option>
+                  </CSelect>
                   {touched["assigned_to"] && errors["assigned_to"] && (
                     <CInvalidFeedback>{errors["assigned_to"]}</CInvalidFeedback>
                   )}
@@ -238,19 +260,36 @@ function FileLongForm({ data, col = 12, handleFormData = () => {} }) {
                 {!receivingSwitch && (
                   <>
                     <CFormGroup>
-                      <CLabel htmlFor="street">
+                      <CLabel htmlFor="received_by">
                         Received By <span className="sterick-field">*</span>
                       </CLabel>
-                      <CInput
-                        id="street"
-                        value={values["received_by"]}
+                      <CSelect
                         name="received_by"
-                        onChange={handleChange}
+                        value={values["received_by"]}
                         invalid={
                           touched["received_by"] && errors["received_by"]
                         }
-                        placeholder="Enter street name"
-                      />
+                        invalid={
+                          touched["received_by"] && errors["received_by"]
+                        }
+                        onChange={(e) => {
+                          if (e.target.value === "") {
+                            setFieldValue("assigned_to", "");
+                          } else {
+                            handleChange(e);
+                          }
+                        }}
+                        custom
+                        id="assigned_to"
+                      >
+                        <option value="" disbled>
+                          Enter Received By
+                        </option>
+                        <option value="Ali">Ali</option>
+                        <option value="Usman">Usman</option>
+                        <option value="Daniel">Daniel</option>
+                        <option value="Usman">Usman</option>
+                      </CSelect>
                       {touched["received_by"] && errors["received_by"] && (
                         <CInvalidFeedback>
                           {errors["received_by"]}
@@ -284,7 +323,7 @@ function FileLongForm({ data, col = 12, handleFormData = () => {} }) {
               </CCardBody>
             </form>
           )}
-        </Formik>
+        </Formik>}
       </CCol>
     </div>
   );

@@ -21,7 +21,7 @@ function EditModal({ open = false, handleClose = () => {}, data }) {
           <CModalTitle>Edit File</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <FileLongForm />
+          <FileLongForm  data={data}/>
         </CModalBody>
         <CModalFooter>
           <CButton color="primary">Next</CButton>{" "}
