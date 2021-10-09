@@ -100,7 +100,10 @@ const FilesTable = ({ isEdit, isDelete }) => {
       <CButton
         color="success"
         size="sm"
-        onClick={() => isDelete(row)}
+        onClick={() => {
+          dispatch({type:'setFile',files:row})
+          history.push(`/files/${row.id}/details`)
+        }}
         style={{ padding: "3px 5px" }}
       >
         <CIcon content={cilFile} />
