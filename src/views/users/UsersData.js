@@ -8,10 +8,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 1,
@@ -22,10 +23,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 2,
@@ -36,10 +38,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:90
   },
   {
     id: 3,
@@ -50,10 +53,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 4,
@@ -64,10 +68,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 5,
@@ -78,10 +83,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 6,
@@ -92,10 +98,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 7,
@@ -106,10 +113,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 8,
@@ -120,10 +128,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 9,
@@ -134,10 +143,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 10,
@@ -148,10 +158,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 11,
@@ -162,10 +173,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 12,
@@ -176,10 +188,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 13,
@@ -190,10 +203,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 14,
@@ -204,10 +218,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 15,
@@ -218,10 +233,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 16,
@@ -232,10 +248,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 17,
@@ -246,10 +263,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 18,
@@ -260,10 +278,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 19,
@@ -274,10 +293,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 20,
@@ -288,10 +308,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 21,
@@ -302,10 +323,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 22,
@@ -316,10 +338,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 23,
@@ -330,10 +353,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
   {
     id: 42,
@@ -344,10 +368,11 @@ const usersData = [
     file_name: "FD1223231312",
     type: "5 Marla",
     project_name: "Bahria",
-    unit_price: "100000",
+    price: "100,000",
     security_code: "1231bhn",
     received_by: "Daniel",
     received_date: "2021-09-22",
+    deposit: "90,000",deposit_percentage:'90'
   },
 ];
 

@@ -19,7 +19,7 @@ function TableWrapper(props) {
   const handleDelete = (data) => {
     setDeleteModal(!deleteModal);
   };
-
+  
   return (
     <div>
       <FilesTable isEdit={handleEdit} isDelete={handleDelete} />

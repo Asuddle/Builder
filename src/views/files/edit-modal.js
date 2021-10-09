@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
   CButton,
@@ -12,23 +12,47 @@ import FilesComponent from "./index";
 import AddFiles from "./add";
 import AddInitialAssignment from "./initial-assignment";
 import FileLongForm from "./longform";
+import PricingComponent from "./pricing";
 
 function EditModal({ open = false, handleClose = () => {}, data }) {
+  const [isPricing, setIsPricing] = useState(false);
+  const handleSubmitLongForm = (values) => {
+    setIsPricing(true);
+  };
+  const handlePricing = (values, num) => {
+    setIsPricing(false);
+    handleClose();
+  };
+  const handleBack = () => {
+    setIsPricing(!isPricing);
+    console.log("back");
+  };
+  const handlingClose = () => {
+    setIsPricing(false);
+    handleClose();
+  };
   return (
     <div>
-      <CModal show={open} onClose={handleClose} size="md">
+      <CModal show={open} onClose={handlingClose}>
         <CModalHeader closeButton>
           <CModalTitle>Edit File</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <FileLongForm  data={data}/>
+          {!isPricing ? (
+            <FileLongForm
+              data={data}
+              handleClose={handlingClose}
+              handleSubmit={handleSubmitLongForm}
+            />
+          ) : (
+            <PricingComponent
+              data={{ form3: data }}
+              handleFormData={handlePricing}
+              handleBack={handleBack}
+              noCard={true}
+            />
+          )}
         </CModalBody>
-        <CModalFooter>
-          <CButton color="primary">Next</CButton>{" "}
-          <CButton color="secondary" onClick={handleClose}>
-            Cancel
-          </CButton>
-        </CModalFooter>
       </CModal>
     </div>
   );

@@ -51,7 +51,7 @@ const FilesComponent = () => {
         <CCol>
           <CCard className="">
             <CCardHeader>
-              <strong>Files</strong>
+              <strong>Add new files</strong>
             </CCardHeader>
 
             <br />

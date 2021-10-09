@@ -4,6 +4,8 @@ import "./scss/style.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; 
 
 const loading = (
   <div className="pt-3 text-center">
