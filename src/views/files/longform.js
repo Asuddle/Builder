@@ -14,11 +14,16 @@ import {
   CSelect,
   CSwitch,
   CInputRadio,
+  CCardTitle,
   CRow,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { Field, Formik } from "formik";
 import * as yup from "yup";
+import TextFieldComponent from "src/reusable/textfield";
+import SelectInput from "src/reusable/select";
+import AlFursanBanner from "./alfursan-banner";
+import CustomSwitch from "./switch";
 function FileLongForm({
   data,
   col = 12,
@@ -29,14 +34,15 @@ function FileLongForm({
   const [initialState, setInitialState] = useState(data);
 
   let schema = yup.object().shape({
-    file_name: yup.string().required(),
-    security_code: yup.string().required(),
-    type: yup.string().required(),
+    file_name: yup.string().required("File Number is a required field"),
+    security_code: yup.string().required("Security Code is a required field"),
+    type: yup.string().required("Type is a required field"),
     assignment_date: yup.string().required(),
     received_by: yup.string().required(),
     received_date: yup.string().required(),
     assigned_to: yup.string().required(),
   });
+  const [isAlfursan,setIsAlFursan]=useState(true)
   useEffect(() => {
     if (typeof data !== "undefined") {
       setInitialState(data);
@@ -45,8 +51,10 @@ function FileLongForm({
     }
   }, [data]);
 
-  console.log(initialState);
-
+  const customChecked=(val)=>{
+    console.log('here is the value',val)
+    setIsAlFursan(val)
+  }
   return (
     <div>
       <CCol xs="12" sm={12}>
@@ -65,177 +73,100 @@ function FileLongForm({
               handleChange,
               values,
               setFieldValue,
+              setFieldTouched 
             }) => (
               <form onSubmit={handleSubmit}>
+                 <CCardHeader>
+                <strong>Basic Information</strong>
+                </CCardHeader>
                 <CCardBody>
-                  <CFormGroup>
-                    <CLabel htmlFor="company">
-                      File number <span className="sterick-field">*</span>{" "}
-                    </CLabel>
-                    <CInput
-                      invalid={touched["file_name"] && errors["file_name"]}
-                      name="file_name"
-                      id="company"
-                      value={values["file_name"]}
-                      onChange={handleChange}
-                      placeholder="123457"
-                    />
-
-                    {touched["file_name"] && errors["file_name"] && (
-                      <CInvalidFeedback>{errors["file_name"]}</CInvalidFeedback>
-                    )}
-                  </CFormGroup>
-                  <CFormGroup>
-                    <CLabel htmlFor="vat">
-                      Security Code <span className="sterick-field">*</span>{" "}
-                    </CLabel>
-                    <CInput
-                      invalid={
-                        touched["security_code"] && errors["security_code"]
-                      }
-                      value={values["security_code"]}
-                      name="security_code"
-                      onChange={handleChange}
-                      id="vat"
-                      placeholder="ABC12345XTZ"
-                    />
-                    {touched["security_code"] && errors["security_code"] && (
-                      <CInvalidFeedback>
-                        {errors["security_code"]}
-                      </CInvalidFeedback>
-                    )}
-                  </CFormGroup>
-                  <CFormGroup>
+                <TextFieldComponent
+                    handleChange={handleChange}
+                    name='file_name'
+                    touched={touched['file_name']}
+                    error={errors['file_name']}
+                    value={values['file_name']}
+                    required={true}
+                    label={"File number"}
+                  />
+                   <TextFieldComponent
+                    handleChange={handleChange}
+                    name='security_code'
+                    touched={touched['security_code']}
+                    error={errors['security_code']}
+                    value={values['security_code']}
+                    required={true}
+                    label={"Security code"}
+                  />
+                   <CFormGroup>
                     <CLabel htmlFor="ccmonth">
                       Type <span className="sterick-field">*</span>
                     </CLabel>
-                    <CSelect
-                      name="type"
-                      value={values["type"]}
-                      invalid={touched["type"] && errors["type"]}
-                      onChange={(e) => {
-                        if (e.target.value !== "") {
-                          handleChange(e);
-                        } else {
-                          setFieldValue("type", "");
-                        }
-                      }}
-                      custom
-                      name="type"
-                      id="ccmonth"
-                    >
-                      <option value="">Enter Type</option>
-                      <option value="5 Marla">5 Marla</option>
-                      <option value="10 Marla">10 Marla</option>
-                      <option value="15 Marla">15 Marla</option>
-                      <option value="20 Marla">20 Marla</option>
-                    </CSelect>
-                    {touched["type"] && errors["type"] && (
-                      <CInvalidFeedback>{errors["type"]}</CInvalidFeedback>
-                    )}
-                  </CFormGroup>
-                  <CFormGroup row>
-                    <CCol md="12">
-                      <CLabel>Status</CLabel>
-                    </CCol>
-                    <CCol md="11">
-                      <CFormGroup variant="custom-radio" inline>
-                        <CInputRadio
-                          custom
-                          id="inline-radio1"
-                          name="inline-radios"
-                          value="option1"
-                        />
-                        <CLabel
-                          variant="custom-checkbox"
-                          htmlFor="inline-radio1"
-                        >
-                          Sold
-                        </CLabel>
-                      </CFormGroup>
-                      <CFormGroup variant="custom-radio" inline>
-                        <CInputRadio
-                          custom
-                          color="primary"
-                          id="inline-radio2"
-                          name="inline-radios"
-                          value="option2"
-                        />
-                        <CLabel
-                          variant="custom-checkbox"
-                          htmlFor="inline-radio2"
-                        >
-                          Reserved
-                        </CLabel>
-                      </CFormGroup>
-                      <CFormGroup variant="custom-radio" inline>
-                        <CInputRadio
-                          custom
-                          id="inline-radio3"
-                          name="inline-radios"
-                          value="option3"
-                        />
-                        <CLabel
-                          variant="custom-checkbox"
-                          htmlFor="inline-radio3"
-                        >
-                          Available
-                        </CLabel>
-                      </CFormGroup>
-                    </CCol>
-                  </CFormGroup>
+                    <SelectInput
+                      handleBlur={setFieldTouched}
+                      touched={touched['type']}
+                      error={errors['type']}
+                      options={[
+                        { value: '5 Marla', label: '5 Marla' },
+                        { value: '10 Marla', label: '10 Marla' },
+                        { value: '15 Marla', label: '15 Marla' }
+                      ]}
+                      value={values['type']}
+                      setValue={setFieldValue}
+                      name='type'
+                    />
+                </CFormGroup>
                   <CFormGroup>
                     <CLabel htmlFor="street">Project Name</CLabel>
-                    <CInput
-                      onChange={handleChange}
-                      name="project_name"
-                      value={values["project_name"]}
-                      id="street"
-                      placeholder="DHA etc.."
-                      invalid={
-                        touched["project_name"] && errors["tproject_nameype"]
-                      }
+                    <SelectInput
+                      creatable={true}
+                      options={[
+                        { value: 'Bahria', label: 'Bahria' },
+                        { value: 'DHA', label: 'DHA' },
+                      ]}
+                      touched={touched['type']}
+                      handleBlur={setFieldTouched}
+                      value={values['project_name']}
+                      setValue={setFieldValue}
+                      name='project_name'
                     />
-                    {touched["project_name"] && errors["project_name"] && (
-                      <CInvalidFeedback>
-                        {errors["project_name"]}
-                      </CInvalidFeedback>
-                    )}
                   </CFormGroup>
+                      </CCardBody>
+                      
+                <CustomSwitch setState={customChecked} />
+                      <CCardHeader>
+                <strong>File Assignment</strong>
+                </CCardHeader>
+                <CCardBody>
                   <CFormGroup>
                     <CLabel htmlFor="assigned_to">
                       Assigned To <span className="sterick-field">*</span>
                     </CLabel>
-                    <CSelect
-                      name="assigned_to"
+                    <SelectInput
+                      touched={touched["assigned_to"]}
+                      handleBlur={setFieldTouched}
+                      error={errors["assigned_to"]}
                       value={values["assigned_to"]}
-                      invalid={touched["assigned_to"] && errors["assigned_to"]}
-                      onChange={(e) => {
-                        console.log("vlue", e.target.value);
-                        if (e.target.value === "") {
-                          setFieldValue("assigned_to", "");
-                        } else {
-                          handleChange(e);
-                          setFieldValue("received_by", e.target.value);
+                      setValue={setFieldValue}
+                      customHandleChange={(e) => {
+                        setFieldValue("assigned_to", e.value);
+                        if(isAlfursan){
+                        setFieldValue("received_by", e.value);
                         }
                       }}
-                      custom
+                      options={isAlfursan?[
+                        { value: "Ali", label: "Ali" },
+                        { value: "Usman", label: "Usman" },
+                        { value: "Daniel", label: "Daniel" },
+                        { value: "Sam", label: "Sam" },
+                      ]:[
+                        { value: "Dealer 1", label: "Dealer 1" },
+                        { value: "Dealer 2", label: "Dealer 2" },
+                        { value: "Dealer 3", label: "Dealer 3" },
+                        { value: "Dealer 4", label: "Dealer 4" },  
+                      ]}
                       name="assigned_to"
-                      id="assigned_to"
-                    >
-                      <option value="" disbled>
-                        Enter Assigned To
-                      </option>
-                      <option value="Ali">Ali</option>
-                      <option value="Usman">Usman</option>
-                      <option value="Daniel">Daniel</option>
-                      <option value="Usman">Usman</option>
-                    </CSelect>
-                    {touched["assigned_to"] && errors["assigned_to"] && (
-                      <CInvalidFeedback>
-                        {errors["assigned_to"]}
-                      </CInvalidFeedback>
-                    )}
+                    />
                   </CFormGroup>
                   <CFormGroup>
                     <CLabel htmlFor="vat">Assignment Date </CLabel>
@@ -256,6 +187,59 @@ function FileLongForm({
                           {errors["assignment_date"]}
                         </CInvalidFeedback>
                       )}
+                  </CFormGroup>
+                  <CFormGroup row>
+                    <CCol md="12">
+                      <CLabel>Status</CLabel>
+                    </CCol>
+                    <CCol md="11">
+                      <CFormGroup variant="custom-radio" inline>
+                        <CInputRadio
+                          custom
+                          id="inline-radio1"
+                          name="status"
+                          onClick={()=>{setFieldValue('status','Sold')}}
+                          checked={values['status']==='Sold'}
+                        />
+                        <CLabel
+                          variant="custom-checkbox"
+                          htmlFor="inline-radio1"
+                        >
+                          Sold
+                        </CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-radio" inline>
+                        <CInputRadio
+                          custom
+                          color="primary"
+                          id="inline-radio2"
+                          name="status"
+                          onClick={()=>{setFieldValue('status','Reserved')}}
+                          checked={values['status']==='Reserved'}
+                        />
+                        <CLabel
+                          variant="custom-checkbox"
+                          htmlFor="inline-radio2"
+                        >
+                          Reserved
+                        </CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-radio" inline>
+                        <CInputRadio
+                          custom
+                          id="inline-radio3"
+                          name="status"
+                          onClick={()=>{setFieldValue('status','Available')}}
+                          checked={values['status']==='Available'}
+                        />
+                        <CLabel
+                          variant="custom-checkbox"
+                          htmlFor="inline-radio3"
+                        >
+                          Available
+                        </CLabel>
+                      </CFormGroup>
+                    </CCol>
                   </CFormGroup>
                   <CFormGroup>
                     <CSwitch
@@ -280,38 +264,27 @@ function FileLongForm({
                         <CLabel htmlFor="received_by">
                           Received By <span className="sterick-field">*</span>
                         </CLabel>
-                        <CSelect
-                          name="received_by"
+                        <SelectInput
+                          touched={touched["received_by"]}
+                          handleBlur={setFieldTouched}
                           value={values["received_by"]}
-                          invalid={
-                            touched["received_by"] && errors["received_by"]
-                          }
-                          invalid={
-                            touched["received_by"] && errors["received_by"]
-                          }
-                          onChange={(e) => {
-                            if (e.target.value === "") {
+                          setValue={setFieldValue}
+                          options={[
+                            { value: "Ali", label: "Ali" },
+                            { value: "Usman", label: "Usman" },
+                            { value: "Daniel", label: "Daniel" },
+                            { value: "Sam", label: "Sam" },
+                          ]}
+                          customHandleChange={(e) => {
+                            if (e.value === "") {
                               setFieldValue("assigned_to", "");
                             } else {
-                              handleChange(e);
+                              setFieldValue("received_by", e.value);
+                              // handleChange(e);
                             }
                           }}
-                          custom
-                          id="assigned_to"
-                        >
-                          <option value="" disbled>
-                            Enter Received By
-                          </option>
-                          <option value="Ali">Ali</option>
-                          <option value="Usman">Usman</option>
-                          <option value="Daniel">Daniel</option>
-                          <option value="Usman">Usman</option>
-                        </CSelect>
-                        {touched["received_by"] && errors["received_by"] && (
-                          <CInvalidFeedback>
-                            {errors["received_by"]}
-                          </CInvalidFeedback>
-                        )}
+                          name="received_by"
+                        />
                       </CFormGroup>
 
                       <CFormGroup>

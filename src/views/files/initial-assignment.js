@@ -18,13 +18,20 @@ import CIcon from "@coreui/icons-react";
 import { Formik } from "formik";
 import logo from "../../assets/icons/alfursanlog.png";
 import * as yup from "yup";
+import SelectInput from "src/reusable/select";
+import AlFursanBanner from "./alfursan-banner";
 const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
   const [receivingSwitch, setReceivingSwitch] = useState(true);
   let schema = yup.object().shape({
-    assignment_date: yup.string().required(),
-    received_by: yup.string().required(),
-    received_date: yup.string().required(),
-    assigned_to: yup.string().trim().required(),
+    assignment_date: yup
+      .string()
+      .required("Assignment date is a required field"),
+    received_by: yup.string().required("Received by is a required field"),
+    received_date: yup.string().required("Received date is a required field"),
+    assigned_to: yup
+      .string()
+      .trim()
+      .required("Assigned to is a required field"),
   });
   return (
     <>
@@ -45,70 +52,35 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
               touched,
               handleSubmit,
               handleChange,
+              setFieldTouched,
               values,
               setFieldValue,
             }) => (
               <form onSubmit={handleSubmit}>
                 <CCardBody>
-                  <CCard
-                    style={{
-                      padding: "6px",
-                      boxShadow: "#edcf82 5px 5px",
-                    }}
-                  >
-                    <CRow>
-                      <CCol>
-                        <img
-                          style={{ float: "right" }}
-                          src={logo}
-                          width={70}
-                          height={70}
-                        />
-                      </CCol>
-                      <CCol xs={9}>
-                        {/* <CLabel htmlFor="street">Company </CLabel>*/}
-                        <h2 style={{ paddingTop: "15px" }}>
-                          Al-Fursan Properties
-                        </h2>
-                        <p className="subtitle">
-                          The Ultimate Insider's Guide to City Real Estate
-                        </p>
-                      </CCol>
-                    </CRow>
-                  </CCard>
+                  <AlFursanBanner />
                   <CFormGroup>
                     <CLabel htmlFor="assigned_to">
-                    Assigned To <span className="sterick-field">*</span>
+                      Assigned To <span className="sterick-field">*</span>
                     </CLabel>
-                    <CSelect
-                      name="assigned_to"
+                    <SelectInput
+                      touched={touched["assigned_to"]}
+                      handleBlur={setFieldTouched}
+                      error={errors["assigned_to"]}
                       value={values["assigned_to"]}
-                      invalid={touched["assigned_to"] && errors["assigned_to"]}
-                      onChange={(e)=>{  
-                        console.log('vlue',e.target.value)
-                          if(e.target.value===''){
-                            setFieldValue('assigned_to','')
-                          }else{
-                            handleChange(e)
-                            setFieldValue('received_by',e.target.value)
-                          }
+                      setValue={setFieldValue}
+                      customHandleChange={(e) => {
+                        setFieldValue("assigned_to", e.value);
+                        setFieldValue("received_by", e.value);
                       }}
-                      custom
+                      options={[
+                        { value: "Ali", label: "Ali" },
+                        { value: "Usman", label: "Usman" },
+                        { value: "Daniel", label: "Daniel" },
+                        { value: "Sam", label: "Sam" },
+                      ]}
                       name="assigned_to"
-                      id="assigned_to"
-                    >
-                      <option value="" disbled>Enter Assigned To</option>
-                      <option value="5 Marla">Ali</option>
-                      <option value="10 Marla">Usman</option>
-                      <option value="15 Marla">Daniel</option>
-                      <option value="20 Marla">Usman</option>
-                    </CSelect>
-                    {touched["assigned_to"] && errors["assigned_to"] && (
-                      <CInvalidFeedback>
-                        {errors["assigned_to"]}
-                      </CInvalidFeedback>
-                    )}
-                   
+                    />
                   </CFormGroup>
                   <CFormGroup>
                     <CLabel htmlFor="vat">Assignment Date </CLabel>
@@ -149,38 +121,31 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
                   </CFormGroup>
                   {!receivingSwitch && (
                     <>
-                    <CFormGroup>
-                    <CLabel htmlFor="received_by">
-                    Received By <span className="sterick-field">*</span>
-                    </CLabel>
-                    <CSelect
-                      name="received_by"
-                      value={values["received_by"]}
-                      invalid={
-                        touched["received_by"] && errors["received_by"]
-                      }
-                      invalid={touched["received_by"] && errors["received_by"]}
-                      onChange={(e)=>{ 
-                          if(e.target.value===''){
-                            setFieldValue('assigned_to','')
-                          }else{
-                            handleChange(e)
-                          }
-                      }}
-                      custom
-                      id="assigned_to"
-                    >
-                      <option value="" disbled>Enter Received By</option>
-                      <option value="5 Marla">Ali</option>
-                      <option value="10 Marla">Usman</option>
-                      <option value="15 Marla">Daniel</option>
-                      <option value="20 Marla">Usman</option>
-                    </CSelect>
-                    {touched["received_by"] && errors["received_by"] && (
-                          <CInvalidFeedback>
-                            {errors["received_by"]}
-                          </CInvalidFeedback>
-                        )}
+                      <CFormGroup>
+                        <CLabel htmlFor="received_by">
+                          Received By <span className="sterick-field">*</span>
+                        </CLabel>
+                        <SelectInput
+                          touched={touched["received_by"]}
+                          handleBlur={setFieldTouched}
+                          value={values["received_by"]}
+                          setValue={setFieldValue}
+                          options={[
+                            { value: "Ali", label: "Ali" },
+                            { value: "Usman", label: "Usman" },
+                            { value: "Daniel", label: "Daniel" },
+                            { value: "Sam", label: "Sam" },
+                          ]}
+                          customHandleChange={(e) => {
+                            if (e.value === "") {
+                              setFieldValue("assigned_to", "");
+                            } else {
+                              setFieldValue("received_by", e.value);
+                              // handleChange(e);
+                            }
+                          }}
+                          name="received_by"
+                        />
                       </CFormGroup>
 
                       <CFormGroup>

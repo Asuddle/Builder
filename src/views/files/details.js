@@ -23,6 +23,7 @@ const FileDetails = ({ match }) => {
     assignment_date: "Assignment Date",
     received_by: "Received By",
     received_date: "Received By",
+    project_name:'Project Name',
     assigned_to: "Assigned To",
     price:'Price',
     deposit:'Deposit',

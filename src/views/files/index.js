@@ -20,6 +20,7 @@ const FilesComponent = () => {
       security_code: "",
       type: "",
       project_name: "",
+      status:'Available'
     },
     form2: {
       assigned_to: "",

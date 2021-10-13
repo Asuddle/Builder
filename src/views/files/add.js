@@ -16,11 +16,13 @@ import {
 import CIcon from "@coreui/icons-react";
 import { Field, Formik } from "formik";
 import * as yup from "yup";
+import SelectInput from "src/reusable/select";
+import TextFieldComponent from "src/reusable/textfield";
 const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
   let schema = yup.object().shape({
-    file_name: yup.string().required(),
-    security_code: yup.string().required(),
-    type: yup.string().required(),
+    file_name: yup.string().required("File Number is a required field"),
+    security_code: yup.string().required("Security Code is a required field"),
+    type: yup.string().required("Type is a required field"),
   });
 
   return (
@@ -33,79 +35,51 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
           <Formik
             initialValues={data.form1}
             validationSchema={schema}
+            validateOnBlur
             onSubmit={(values) => {
+              console.log('values here',values)
               handleFormData(values, 1);
             }}
           >
-            {({ errors, touched, handleSubmit, handleChange, values,setFieldValue }) => (
+            {({ errors, touched, handleSubmit, handleChange, values,setFieldValue,handleBlur,setFieldTouched }) => (
               <form onSubmit={handleSubmit}>
                 <CCardBody>
-                  <CFormGroup>
-                    <CLabel htmlFor="company">
-                      File number <span className="sterick-field">*</span>{" "}
-                    </CLabel>
-                    <CInput
-                      invalid={touched["file_name"] && errors["file_name"]}
-                      name="file_name"
-                      id="company"
-                      value={values["file_name"]}
-                      onChange={handleChange}
-                      placeholder="123457"
-                    />
-
-                    {touched["file_name"] && errors["file_name"] && (
-                      <CInvalidFeedback>{errors["file_name"]}</CInvalidFeedback>
-                    )}
-                  </CFormGroup>
-                  <CFormGroup>
-                    <CLabel htmlFor="vat">
-                      Security Code <span className="sterick-field">*</span>{" "}
-                    </CLabel>
-                    <CInput
-                      invalid={
-                        touched["security_code"] && errors["security_code"]
-                      }
-                      value={values["security_code"]}
-                      name="security_code"
-                      onChange={handleChange}
-                      id="vat"
-                      placeholder="ABC12345XTZ"
-                    />
-                    {touched["security_code"] && errors["security_code"] && (
-                      <CInvalidFeedback>
-                        {errors["security_code"]}
-                      </CInvalidFeedback>
-                    )}
-                  </CFormGroup>
+                  <TextFieldComponent
+                    handleChange={handleChange}
+                    name='file_name'
+                    touched={touched['file_name']}
+                    error={errors['file_name']}
+                    value={values['file_name']}
+                    required={true}
+                    label={"File number"}
+                  />
+                  <TextFieldComponent
+                    handleChange={handleChange}
+                    name='security_code'
+                    touched={touched['security_code']}
+                    error={errors['security_code']}
+                    value={values['security_code']}
+                    required={true}
+                    label={"Security code"}
+                  />
                   <CFormGroup>
                     <CLabel htmlFor="ccmonth">
                       Type <span className="sterick-field">*</span>
                     </CLabel>
-                    <CSelect
-                      name="type"
-                      value={values["type"]}
-                      invalid={touched["type"] && errors["type"]}
-                      onChange={(e)=>{
-                        if(e.target.value!==''){
-                          handleChange(e)
-                        }else{
-                          setFieldValue('type','') 
-                        }
-                      }}
-                      custom
-                      name="type"
-                      id="ccmonth"
-                    >
-                      <option value="">Enter Type</option>
-                      <option value="5 Marla">5 Marla</option>
-                      <option value="10 Marla">10 Marla</option>
-                      <option value="15 Marla">15 Marla</option>
-                      <option value="20 Marla">20 Marla</option>
-                    </CSelect>
-                    {touched["type"] && errors["type"] && (
-                      <CInvalidFeedback>{errors["type"]}</CInvalidFeedback>
-                    )}
-                  </CFormGroup>
+                    <SelectInput
+                      handleBlur={setFieldTouched}
+                      touched={touched['type']}
+                      error={errors['type']}
+                      options={[
+                        { value: '5 Marla', label: '5 Marla' },
+                        { value: '10 Marla', label: '10 Marla' },
+                        { value: '15 Marla', label: '15 Marla' }
+                      ]}
+                      value={values['type']}
+                      setValue={setFieldValue}
+                      name='type'
+                    />
+                </CFormGroup>
                   <CFormGroup row>
                     <CCol md="12">
                       <CLabel>Status</CLabel>
@@ -115,8 +89,9 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
                         <CInputRadio
                           custom
                           id="inline-radio1"
-                          name="inline-radios"
-                          value="option1"
+                          name="status"
+                          onClick={()=>{setFieldValue('status','Sold')}}
+                          checked={values['status']==='Sold'}
                         />
                         <CLabel
                           variant="custom-checkbox"
@@ -130,8 +105,9 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
                           custom
                           color="primary"
                           id="inline-radio2"
-                          name="inline-radios"
-                          value="option2"
+                          name="status"
+                          onClick={()=>{setFieldValue('status','Reserved')}}
+                          checked={values['status']==='Reserved'}
                         />
                         <CLabel
                           variant="custom-checkbox"
@@ -144,8 +120,9 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
                         <CInputRadio
                           custom
                           id="inline-radio3"
-                          name="inline-radios"
-                          value="option3"
+                          name="status"
+                          onClick={()=>{setFieldValue('status','Available')}}
+                          checked={values['status']==='Available'}
                         />
                         <CLabel
                           variant="custom-checkbox"
@@ -158,28 +135,24 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
                   </CFormGroup>
                   <CFormGroup>
                     <CLabel htmlFor="street">Project Name</CLabel>
-                    <CInput
-                      onChange={handleChange}
-                      name="project_name"
-                      value={values["project_name"]}
-                      id="street"
-                      placeholder="DHA etc.."
-                      invalid={
-                        touched["project_name"] && errors["tproject_nameype"]
-                      }
+                    <SelectInput
+                      creatable={true}
+                      options={[
+                        { value: 'Bahria', label: 'Bahria' },
+                        { value: 'DHA', label: 'DHA' },
+                      ]}
+                      touched={touched['type']}
+                      handleBlur={setFieldTouched}
+                      value={values['project_name']}
+                      setValue={setFieldValue}
+                      name='project_name'
                     />
-                    {touched["project_name"] && errors["project_name"] && (
-                      <CInvalidFeedback>
-                        {errors["project_name"]}
-                      </CInvalidFeedback>
-                    )}
                   </CFormGroup>
                 </CCardBody>
                 <CCardFooter>
                   <CButton
                     type="submit"
                     className="button-color"
-                    //   onClick={handleFormSubmit}
                   >
                     Next <CIcon name="cil-arrow-right" width={16} />
                   </CButton>

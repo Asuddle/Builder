@@ -77,8 +77,23 @@ const FilesTable = ({ isEdit, isDelete }) => {
       }
     },
   };
+  var SVGComponent=(props)=><svg {...props}>{props.children}</svg>
+  var CircleComponent=(props)=><circle {...props}>{props.children}</circle>
+  
   const actionButtons = (cell, row) => (
     <>
+    <CButton
+        color="secondary"
+        size="sm"
+        onClick={() => {
+          dispatch({type:'setFile',files:row})
+          history.push(`/files/${row.id}/details`)
+        }}
+        style={{ padding: "3px 5px" }}
+      >
+        <CIcon content={cilFile} />
+      </CButton>
+      {' '}
       <CButton
         color="info"
         size="sm"
@@ -97,17 +112,6 @@ const FilesTable = ({ isEdit, isDelete }) => {
       </CButton>
       {"  "}
  
-      <CButton
-        color="success"
-        size="sm"
-        onClick={() => {
-          dispatch({type:'setFile',files:row})
-          history.push(`/files/${row.id}/details`)
-        }}
-        style={{ padding: "3px 5px" }}
-      >
-        <CIcon content={cilFile} />
-      </CButton>
     </>
   );
   const columns = [
@@ -142,6 +146,42 @@ const FilesTable = ({ isEdit, isDelete }) => {
     {
       dataField: "assigned_to",
       text: "File Owner",
+      headerStyle: (colum, colIndex) => {
+        return { textAlign: "center" };
+      },
+      formatter:(cell,row)=><div style={{textAlign:'center'}}>
+            <SVGComponent height="36" width='36'>
+              <CircleComponent
+              cx="18"
+              cy='18'
+              r='18'
+              fill='#edcf82'
+              stroke=''
+              strokeWidth='4'
+              />
+              <linearGradient
+              id='paint0_linear'
+              x1='1.6'
+              y1='9.48149'
+              x2='69.7431'
+              y2='15.3662'
+              gradientUnits='userSpaceOnUse'
+              >
+                <stop stopColor='white'/>
+                <stop offset='1' stopColor='white'/>
+              </linearGradient>
+              <text
+              textAnchor='middle'
+              x='18'
+              y='24'
+              style={{fontWeight:'500',color:'white'}}
+              >
+              {cell.split(" ").map((n)=>n[0]).join(".")}
+              </text>
+              </SVGComponent>
+              <br/>
+            <p style={{color:"#7f7f7f"}}>{cell}</p>
+      </div>,
       sort: true,
     },
     {
@@ -151,17 +191,16 @@ const FilesTable = ({ isEdit, isDelete }) => {
       sort: true,
       hidden: true,
     },
-    // {
-    //   dataField: "project_name",
-    //   text: "Project Name",
-    //   sort: true,
-    // },
     {
       dataField: "assignment_date",
       text: "Assigned Date",
       sort: true,
     },
-
+    {
+      dataField: "received_date",
+      text: "Created Date",
+      sort: true,
+    },
     {
       dataField: "price",
       text: "Price (Rs)",
@@ -274,7 +313,7 @@ const FilesTable = ({ isEdit, isDelete }) => {
                   size="md"
                 >
                   {/* <AddIcon />  */}
-                  Add File
+                  Add New File
                 </CButton>
                 {!onSelectClick.length == 0 && (
                   <CButton

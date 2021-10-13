@@ -4,6 +4,7 @@ const AddFiles = React.lazy(() => import("./views/files/index"));
 const FilesTable = React.lazy(() => import("./views/files/table-wrapper"));
 const FilesTransfer = React.lazy(() => import("./views/files/transfer-file"));
 const FileDetail=React.lazy(()=>import('./views/files/details'))
+const FileAssignment=React.lazy(()=>import('./views/files/file-assignment'))
 const Toaster = React.lazy(() =>
   import("./views/notifications/toaster/Toaster")
 );
@@ -70,7 +71,10 @@ const routes = [
   { path: "/files/add", exact: true, name: "Add", component: AddFiles },
   { path: "/files/transfer", exact: true, name: "Transfer", component: FilesTransfer },
   { path: "/files/:id/details", exact: true, name: "Detail", component: FileDetail },
-
+  { path: "/files/assignment", exact: true, name: "Assignment", component: FileAssignment },
+  { path: "/files/history", exact: true, name: "History", component: FileAssignment },
+  
+  // FileAssignment
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/theme", name: "Theme", component: Colors, exact: true },
   { path: "/theme/colors", name: "Colors", component: Colors },

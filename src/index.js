@@ -6,7 +6,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+// import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-daterangepicker/daterangepicker.css'
 
+// import 'bootstrap/dist/css/bootstrap.css';
+// you will also need the css that comes with bootstrap-daterangepicker
+// import 'bootstrap-daterangepicker/daterangepicker.css';
+ 
 import { icons } from './assets/icons'
 
 import { Provider } from 'react-redux'

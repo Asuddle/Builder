@@ -12,17 +12,57 @@ const _nav = [
     _tag: "CSidebarNavTitle",
     _children: ["Files Managment"],
   },
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "Add Files",
-  //   to: "/files/add",
-  //   icon: "cil-drop",
-  // },
   {
     _tag: "CSidebarNavItem",
     name: "Inventory",
     to: "/files",
     icon: "cil-pencil",
+  },
+    {
+    _tag: "CSidebarNavItem",
+    name: "Add New File",
+    to: "/files/add",
+    icon: "cil-drop",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "File Assignment",
+    to: "/files/assignment",
+    icon: "cil-bell",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Assignment History",
+    to: "/files/history",
+    icon: "cil-puzzle",
+  },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["User Managment"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Users",
+    to: "/files",
+    icon: "cil-pencil",
+  },
+    {
+    _tag: "CSidebarNavItem",
+    name: "Add New Users",
+    to: "/files/add",
+    icon: "cil-drop",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Roles",
+    to: "/files/add",
+    icon: "cil-puzzle",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Permissions",
+    to: "/files/add",
+    icon: "cil-puzzle",
   },
   // {
   //   _tag: "CSidebarNavTitle",

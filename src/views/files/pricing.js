@@ -31,9 +31,9 @@ const PricingComponent = ({
   handleBack = () => {},
 }) => {
   let schema = yup.object().shape({
-    price: yup.string().required(),
-    deposit: yup.string().required(),
-    deposit_percentage: yup.number().max(100),
+    price: yup.string().required("Price is a required field").min(0),
+    deposit: yup.string().required("Deposit is a required field").min(0),
+    deposit_percentage: yup.number("Deposit Percentage has to be number").max(100).min(0),
   });
   const history = useHistory();
   function addCommas(str) {
