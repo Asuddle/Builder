@@ -5,7 +5,7 @@ const FilesTable = React.lazy(() => import("./views/files/table-wrapper"));
 const FilesTransfer = React.lazy(() => import("./views/files/transfer-file"));
 const FileDetail=React.lazy(()=>import('./views/files/details'))
 const FileAssignment=React.lazy(()=>import('./views/files/file-assignment'))
-
+const FileHistory=React.lazy(()=>import('./views/files/transfer-file'))
 
 const AddUser=React.lazy(()=>import('./views/user/add'))
 const UserList=React.lazy(()=>import('./views/user/list'))
@@ -79,7 +79,7 @@ const routes = [
   { path: "/files/transfer", exact: true, name: "Transfer", component: FilesTransfer },
   { path: "/files/:id/details", exact: true, name: "Detail", component: FileDetail },
   { path: "/files/assignment", exact: true, name: "Assignment", component: FileAssignment },
-  { path: "/files/history", exact: true, name: "History", component: FileAssignment },
+  { path: "/files/history", exact: true, name: "History", component: FileHistory },
   
 
   { path: "/users", exact: true, name: "Users", component: UserList },

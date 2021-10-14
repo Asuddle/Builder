@@ -29,11 +29,13 @@ import AlFursanBanner from "./alfursan-banner";
 import CustomSwitch from "./switch";
 import TableComponent from "src/reusable/table";
 import FileLongForm from "./longform";
+import { roundToNearestMinutes } from "date-fns/esm";
 function FileAssignment({
   data,
   col = 12,
   handleSubmit = () => {},
   handleClose,
+  hideForm=false
 }) {
   const [showClass, setShowClass] = useState("");
   const [filter, setFilter] = useState(true);
@@ -326,9 +328,9 @@ function FileAssignment({
       )}
       {showClass && (
         <>
-          <TableComponent />
+          <TableComponent exportCSV={true}/>
           <CCard>
-          <FileLongForm
+          {!hideForm&&<FileLongForm
             data={{
               file_name: "",
               security_code: "",
@@ -340,7 +342,7 @@ function FileAssignment({
               received_by: "",
               received_date: new Date().toISOString().split("T")[0],
             }}
-          />
+          />}
           </CCard>
         </>
       )}

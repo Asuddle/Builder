@@ -3,6 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import PropTypes from "prop-types";
+import ToolkitProvider, { CSVExport } from "react-bootstrap-table2-toolkit";
 import { cilTrash, cilPencil, cilFile, cilCircle } from "@coreui/icons";
 import {
   CBadge,
@@ -135,9 +136,11 @@ function TableComponent({
   title = "Files",
   columns = defaultColumns,
   data = usersData,
+  exportCSV = false,
   addButton = false,
-  callback=()=>{}
+  callback = () => {},
 }) {
+  const { ExportCSVButton } = CSVExport;
   return (
     <CRow>
       <CCol xl={12}>
@@ -145,28 +148,53 @@ function TableComponent({
           <CCardHeader>
             <strong>{title}</strong>
             {addButton && (
-              <CButton style={{ float: "right" }} color="success" onClick={callback}>
+              <CButton
+                style={{ float: "right" }}
+                color="success"
+                onClick={callback}
+              >
                 {addButton}
               </CButton>
             )}
           </CCardHeader>
           <CCardBody>
-            <BootstrapTable
-              striped
-              bootstrap4
-              hover
+            <ToolkitProvider
               keyField="id"
               data={data}
               columns={columns}
-              bordered={false}
-              pagination={paginationFactory()}
-              exportCSV={{
-                fileName: "custom.csv",
-                separator: "|",
-                ignoreHeader: true,
-                noAutoBOM: false,
-              }}
-            />
+              exportCSV
+            >
+              {(props) => (
+                <div>
+                  {exportCSV && (
+                    <ExportCSVButton
+                      style={{ background: "grey", color: "white" }}
+                      {...props.csvProps}
+                    >
+                      Export CSV
+                    </ExportCSVButton>
+                  )}{" "}
+                  <hr />
+                  <BootstrapTable
+                    {...props.baseProps}
+                    striped
+                    bootstrap4
+                    hover
+                    keyField="id"
+                    data={data}
+                    columns={columns}
+                    bordered={false}
+                    pagination={paginationFactory()}
+                    exportCSV={{
+                      fileName: "custom.csv",
+                      separator: "|",
+                      ignoreHeader: true,
+                      noAutoBOM: false,
+                    }}
+                  />
+                </div>
+              )}
+            </ToolkitProvider>
           </CCardBody>
         </CCard>
       </CCol>
