@@ -4,7 +4,8 @@ const userDataArray = [
     name: "Ali Khan",
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'Employee'
+    type: "Employee",
+    badge: "platinum",
   },
   {
     id: 1,
@@ -12,98 +13,112 @@ const userDataArray = [
     email: "abc@xyz.com",
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'Dealer',
+    type: "Dealer",
+    badge: "platinum",
   },
   {
     id: 2,
     name: "Subhan Khan",
-    type:'Dealer',
+    type: "Dealer",
     email: "abc@xyz.com",
     phone: "03021232238",
+    badge: "gold",
   },
   {
     id: 3,
     name: "Robert Daniel",
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'End User'
+    type: "End User",
+    badge: "bronze",
   },
   {
     id: 4,
     name: "Zed Blade",
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'Employee'
+    type: "Employee",
+    badge: "platinum",
   },
   {
     id: 5,
     name: "Roar Reer",
-    type:'Dealer',
+    type: "Dealer",
     email: "abc@xyz.com",
     phone: "03021232238",
+    badge: "gold",
   },
   {
     id: 6,
     name: "Ali Zeus",
-    type:'Employee',
+    type: "Employee",
     email: "abc@xyz.com",
     phone: "03021232238",
+    badge: "bronze",
   },
   {
     id: 7,
     name: "Ali Zeus",
-    type:'Dealer',
+    type: "Dealer",
     email: "abc@xyz.com",
     phone: "03021232238",
+    badge: "bronze",
   },
   {
     id: 8,
     name: "Ali Zeus",
-    type:'Employee',
+    type: "Employee",
     email: "abc@xyz.com",
     phone: "03021232238",
+    badge: "platinum",
   },
   {
     id: 9,
     name: "Ali Zeus",
-    type:'Employee',
+    type: "Employee",
     email: "abc@xyz.com",
     phone: "03021232238",
+    badge: "platinum",
   },
   {
     id: 10,
     name: "Ali Zeus",
-    type:'Employee',
+    type: "Employee",
     email: "abc@xyz.com",
     phone: "03021232238",
+    badge: "platinum",
   },
   {
     id: 11,
     name: "Ali Zeus",
-    type:'Dealer',
+    type: "Dealer",
     email: "abc@xyz.com",
     phone: "03021232238",
+    badge: "platinum",
   },
   {
     id: 12,
     name: "Nehemiah Tatius",
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'Employee'
+    type: "Employee",
+    badge: "platinum",
   },
   {
     id: 13,
     name: "Ebbe Gemariah",
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'End User'
+    type: "End User",
+    badge: "platinum",
   },
   {
     id: 14,
     name: "Eustorgios Amulius",
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'Dealer'
+    type: "Dealer",
+    badge: "platinum",
   },
   {
     id: 15,
@@ -111,7 +126,7 @@ const userDataArray = [
 
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'Dealer'
+    type: "Dealer",
   },
   {
     id: 16,
@@ -119,30 +134,33 @@ const userDataArray = [
 
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'Employee'
+    type: "Employee",
+    badge: "platinum",
   },
   {
     id: 17,
     name: "Paĉjo Jadon",
 
-
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'Employee'
+    type: "Employee",
+    badge: "platinum",
   },
   {
     id: 18,
     name: "Micheal Mercurius",
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'Employee'
+    type: "Employee",
+    badge: "platinum",
   },
   {
     id: 19,
     name: "Ganesha Dubhghall",
     email: "abc@xyz.com",
     phone: "03021232238",
-    type:'Employee'
+    type: "Employee",
+    badge: "platinum",
   },
 ];
 
