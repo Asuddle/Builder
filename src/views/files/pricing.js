@@ -13,6 +13,7 @@ import {
   CRow,
   CInputGroupAppend,
   CInputGroupText,
+  CTextarea,
   CInputGroup,
 } from "@coreui/react";
 
@@ -171,6 +172,21 @@ const PricingComponent = ({
                           </CInvalidFeedback>
                         )}
                     </CInputGroup>
+                  </CCol>
+                  <br/>
+                  <CCol xs="12">
+                    <CFormGroup>
+                    <br/>
+                    <CLabel htmlFor="textarea-input">Notes/Comments</CLabel>
+                    <CTextarea 
+                      onChange={handleChange}
+                      name="textarea-input" 
+                      id="textarea-input" 
+                      rows="4"
+                      name='note'
+                      placeholder="Content..." 
+                    />
+                    </CFormGroup>
                   </CCol>
                 </CRow>
               </CFormGroup>
