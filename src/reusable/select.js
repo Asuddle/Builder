@@ -17,7 +17,6 @@ function SelectInput({
   touched,
 }) {
   const handleBlurEvent = () => {
-    console.log("check");
     handleBlur(name, true);
   };
   const style = {

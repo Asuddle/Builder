@@ -83,7 +83,7 @@ const routes = [
   
 
   { path: "/users", exact: true, name: "Users", component: UserList },
-  { path: "/users/add", exact: true, name: "User Details", component: AddUser },
+  { path: "/users/add", exact: true, name: "Add", component: AddUser },
 
   // FileAssignment
   { path: "/dashboard", name: "Dashboard", component: Dashboard },

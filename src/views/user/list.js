@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import TableComponent from "../../reusable/table";
 import userDataArray from "./data";
+import { useHistory } from "react-router";
 
 function UserList(props) {
+  const history = useHistory();
   const columns = [
     {
       dataField: "name",
@@ -28,7 +30,13 @@ function UserList(props) {
   ];
   return (
     <>
-      <TableComponent title="Users" columns={columns} data={userDataArray} />
+      <TableComponent
+        addButton="Add Users"
+        callback={() => history.push("/users/add")}
+        title="Users"
+        columns={columns}
+        data={userDataArray}
+      />
     </>
   );
 }

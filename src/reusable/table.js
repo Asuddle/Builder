@@ -24,15 +24,14 @@ import CIcon from "@coreui/icons-react";
 
 import usersData from "src/views/users/UsersData";
 
-    
 function addCommas(str) {
   return str
     .replace(/^0+/, "")
     .replace(/\D/g, "")
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-  var SVGComponent=(props)=><svg {...props}>{props.children}</svg>
-  var CircleComponent=(props)=><circle {...props}>{props.children}</circle>
+var SVGComponent = (props) => <svg {...props}>{props.children}</svg>;
+var CircleComponent = (props) => <circle {...props}>{props.children}</circle>;
 const defaultColumns = [
   {
     dataField: "file_name",
@@ -68,39 +67,44 @@ const defaultColumns = [
     headerStyle: (colum, colIndex) => {
       return { textAlign: "center" };
     },
-    formatter:(cell,row)=><div style={{textAlign:'center'}}>
-          <SVGComponent height="36" width='36'>
-            <CircleComponent
+    formatter: (cell, row) => (
+      <div style={{ textAlign: "center" }}>
+        <SVGComponent height="36" width="36">
+          <CircleComponent
             cx="18"
-            cy='18'
-            r='18'
-            fill='#edcf82'
-            stroke=''
-            strokeWidth='4'
-            />
-            <linearGradient
-            id='paint0_linear'
-            x1='1.6'
-            y1='9.48149'
-            x2='69.7431'
-            y2='15.3662'
-            gradientUnits='userSpaceOnUse'
-            >
-              <stop stopColor='white'/>
-              <stop offset='1' stopColor='white'/>
-            </linearGradient>
-            <text
-            textAnchor='middle'
-            x='18'
-            y='24'
-            style={{fontWeight:'500',color:'white'}}
-            >
-            {cell.split(" ").map((n)=>n[0]).join(".")}
-            </text>
-            </SVGComponent>
-            <br/>
-          <p style={{color:"#7f7f7f"}}>{cell}</p>
-    </div>,
+            cy="18"
+            r="18"
+            fill="#edcf82"
+            stroke=""
+            strokeWidth="4"
+          />
+          <linearGradient
+            id="paint0_linear"
+            x1="1.6"
+            y1="9.48149"
+            x2="69.7431"
+            y2="15.3662"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="white" />
+            <stop offset="1" stopColor="white" />
+          </linearGradient>
+          <text
+            textAnchor="middle"
+            x="18"
+            y="24"
+            style={{ fontWeight: "500", color: "white" }}
+          >
+            {cell
+              .split(" ")
+              .map((n) => n[0])
+              .join(".")}
+          </text>
+        </SVGComponent>
+        <br />
+        <p style={{ color: "#7f7f7f" }}>{cell}</p>
+      </div>
+    ),
     sort: true,
   },
   {
@@ -125,16 +129,27 @@ const defaultColumns = [
     text: "Price (Rs)",
     formatter: (cell) => addCommas(cell),
     sort: true,
-  }
+  },
 ];
-function TableComponent({title='Files',columns=defaultColumns,data=usersData}) {
-
-  
+function TableComponent({
+  title = "Files",
+  columns = defaultColumns,
+  data = usersData,
+  addButton = false,
+  callback=()=>{}
+}) {
   return (
     <CRow>
       <CCol xl={12}>
         <CCard>
-          <CCardHeader>{title}</CCardHeader>
+          <CCardHeader>
+            <strong>{title}</strong>
+            {addButton && (
+              <CButton style={{ float: "right" }} color="success" onClick={callback}>
+                {addButton}
+              </CButton>
+            )}
+          </CCardHeader>
           <CCardBody>
             <BootstrapTable
               striped
