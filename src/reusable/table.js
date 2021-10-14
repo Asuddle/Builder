@@ -23,8 +23,8 @@ import {
 import CIcon from "@coreui/icons-react";
 
 import usersData from "src/views/users/UsersData";
-function TableComponent(props) {
-    const columns = [
+function TableComponent({title='Files',columns=defaultColumns,data=usersData}) {
+    const defaultColumns = [
         {
           dataField: "file_name",
           text: "File Number",
@@ -132,14 +132,14 @@ function addCommas(str) {
     <CRow>
       <CCol xl={12}>
         <CCard>
-          <CCardHeader>Files</CCardHeader>
+          <CCardHeader>{title}</CCardHeader>
           <CCardBody>
             <BootstrapTable
               striped
               bootstrap4
               hover
               keyField="id"
-              data={usersData}
+              data={data}
               columns={columns}
               bordered={false}
               pagination={paginationFactory()}

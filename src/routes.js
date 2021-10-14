@@ -5,6 +5,13 @@ const FilesTable = React.lazy(() => import("./views/files/table-wrapper"));
 const FilesTransfer = React.lazy(() => import("./views/files/transfer-file"));
 const FileDetail=React.lazy(()=>import('./views/files/details'))
 const FileAssignment=React.lazy(()=>import('./views/files/file-assignment'))
+
+
+const AddUser=React.lazy(()=>import('./views/user/add'))
+const UserList=React.lazy(()=>import('./views/user/list'))
+
+
+
 const Toaster = React.lazy(() =>
   import("./views/notifications/toaster/Toaster")
 );
@@ -74,6 +81,10 @@ const routes = [
   { path: "/files/assignment", exact: true, name: "Assignment", component: FileAssignment },
   { path: "/files/history", exact: true, name: "History", component: FileAssignment },
   
+
+  { path: "/users", exact: true, name: "Users", component: UserList },
+  { path: "/users/add", exact: true, name: "User Details", component: AddUser },
+
   // FileAssignment
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/theme", name: "Theme", component: Colors, exact: true },
@@ -129,8 +140,8 @@ const routes = [
   { path: "/notifications/modals", name: "Modals", component: Modals },
   { path: "/notifications/toaster", name: "Toaster", component: Toaster },
   { path: "/widgets", name: "Widgets", component: Widgets },
-  { path: "/users", exact: true, name: "Users", component: Users },
-  { path: "/users/:id", exact: true, name: "User Details", component: User },
+  // { path: "/users", exact: true, name: "Users", component: Users },
+  // { path: "/users/:id", exact: true, name: "User Details", component: User },
 ];
 
 export default routes;

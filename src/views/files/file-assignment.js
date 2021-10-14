@@ -28,6 +28,7 @@ import SelectInput from "src/reusable/select";
 import AlFursanBanner from "./alfursan-banner";
 import CustomSwitch from "./switch";
 import TableComponent from "src/reusable/table";
+import FileLongForm from "./longform";
 function FileAssignment({
   data,
   col = 12,
@@ -290,15 +291,15 @@ function FileAssignment({
                           type="submit"
                           className="button-color"
                           onClick={() => {
-                            setShowClass(true)
-                            setFilter(!filter)
+                            setShowClass(true);
+                            setFilter(!filter);
                           }}
                         >
                           Search
                         </CButton>
-                        {'  '}
+                        {"  "}
                         <CButton
-                          style={{marginRight:'12px'}}
+                          style={{ marginRight: "12px" }}
                           type="submit"
                           className="button-color"
                           onClick={() => setFilter(!filter)}
@@ -314,14 +315,35 @@ function FileAssignment({
           </CCol>
         )}
       </CCollapse>
-      {!filter&&<CButton
-        type="submit"
-        className="button-color"
-        onClick={() => setFilter(!filter)}
-      >
-        Filter
-      </CButton>}
-      {showClass && <TableComponent />}
+      {!filter && (
+        <CButton
+          type="submit"
+          className="button-color"
+          onClick={() => setFilter(!filter)}
+        >
+          Filter
+        </CButton>
+      )}
+      {showClass && (
+        <>
+          <TableComponent />
+          <CCard>
+          <FileLongForm
+            data={{
+              file_name: "",
+              security_code: "",
+              type: "",
+              project_name: "",
+              status: "Sold",
+              assigned_to: "",
+              assignment_date: new Date().toISOString().split("T")[0],
+              received_by: "",
+              received_date: new Date().toISOString().split("T")[0],
+            }}
+          />
+          </CCard>
+        </>
+      )}
     </div>
   );
 }

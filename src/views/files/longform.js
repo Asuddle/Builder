@@ -25,7 +25,7 @@ import SelectInput from "src/reusable/select";
 import AlFursanBanner from "./alfursan-banner";
 import CustomSwitch from "./switch";
 function FileLongForm({
-  data,
+  data={},
   col = 12,
   handleSubmit = () => {},
   handleClose,
