@@ -29,7 +29,8 @@ function FileLongForm({
   col = 12,
   handleSubmit = () => {},
   handleClose,
-  hideBasicInfo=false
+  hideBasicInfo=false,
+  customSchema=false
 }) {
   const [receivingSwitch, setReceivingSwitch] = useState(true);
   const [initialState, setInitialState] = useState(data);
@@ -61,7 +62,7 @@ function FileLongForm({
         {Object.entries(initialState).length > 0 && (
           <Formik
             initialValues={initialState}
-            validationSchema={schema}
+            validationSchema={customSchema?customSchema:schema}
             onSubmit={(values) => {
               handleSubmit(values)
             }}

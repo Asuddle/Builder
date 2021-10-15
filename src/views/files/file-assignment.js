@@ -20,6 +20,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
+import { ToastContainer, toast } from "react-toastify";
 import { Field, Formik } from "formik";
 import * as yup from "yup";
 import TextFieldComponent from "src/reusable/textfield";
@@ -30,16 +31,21 @@ import CustomSwitch from "./switch";
 import TableComponent from "src/reusable/table";
 import FileLongForm from "./longform";
 import { roundToNearestMinutes } from "date-fns/esm";
+import PricingComponent from "./pricing";
+import { useHistory } from "react-router";
 function FileAssignment({
   data,
   col = 12,
   handleSubmit = () => {},
   handleClose,
-  hideForm=false
+  hideForm = false,
 }) {
+  const history=useHistory()
   const [showClass, setShowClass] = useState("");
   const [filter, setFilter] = useState(true);
   const [isAlfursan, setIsAlFursan] = useState(true);
+  const [assignmentForm, setAssignmentForm] = useState({});
+  const [isPricingForm, setIsPricingForm] = useState(false);
   return (
     <div>
       <CCollapse show={filter}>
@@ -328,32 +334,82 @@ function FileAssignment({
       )}
       {showClass && (
         <>
-          <TableComponent exportCSV={true}/>
-        
-            <CRow>
+          <TableComponent dataCount={true} exportCSV={true} />
+
+          <CRow>
             <CCol xs="1"></CCol>
-              <CCol xs={10}>
+            <CCol xs={10}>
+              {!isPricingForm && (
+                <CCard>
+                  {!hideForm && (
+                    <FileLongForm
+                      hideBasicInfo={true}
+                      data={{
+                        file_name: "",
+                        security_code: "",
+                        type: "",
+                        project_name: "",
+                        status: "Sold",
+                        assigned_to: "",
+                        assignment_date: new Date().toISOString().split("T")[0],
+                        received_by: "",
+                        received_date: new Date().toISOString().split("T")[0],
+                        ...assignmentForm,
+                      }}
+                      handleSubmit={(val) => {
+                        setAssignmentForm(val);
+                        setIsPricingForm(true);
+                      }}
+                      customSchema={yup.object().shape({
+                        assignment_date: yup.string().required(),
+                        received_by: yup.string().required(),
+                        received_date: yup.string().required(),
+                        assigned_to: yup.string().required(),
+                      })}
+                    />
+                  )}
+                </CCard>
+              )}
               <CCard>
-          {!hideForm&&<FileLongForm
-            hideBasicInfo={true}
-            data={{
-              file_name: "",
-              security_code: "",
-              type: "",
-              project_name: "",
-              status: "Sold",
-              assigned_to: "",
-              assignment_date: new Date().toISOString().split("T")[0],
-              received_by: "",
-              received_date: new Date().toISOString().split("T")[0],
-            }}
-          />}
-          </CCard>
-          </CCol>
-          
-          <CCol xs="1"></CCol>
+                {isPricingForm && (
+                  <PricingComponent
+                    handleBack={() => {
+                      console.log("here check");
+                      setIsPricingForm(false);
+                    }}
+                    customSubmit={(val) => {
+                      console.log("here are some values", val);
+                      toast.success("The files are transferred successfully", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                      });
+                      history.push("/files");
+                    }}
+                    noCard={true}
+                    data={{
+                      form3: {
+                        price: "100,000",
+                        deposit: "10,000",
+                        deposit_percentage: "10",
+                        total_price: "1,000,0000",
+                        discount: "500,000",
+                        discount_percentage: "5",
+                        payable: "950,000",
+                        note: "Hey There It is a note",
+                      },
+                    }}
+                  />
+                )}
+              </CCard>
+            </CCol>
+
+            <CCol xs="1"></CCol>
           </CRow>
-          
         </>
       )}
     </div>

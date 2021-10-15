@@ -1,7 +1,8 @@
 import React from "react";
-import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
+import { CButton, CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
 const FileDetails = ({ match }) => {
   const data = useSelector((item) => item.files);
@@ -31,12 +32,15 @@ const FileDetails = ({ match }) => {
     status:'Status',
     role:'Role'
   };
-
+  const history=useHistory()
   return (
     <CRow>
       <CCol lg={12}>
         <CCard>
-          <CCardHeader>Details</CCardHeader>
+          <CCardHeader>
+            <strong>Details</strong>
+            <CButton  onClick={()=>{history.push('/files/9/notes')}}style={{float:'right'}} color='success'>Notes</CButton>
+            </CCardHeader>
           <CCardBody>
             <table className="table table-striped table-hover">
               <tbody>

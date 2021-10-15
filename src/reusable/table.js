@@ -138,6 +138,7 @@ function TableComponent({
   data = usersData,
   exportCSV = false,
   addButton = false,
+  dataCount=false,
   callback = () => {},
 }) {
   const { ExportCSVButton } = CSVExport;
@@ -174,6 +175,13 @@ function TableComponent({
                       Export CSV
                     </ExportCSVButton>
                   )}{" "}
+                  {dataCount && (
+                    <>
+                      <br />
+                      <br />
+                      <h4>Total Number of Files : {data.length}</h4>
+                    </>
+                  )}
                   <hr />
                   <BootstrapTable
                     {...props.baseProps}
