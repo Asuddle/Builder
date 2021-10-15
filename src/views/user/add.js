@@ -30,7 +30,9 @@ const AddUsers = ({
   handleFormData,
   noCard = false,
   handleBack = () => {},
+  match
 }) => {
+  let isEdit=typeof match.params.id!=='undefined'?match.params.id:false
   function generatePassword() {
     var length = 8,
       charset =

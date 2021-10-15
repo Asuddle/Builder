@@ -29,6 +29,7 @@ const PricingComponent = ({
   data,
   handleFormData,
   noCard = false,
+  hideExtraFields=false,
   handleBack = () => {},
 }) => {
   let schema = yup.object().shape({
@@ -109,7 +110,6 @@ const PricingComponent = ({
                   <CInvalidFeedback>{errors["price"]}</CInvalidFeedback>
                 )}
               </CFormGroup>
-              <CFormGroup>
                 <CLabel htmlFor="vat">Minimum deposit </CLabel>
                 <CRow>
                   <CCol>
@@ -173,10 +173,139 @@ const PricingComponent = ({
                         )}
                     </CInputGroup>
                   </CCol>
-                  <br/>
+                 
+                {!hideExtraFields&&<>
+                  <CCol xs='12'>
+                 <CFormGroup>
+                <br/>
+                <CLabel htmlFor="company">Total Price </CLabel>
+                <CInput
+                  invalid={touched["price"] && errors["price"]}
+                  name="price"
+                  onChange={(e) => {
+                    if (
+                      values["deposit"] !== "" ||
+                      values["deposit_percentage"] !== ""
+                    ) {
+                      setFieldValue("deposit", "");
+                      setFieldValue("deposit_percentage", "");
+                    }
+
+                    setFieldValue("price", addCommas(e.target.value));
+                    // handleChange(e);
+                  }}
+                  value={values["price"]}
+                  placeholder="123457"
+                />
+                {touched["price"] && errors["price"] && (
+                  <CInvalidFeedback>{errors["price"]}</CInvalidFeedback>
+                )}
+              </CFormGroup>
+                 </CCol>
+                 <CCol >
+                 <CFormGroup>
+                 <CLabel htmlFor="vat">Total discount on deposit</CLabel>
+                    <CInput
+                      invalid={touched["deposit"] && errors["deposit"]}
+                      onChange={(e) => {
+                        if (values["price"] !== "") {
+                          let val = removeCommas(e.target.value);
+                          let perc =
+                            (val * 100) / removeCommas(values["price"]);
+                          if (!Number.isInteger(perc)) {
+                            perc = parseFloat(perc).toFixed(2);
+                          }
+                          // 23 % 1 = 0
+                          // 23.5 % 1 = 0.5
+                          // if (perc > 100) {
+                          //   perc = 100;
+                          // }
+                          setFieldValue("deposit_percentage", perc);
+                        }
+                        setFieldValue("deposit", addCommas(e.target.value));
+                      }}
+                      value={values["deposit"]}
+                      name="deposit"
+                      placeholder="Deposit"
+                    />
+                    {touched["deposit"] && errors["deposit"] && (
+                      <CInvalidFeedback>{errors["deposit"]}</CInvalidFeedback>
+                    )}
+                    
+                  </CFormGroup>
+                  </CCol>
+                  
+                  <CCol>
+                    <CLabel style={{marginBottom:'24px'}}></CLabel>
+                    <CInputGroup>
+                      <CInput
+                        invalid={
+                          touched["deposit_percentage"] &&
+                          errors["deposit_percentage"]
+                        }
+                        onChange={(e) => {
+                          if (e.target.value < 101) {
+                            if (values["price"] !== "") {
+                              let perc =
+                                (e.target.value / 100) *
+                                removeCommas(values["price"]);
+                              setFieldValue("deposit", addCommas(perc + ""));
+                            }
+                            handleChange(e);
+                          }
+                        }}
+                        value={values["deposit_percentage"]}
+                        name="deposit_percentage"
+                        placeholder="Percentage"
+                      />
+                      <CInputGroupAppend>
+                        <CInputGroupText>%</CInputGroupText>
+                      </CInputGroupAppend>
+                      {touched["deposit_percentage"] &&
+                        errors["deposit_percentage"] && (
+                          <CInvalidFeedback>
+                            {errors["deposit_percentage"]}
+                          </CInvalidFeedback>
+                        )}
+                    </CInputGroup>
+                  </CCol>
                   <CCol xs="12">
-                    <CFormGroup>
+                  <CFormGroup>
+                 <CLabel htmlFor="vat">Total Payable</CLabel>
+                    <CInput
+                      invalid={touched["deposit"] && errors["deposit"]}
+                      onChange={(e) => {
+                        if (values["price"] !== "") {
+                          let val = removeCommas(e.target.value);
+                          let perc =
+                            (val * 100) / removeCommas(values["price"]);
+                          if (!Number.isInteger(perc)) {
+                            perc = parseFloat(perc).toFixed(2);
+                          }
+                          // 23 % 1 = 0
+                          // 23.5 % 1 = 0.5
+                          // if (perc > 100) {
+                          //   perc = 100;
+                          // }
+                          setFieldValue("deposit_percentage", perc);
+                        }
+                        setFieldValue("deposit", addCommas(e.target.value));
+                      }}
+                      value={values["deposit"]}
+                      name="deposit"
+                      placeholder="Deposit"
+                    />
+                    {touched["deposit"] && errors["deposit"] && (
+                      <CInvalidFeedback>{errors["deposit"]}</CInvalidFeedback>
+                    )}
+                    
+                  </CFormGroup>
+                  </CCol>
+                  
+                </>}
+                  <CCol xs="12">
                     <br/>
+                    <CFormGroup>
                     <CLabel htmlFor="textarea-input">Notes/Comments</CLabel>
                     <CTextarea 
                       onChange={handleChange}
@@ -188,8 +317,10 @@ const PricingComponent = ({
                     />
                     </CFormGroup>
                   </CCol>
-                </CRow>
-              </CFormGroup>
+                  </CRow>
+                  <br/>
+
+            
             </CCardBody>
             <CCardFooter>
               <CButton type="submit" className="button-color">

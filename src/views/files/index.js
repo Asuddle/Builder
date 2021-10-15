@@ -144,6 +144,7 @@ const FilesComponent = () => {
                   nextForm={handleNextForm}
                   handleFormData={handleFormData}
                   data={form}
+                  hideExtraFields={true}
                 />
               )}
             </CRow>

@@ -29,6 +29,7 @@ function FileLongForm({
   col = 12,
   handleSubmit = () => {},
   handleClose,
+  hideBasicInfo=false
 }) {
   const [receivingSwitch, setReceivingSwitch] = useState(true);
   const [initialState, setInitialState] = useState(data);
@@ -52,7 +53,6 @@ function FileLongForm({
   }, [data]);
 
   const customChecked=(val)=>{
-    console.log('here is the value',val)
     setIsAlFursan(val)
   }
   return (
@@ -76,10 +76,10 @@ function FileLongForm({
               setFieldTouched 
             }) => (
               <form onSubmit={handleSubmit}>
-                 <CCardHeader>
+              {!hideBasicInfo&&<>    <CCardHeader>
                 <strong>Basic Information</strong>
                 </CCardHeader>
-                <CCardBody>
+              <CCardBody>
                 <TextFieldComponent
                     handleChange={handleChange}
                     name='file_name'
@@ -132,6 +132,7 @@ function FileLongForm({
                     />
                   </CFormGroup>
                       </CCardBody>
+                      </>}
                       
                 <CustomSwitch setState={customChecked} />
                       <CCardHeader>
@@ -155,7 +156,7 @@ function FileLongForm({
                         }
                       }}
                       options={isAlfursan?[
-                        { value: "Ali", label: "Ali" },
+                        { value: "Ali Khan", label: "Ali Khan" },
                         { value: "Usman", label: "Usman" },
                         { value: "Daniel", label: "Daniel" },
                         { value: "Sam", label: "Sam" },
@@ -318,9 +319,9 @@ function FileLongForm({
                     Next <CIcon name="cil-arrow-right" width={16} />
                   </CButton>
                   
-                  <CButton color='secondary'className='cancel-button-color' onClick={handleClose}>
+                  {!hideBasicInfo&&<CButton color='secondary'className='cancel-button-color' onClick={handleClose}>
                     Cancel
-                  </CButton>
+                  </CButton>}
                 </CCardFooter>
               </form>
             )}

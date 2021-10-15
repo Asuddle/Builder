@@ -7,7 +7,10 @@ const FileDetail=React.lazy(()=>import('./views/files/details'))
 const FileAssignment=React.lazy(()=>import('./views/files/file-assignment'))
 const FileHistory=React.lazy(()=>import('./views/files/transfer-file'))
 
+
 const AddUser=React.lazy(()=>import('./views/user/add'))
+const EditUser=React.lazy(()=>import('./views/user/add'))
+
 const UserList=React.lazy(()=>import('./views/user/list'))
 
 
@@ -84,6 +87,7 @@ const routes = [
 
   { path: "/users", exact: true, name: "Users", component: UserList },
   { path: "/users/add", exact: true, name: "Add", component: AddUser },
+  { path: "/users/:id/edit", exact: true, name: "Edit", component: EditUser },
 
   // FileAssignment
   { path: "/dashboard", name: "Dashboard", component: Dashboard },

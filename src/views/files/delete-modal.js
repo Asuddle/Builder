@@ -8,7 +8,7 @@ import {
   CModalHeader,
   CModalTitle,
 } from "@coreui/react";
-function DeleteFileModal({ open, handleClose }) {
+function DeleteFileModal({ open, handleClose, title = "File" }) {
   return (
     <CModal
       show={open}
@@ -17,9 +17,9 @@ function DeleteFileModal({ open, handleClose }) {
       style={{ marginTop: "100px" }}
     >
       <CModalHeader closeButton>
-        <CModalTitle>Delete File</CModalTitle>
+        <CModalTitle>Delete {title}</CModalTitle>
       </CModalHeader>
-      <CModalBody>Are you sure you want to delete the file?</CModalBody>
+      <CModalBody>Are you sure you want to delete the {title}?</CModalBody>
       <CModalFooter>
         <CButton color="danger" onClick={handleClose}>
           Delete

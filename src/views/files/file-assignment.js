@@ -329,8 +329,13 @@ function FileAssignment({
       {showClass && (
         <>
           <TableComponent exportCSV={true}/>
-          <CCard>
+        
+            <CRow>
+            <CCol xs="1"></CCol>
+              <CCol xs={10}>
+              <CCard>
           {!hideForm&&<FileLongForm
+            hideBasicInfo={true}
             data={{
               file_name: "",
               security_code: "",
@@ -344,6 +349,11 @@ function FileAssignment({
             }}
           />}
           </CCard>
+          </CCol>
+          
+          <CCol xs="1"></CCol>
+          </CRow>
+          
         </>
       )}
     </div>
