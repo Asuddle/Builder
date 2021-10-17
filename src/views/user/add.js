@@ -30,9 +30,9 @@ const AddUsers = ({
   handleFormData,
   noCard = false,
   handleBack = () => {},
-  match
+  match,
 }) => {
-  let isEdit=typeof match.params.id!=='undefined'?match.params.id:false
+  let isEdit = typeof match.params.id !== "undefined" ? match.params.id : false;
   function generatePassword() {
     var length = 8,
       charset =
@@ -45,9 +45,10 @@ const AddUsers = ({
   }
   const [typeField, setTypeField] = useState("End User");
   const [badge, setBadge] = useState("platinum");
-  
+
   let schema = yup.object().shape({
     name: yup.string().required("Name is a required field").min(0),
+    cnic: yup.string().required("CNIC is a required field").min(0),
     email: yup.string().when("type", {
       is: "End User",
       otherwise: yup.string().required("Email is a required field").email(),
@@ -69,9 +70,9 @@ const AddUsers = ({
       <CCardHeader>
         <strong>Add User</strong>
         <div style={{ float: "right" }}>
-          {badge==='platinum'&&<img src={platinumBadge} width="35" />}
-          {badge=='gold'&&<img src={goldBadge} width="35" />}
-          {badge=='bronze'&&<img src={bronzeBadge} width="35" />}
+          {badge === "platinum" && <img src={platinumBadge} width="35" />}
+          {badge == "gold" && <img src={goldBadge} width="35" />}
+          {badge == "bronze" && <img src={bronzeBadge} width="35" />}
         </div>
         {/* <small> Form</small> */}
       </CCardHeader>
@@ -81,8 +82,9 @@ const AddUsers = ({
           email: "",
           phone: "",
           type: "",
+          cnic: "",
           password: generatePassword(),
-          badge:'platinum'
+          badge: "platinum",
         }}
         validationSchema={schema}
         onSubmit={(values) => {
@@ -146,6 +148,17 @@ const AddUsers = ({
                     label={"Name"}
                   />
                 </CCol>
+                <CCol xs="12">
+                  <TextFieldComponent
+                    handleChange={handleChange}
+                    name="cnic"
+                    touched={touched["cnic"]}
+                    error={errors["cnic"]}
+                    value={values["cnic"]}
+                    required={true}
+                    label={"CNIC"}
+                  />
+                </CCol>
                 {typeField !== "End User" && (
                   <CCol xs="6">
                     <TextFieldComponent
@@ -155,7 +168,7 @@ const AddUsers = ({
                       error={errors["email"]}
                       value={values["email"]}
                       required={true}
-                      label={"Email"}
+                      label={"Email"} 
                     />
                   </CCol>
                 )}
@@ -180,74 +193,77 @@ const AddUsers = ({
                     </CCol>
                     <CCol md="12">
                       <CRow>
-                        <CCol xs='2'>
-                      <CFormGroup variant="custom-radio" inline>
-                        <CInputRadio
-                          custom
-                          id="inline-radio1"
-                          name="badge"
-                          onClick={() => {
-                            setFieldValue("badge", "platinum");
-                            setBadge('platinum')
-                          }}
-                          checked={values["badge"] === "platinum"}
-                        />
-                        <CLabel
-                          variant="custom-checkbox"
-                          htmlFor="inline-radio1"
-                          style={{display:'grid',textAlign:'center'}}
-                        >
-                        <img src={platinumBadge} width="40" style={{marginLeft:'5px'}} />
-                        <p>Platinum</p>
-                        </CLabel>
-                      </CFormGroup>
-                      </CCol>
-                      <CCol xs='2'>
-                      <CFormGroup variant="custom-radio" inline>
-                        <CInputRadio
-                          custom
-                          color="primary"
-                          id="inline-radio2"
-                          name="badge"
-                          onClick={() => {
-                            setFieldValue("badge", "gold");
-                            setBadge('gold')
-                          }}
-                          checked={values["badge"] === "gold"}
-                        />
-                        <CLabel
-                          variant="custom-checkbox"
-                          htmlFor="inline-radio2"
-                          style={{display:'grid',textAlign:'center'}}
-                        >
-                         <img src={goldBadge} width="40" />
-                         <p>Gold</p>
-                        </CLabel>
-                      </CFormGroup>
-                      </CCol>
-                      <CCol xs='2'>
-                      <CFormGroup variant="custom-radio" inline>
-                        <CInputRadio
-                          custom
-                          id="inline-radio3"
-                          name="badge"
-                          onClick={() => {
-                            setFieldValue("badge", "bronze");
-                            setBadge('bronze')
-                          }}
-                          checked={values["badge"] === "bronze"}
-                        />
-                        <CLabel
-                          variant="custom-checkbox"
-                          htmlFor="inline-radio3"
-                          style={{display:'grid',textAlign:'center'}}
-                      >
-                        <img src={bronzeBadge} width="40" />
-                        <p>Bronze</p>
-                        </CLabel>
-                      </CFormGroup>
-                      </CCol>
-                      
+                        <CCol xs="2">
+                          <CFormGroup variant="custom-radio" inline>
+                            <CInputRadio
+                              custom
+                              id="inline-radio1"
+                              name="badge"
+                              onClick={() => {
+                                setFieldValue("badge", "platinum");
+                                setBadge("platinum");
+                              }}
+                              checked={values["badge"] === "platinum"}
+                            />
+                            <CLabel
+                              variant="custom-checkbox"
+                              htmlFor="inline-radio1"
+                              style={{ display: "grid", textAlign: "center" }}
+                            >
+                              <img
+                                src={platinumBadge}
+                                width="40"
+                                style={{ marginLeft: "5px" }}
+                              />
+                              <p>Platinum</p>
+                            </CLabel>
+                          </CFormGroup>
+                        </CCol>
+                        <CCol xs="2">
+                          <CFormGroup variant="custom-radio" inline>
+                            <CInputRadio
+                              custom
+                              color="primary"
+                              id="inline-radio2"
+                              name="badge"
+                              onClick={() => {
+                                setFieldValue("badge", "gold");
+                                setBadge("gold");
+                              }}
+                              checked={values["badge"] === "gold"}
+                            />
+                            <CLabel
+                              variant="custom-checkbox"
+                              htmlFor="inline-radio2"
+                              style={{ display: "grid", textAlign: "center" }}
+                            >
+                              <img src={goldBadge} width="40" />
+                              <p>Gold</p>
+                            </CLabel>
+                          </CFormGroup>
+                        </CCol>
+                        <CCol xs="2">
+                          <CFormGroup variant="custom-radio" inline>
+                            <CInputRadio
+                              custom
+                              id="inline-radio3"
+                              name="badge"
+                              onClick={() => {
+                                setFieldValue("badge", "bronze");
+                                setBadge("bronze");
+                              }}
+                              checked={values["badge"] === "bronze"}
+                            />
+                            <CLabel
+                              variant="custom-checkbox"
+                              htmlFor="inline-radio3"
+                              style={{ display: "grid", textAlign: "center" }}
+                            >
+                              <img src={bronzeBadge} width="40" />
+                              <p>Bronze</p>
+                            </CLabel>
+                          </CFormGroup>
+                        </CCol>
                       </CRow>
                     </CCol>
                   </CFormGroup>

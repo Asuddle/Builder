@@ -55,13 +55,13 @@ const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "Roles",
-    to: "/files/add",
+    to: "/roles",
     icon: "cil-puzzle",
   },
   {
     _tag: "CSidebarNavItem",
     name: "Permissions",
-    to: "/files/add",
+    to: "/permissions",
     icon: "cil-puzzle",
   },
   // {

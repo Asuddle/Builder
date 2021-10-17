@@ -104,6 +104,10 @@ $primary-color: #edcf82;
   color: black !important;
   background: transparent;
 }
+.c-sidebar .c-active.c-sidebar-nav-dropdown-toggle, .c-sidebar .c-sidebar-nav-link.c-active{
+  color:'white' !important;
+  background-color: $primary-color!important;
+}
 .c-sidebar .c-sidebar-nav-title {
   color: black !important;
 }

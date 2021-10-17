@@ -82,7 +82,7 @@ const routes = [
   { path: "/files/add", exact: true, name: "Add", component: AddFiles },
   { path: "/files/transfer", exact: true, name: "Transfer", component: FilesTransfer },
   { path: "/files/:id/details", exact: true, name: "Detail", component: FileDetail },
-  { path: "/files/:id/notes", exact: true, name: "Notes", component: FileNotes },
+  { path: "/files/:id/details/notes", exact: true, name: "Notes", component: FileNotes },
   // FileNotes
   { path: "/files/assignment", exact: true, name: "Assignment", component: FileAssignment },
   { path: "/files/history", exact: true, name: "History", component: FileHistory },
@@ -91,6 +91,11 @@ const routes = [
   { path: "/users", exact: true, name: "Users", component: UserList },
   { path: "/users/add", exact: true, name: "Add", component: AddUser },
   { path: "/users/:id/edit", exact: true, name: "Edit", component: EditUser },
+
+
+  { path: "/roles", exact: true, name: "Roles", component: UserList },
+  { path: "/permissions", exact: true, name: "Permissions", component: UserList },
+
 
   // FileAssignment
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
