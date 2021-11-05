@@ -30,7 +30,8 @@ function FileLongForm({
   handleSubmit = () => {},
   handleClose,
   hideBasicInfo=false,
-  customSchema=false
+  customSchema=false,
+  disableFields=false
 }) {
   const [receivingSwitch, setReceivingSwitch] = useState(true);
   const [initialState, setInitialState] = useState(data);
@@ -88,6 +89,7 @@ function FileLongForm({
                     error={errors['file_name']}
                     value={values['file_name']}
                     required={true}
+                    disable={disableFields}
                     label={"File number"}
                   />
                    <TextFieldComponent
@@ -97,6 +99,7 @@ function FileLongForm({
                     error={errors['security_code']}
                     value={values['security_code']}
                     required={true}
+                    disable={disableFields}
                     label={"Security code"}
                   />
                    <CFormGroup>
@@ -106,6 +109,7 @@ function FileLongForm({
                     <SelectInput
                       handleBlur={setFieldTouched}
                       touched={touched['type']}
+                      disable={disableFields}
                       error={errors['type']}
                       options={[
                         { value: '5 Marla', label: '5 Marla' },
@@ -120,12 +124,13 @@ function FileLongForm({
                   <CFormGroup>
                     <CLabel htmlFor="street">Project Name</CLabel>
                     <SelectInput
-                      creatable={true}
+                      creatable={disableFields?false:true}
                       options={[
                         { value: 'Bahria', label: 'Bahria' },
                         { value: 'DHA', label: 'DHA' },
                       ]}
                       touched={touched['type']}
+                      disable={disableFields}
                       handleBlur={setFieldTouched}
                       value={values['project_name']}
                       setValue={setFieldValue}

@@ -15,7 +15,9 @@ function SelectInput({
   error,
   customHandleChange = false,
   touched,
+  disable=false
 }) {
+
   const handleBlurEvent = () => {
     handleBlur(name, true);
   };
@@ -44,6 +46,7 @@ function SelectInput({
             options ? options.find((option) => option.value === value) : ""
           }
           isClearable={isClearable}
+          isDisabled={disable}
           isSearchable={isSearchable}
           onChange={
             customHandleChange

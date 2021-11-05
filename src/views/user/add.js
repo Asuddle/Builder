@@ -12,6 +12,7 @@ import {
   CInput,
   CLabel,
   CRow,
+  CTextarea,
 } from "@coreui/react";
 
 import { cilChevronLeft, cilArrowLeft } from "@coreui/icons";
@@ -137,7 +138,7 @@ const AddUsers = ({
                     />
                   </CFormGroup>
                 </CCol>
-                <CCol xs="12">
+                <CCol xs="6">
                   <TextFieldComponent
                     handleChange={handleChange}
                     name="name"
@@ -148,7 +149,20 @@ const AddUsers = ({
                     label={"Name"}
                   />
                 </CCol>
-                <CCol xs="12">
+                {typeField !== "End User" && typeField !== "Employee" && (
+                  <CCol xs="6">
+                    <TextFieldComponent
+                      handleChange={handleChange}
+                      name="company"
+                      touched={touched["company"]}
+                      error={errors["company"]}
+                      value={values["company"]}
+                      required={true}
+                      label={"Company"}
+                    />
+                  </CCol>
+                )}
+                <CCol xs="6">
                   <TextFieldComponent
                     handleChange={handleChange}
                     name="cnic"
@@ -168,7 +182,7 @@ const AddUsers = ({
                       error={errors["email"]}
                       value={values["email"]}
                       required={true}
-                      label={"Email"} 
+                      label={"Email"}
                     />
                   </CCol>
                 )}
@@ -186,6 +200,21 @@ const AddUsers = ({
                     />
                   </CCol>
                 )}
+                <CCol xs="12">
+                <CLabel htmlFor="company">
+                      Address
+                    </CLabel>
+                  <CTextarea
+                    handleChange={handleChange}
+                    name="address"
+                    type="address"
+                    touched={touched["address"]}
+                    error={errors["address"]}
+                    value={values["address"]}
+                    required={true}
+                    label={"Adderss"}
+                  />
+                </CCol>
                 <CCol xs="12">
                   <CFormGroup row>
                     <CCol md="12">

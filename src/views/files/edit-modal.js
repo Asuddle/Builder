@@ -43,6 +43,7 @@ function EditModal({ open = false, handleClose = () => {}, data }) {
               data={data}
               handleClose={handlingClose}
               handleSubmit={handleSubmitLongForm}
+              disableFields={true}
             />
           ) : (
             <PricingComponent

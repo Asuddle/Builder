@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { CFormGroup, CInput, CInvalidFeedback, CLabel } from '@coreui/react'
 
-function TextFieldComponent({touched,handleChange,error,name,value,label,required=false,placeholder=false,type='text'}) {
+function TextFieldComponent({touched,handleChange,error,disable=false,name,value,label,required=false,placeholder=false,type='text'}) {
     return (
         <>
             <CFormGroup>
@@ -13,6 +13,7 @@ function TextFieldComponent({touched,handleChange,error,name,value,label,require
                       invalid={touched&& error}
                       name={name}
                       type={type}
+                      disabled={disable}
                       value={value}
                       onChange={handleChange}
                       placeholder={placeholder?placeholder:label}
