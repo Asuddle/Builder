@@ -427,8 +427,7 @@ const AddUsers = ({
                     touched={touched["address"]}
                     error={errors["address"]}
                     value={values["address"]}
-                    required={true}
-                    label={"Adderss"}
+                    label={"Address"}
                   />
                 </CCol>
                 {typeField == "End User" && (
