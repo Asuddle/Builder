@@ -83,6 +83,11 @@ function UserList(props) {
       sort: true,
     },
     {
+      dataField: "balance",
+      text: "Account Balance (Rs)",
+      sort: true,
+    },
+    {
       dataField: "type",
       text: "Type",
       sort: true,

@@ -6,6 +6,7 @@ const userDataArray = [
     phone: "03021232238",
     type: "Employee",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 1,
@@ -15,6 +16,7 @@ const userDataArray = [
     phone: "03021232238",
     type: "Dealer",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 2,
@@ -23,6 +25,7 @@ const userDataArray = [
     email: "abc@xyz.com",
     phone: "03021232238",
     badge: "gold",
+    balance: "100,00.00",
   },
   {
     id: 3,
@@ -31,6 +34,7 @@ const userDataArray = [
     phone: "03021232238",
     type: "End User",
     badge: "bronze",
+    balance: "100,00.00",
   },
   {
     id: 4,
@@ -39,6 +43,7 @@ const userDataArray = [
     phone: "03021232238",
     type: "Employee",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 5,
@@ -47,6 +52,7 @@ const userDataArray = [
     email: "abc@xyz.com",
     phone: "03021232238",
     badge: "gold",
+    balance: "100,00.00",
   },
   {
     id: 6,
@@ -55,6 +61,7 @@ const userDataArray = [
     email: "abc@xyz.com",
     phone: "03021232238",
     badge: "bronze",
+    balance: "100,00.00",
   },
   {
     id: 7,
@@ -63,6 +70,7 @@ const userDataArray = [
     email: "abc@xyz.com",
     phone: "03021232238",
     badge: "bronze",
+    balance: "100,00.00",
   },
   {
     id: 8,
@@ -71,6 +79,7 @@ const userDataArray = [
     email: "abc@xyz.com",
     phone: "03021232238",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 9,
@@ -79,6 +88,7 @@ const userDataArray = [
     email: "abc@xyz.com",
     phone: "03021232238",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 10,
@@ -87,6 +97,7 @@ const userDataArray = [
     email: "abc@xyz.com",
     phone: "03021232238",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 11,
@@ -95,6 +106,7 @@ const userDataArray = [
     email: "abc@xyz.com",
     phone: "03021232238",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 12,
@@ -103,6 +115,7 @@ const userDataArray = [
     phone: "03021232238",
     type: "Employee",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 13,
@@ -111,6 +124,7 @@ const userDataArray = [
     phone: "03021232238",
     type: "End User",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 14,
@@ -119,6 +133,7 @@ const userDataArray = [
     phone: "03021232238",
     type: "Dealer",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 15,
@@ -127,6 +142,7 @@ const userDataArray = [
     email: "abc@xyz.com",
     phone: "03021232238",
     type: "Dealer",
+    balance: "100,00.00",
   },
   {
     id: 16,
@@ -136,6 +152,7 @@ const userDataArray = [
     phone: "03021232238",
     type: "Employee",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 17,
@@ -145,6 +162,7 @@ const userDataArray = [
     phone: "03021232238",
     type: "Employee",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 18,
@@ -153,6 +171,7 @@ const userDataArray = [
     phone: "03021232238",
     type: "Employee",
     badge: "platinum",
+    balance: "100,00.00",
   },
   {
     id: 19,
@@ -161,6 +180,7 @@ const userDataArray = [
     phone: "03021232238",
     type: "Employee",
     badge: "platinum",
+    balance: "100,00.00",
   },
 ];
 
