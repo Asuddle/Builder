@@ -64,6 +64,16 @@ const _nav = [
     to: "/permissions",
     icon: "cil-puzzle",
   },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Order Managment"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Orders",
+    to: "/permissions",
+    icon: "cil-puzzle",
+  },
   // {
   //   _tag: "CSidebarNavTitle",
   //   _children: ["Components"],
