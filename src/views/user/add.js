@@ -70,11 +70,13 @@ const AddUsers = ({
       {" "}
       <CCardHeader>
         <strong>Add User</strong>
-        <div style={{ float: "right" }}>
-          {badge === "platinum" && <img src={platinumBadge} width="35" />}
-          {badge == "gold" && <img src={goldBadge} width="35" />}
-          {badge == "bronze" && <img src={bronzeBadge} width="35" />}
-        </div>
+        {typeField !== "End User" && (
+          <div style={{ float: "right" }}>
+            {badge === "platinum" && <img src={platinumBadge} width="35" />}
+            {badge == "gold" && <img src={goldBadge} width="35" />}
+            {badge == "bronze" && <img src={bronzeBadge} width="35" />}
+          </div>
+        )}
         {/* <small> Form</small> */}
       </CCardHeader>
       <Formik
@@ -429,11 +431,15 @@ const AddUsers = ({
                     label={"Adderss"}
                   />
                 </CCol>
-                {typeField == "End User" &&<CCol xs="12">
-                  <br/>
-                  <h5><strong>Nominee Information</strong></h5>
-                  <br/>
-                </CCol>}
+                {typeField == "End User" && (
+                  <CCol xs="12">
+                    <br />
+                    <h5>
+                      <strong>Nominee Information</strong>
+                    </h5>
+                    <br />
+                  </CCol>
+                )}
                 {typeField == "End User" && (
                   <CCol xs="6">
                     <TextFieldComponent
