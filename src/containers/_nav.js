@@ -18,7 +18,7 @@ const _nav = [
     to: "/files",
     icon: "cil-pencil",
   },
-    {
+  {
     _tag: "CSidebarNavItem",
     name: "Add New File",
     to: "/files/add",
@@ -46,7 +46,7 @@ const _nav = [
     to: "/users",
     icon: "cil-pencil",
   },
-    {
+  {
     _tag: "CSidebarNavItem",
     name: "Add New Users",
     to: "/users/add",
@@ -54,16 +54,16 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Roles",
+    name: "Roles and Permissions",
     to: "/roles",
     icon: "cil-puzzle",
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Permissions",
-    to: "/permissions",
-    icon: "cil-puzzle",
-  },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Invoice",
+  //   to: "/invoice",
+  //   icon: "cil-puzzle",
+  // },
   {
     _tag: "CSidebarNavTitle",
     _children: ["Order Managment"],

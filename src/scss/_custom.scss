@@ -104,9 +104,10 @@ $primary-color: #edcf82;
   color: black !important;
   background: transparent;
 }
-.c-sidebar .c-active.c-sidebar-nav-dropdown-toggle, .c-sidebar .c-sidebar-nav-link.c-active{
-  color:'white' !important;
-  background-color: $primary-color!important;
+.c-sidebar .c-active.c-sidebar-nav-dropdown-toggle,
+.c-sidebar .c-sidebar-nav-link.c-active {
+  color: "white" !important;
+  background-color: $primary-color !important;
 }
 .c-sidebar .c-sidebar-nav-title {
   color: black !important;
@@ -200,7 +201,10 @@ $primary-color: #edcf82;
   font-weight: 400;
   font-size: 12px;
 }
-.react-daterange-picker, .react-daterange-picker *, .react-daterange-picker ::before, .react-daterange-picker ::after{
+.react-daterange-picker,
+.react-daterange-picker *,
+.react-daterange-picker ::before,
+.react-daterange-picker ::after {
   padding: 1px !important;
   padding-bottom: 2px !important;
 }
@@ -220,7 +224,7 @@ $primary-color: #edcf82;
   padding-top: 5px !important;
 }
 
-.switch-wrapper{
+.switch-wrapper {
   align-items: center;
   margin-top: 7px;
   background-color: white;
@@ -231,156 +235,243 @@ $primary-color: #edcf82;
   justify-content: center;
   position: relative;
   float: right;
- }
-
-
-
-.switch {
- background-color: transparent;
- box-sizing: border-box;
- display: flex;
- flex: 0 0 auto;
- height: 24px;
- margin: 0 0 10px;
- overflow: hidden;
- padding: 0;
- position: relative;
- width: 56px;
- 
- 
- &__label {
-   cursor: pointer;
-   margin: 0;
-   padding: 0;
-   width: 100%;
- }
- 
- &__input {
-   opacity: 0;
-   
-   &:checked {
-     ~ .switch__text {
-       background:$primary-color;
-       
-       &:before {
-         opacity: 0;
-         transform: translateX(200%);
-       }
-       
-       &:after {
-         opacity: 1;
-         transform: translateX(0);
-       }
-     }
-     
-     ~ .switch__handle {
-       transform: translateX(32px);
-     }
-   }
- }
- 
- &__text {
-   background-color: #e5e5e5;
-   border-radius: 50px;
-   box-sizing: border-box;
-   display: block;
-   flex: 0 0 auto;
-   height: 24px;
-   margin: 0;
-   position: absolute;
-   top: 0;
-   width: 56px;
-    
-   &:before,
-   &:after {
-     color: SlateGrey;
-     font-size: 12px;
-     font-weight: 700;
-     line-height: 25px;
-     position: absolute;
-     transition: all .2s ease-in-out;
-     transition-property: transform;
-   }
-   
-   &:before {
-     content: attr(data-off);
-     right: 8px;
-     transform: translateX(0);
-   }
-   
-   &:after {
-     color: white;
-     content: attr(data-on);
-     left: 9px;
-     opacity: 0;
-     transform: translateX(-200%);
-   }
- }
-
-
-
-
- &__handle {
-   background-color: white;
-   border-radius: 18px;
-   display: block;
-   height: 20px;
-   margin: 2px;
-   padding: 0;
-   position: absolute;
-   top: 0;
-   transition: all .2s ease-in;
-   transition-property: transform;
-   width: 20px;
- }
- 
- &--large {
-   height: 30px;
-   width: 120px;
-    
-   .switch__input {
-     &:checked {
-       ~ .switch__handle {
-         transform: translateX(90px);
-       }
-     }
-   }
-   
-   .switch__text {
-     height: 30px;
-     width: 120px;
-     
-     &:before,
-     &:after {
-       font-size: 14px;
-       line-height: 30px;
-       position: absolute;
-     }
-     
-     &:before {
-       right: 10px;
-     }
-
-     &:after {
-       left: 12px;
-     }
-   }
-   
-   .switch__handle {
-     height: 26px;
-     width: 26px;
-   }
- }      
- 
 }
 
+.switch {
+  background-color: transparent;
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 auto;
+  height: 24px;
+  margin: 0 0 10px;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 56px;
 
-#seconddiv.coolclass{
-  max-height:100%;
- }
- 
- #seconddiv {
+  &__label {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  &__input {
+    opacity: 0;
+
+    &:checked {
+      ~ .switch__text {
+        background: $primary-color;
+
+        &:before {
+          opacity: 0;
+          transform: translateX(200%);
+        }
+
+        &:after {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      ~ .switch__handle {
+        transform: translateX(32px);
+      }
+    }
+  }
+
+  &__text {
+    background-color: #e5e5e5;
+    border-radius: 50px;
+    box-sizing: border-box;
+    display: block;
+    flex: 0 0 auto;
+    height: 24px;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 56px;
+
+    &:before,
+    &:after {
+      color: SlateGrey;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 25px;
+      position: absolute;
+      transition: all 0.2s ease-in-out;
+      transition-property: transform;
+    }
+
+    &:before {
+      content: attr(data-off);
+      right: 8px;
+      transform: translateX(0);
+    }
+
+    &:after {
+      color: white;
+      content: attr(data-on);
+      left: 9px;
+      opacity: 0;
+      transform: translateX(-200%);
+    }
+  }
+
+  &__handle {
+    background-color: white;
+    border-radius: 18px;
+    display: block;
+    height: 20px;
+    margin: 2px;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    transition: all 0.2s ease-in;
+    transition-property: transform;
+    width: 20px;
+  }
+
+  &--large {
+    height: 30px;
+    width: 120px;
+
+    .switch__input {
+      &:checked {
+        ~ .switch__handle {
+          transform: translateX(90px);
+        }
+      }
+    }
+
+    .switch__text {
+      height: 30px;
+      width: 120px;
+
+      &:before,
+      &:after {
+        font-size: 14px;
+        line-height: 30px;
+        position: absolute;
+      }
+
+      &:before {
+        right: 10px;
+      }
+
+      &:after {
+        left: 12px;
+      }
+    }
+
+    .switch__handle {
+      height: 26px;
+      width: 26px;
+    }
+  }
+}
+
+#seconddiv.coolclass {
+  max-height: 100%;
+}
+
+#seconddiv {
   max-height: 0%;
   transition: 0.5s;
   overflow: hidden;
- }
+}
+
+.invoice-box {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #eee;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  line-height: 24px;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  color: #555;
+  margin-bottom: 40px !important;
+  background: white !important;
+}
+
+.invoice-box table {
+  width: 100%;
+  line-height: inherit;
+  text-align: left;
+}
+
+.invoice-box table td {
+  padding: 5px;
+  vertical-align: top;
+}
+
+.invoice-box table tr td:nth-child(2) {
+  text-align: right;
+}
+
+.invoice-box table tr.top table td {
+  padding-bottom: 20px;
+}
+
+.invoice-box table tr.top table td.title {
+  font-size: 45px;
+  line-height: 45px;
+  color: #333;
+}
+
+.invoice-box table tr.information table td {
+  padding-bottom: 40px;
+}
+
+.invoice-box table tr.heading td {
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+
+.invoice-box table tr.details td {
+  padding-bottom: 20px;
+}
+
+.invoice-box table tr.item td {
+  border-bottom: 1px solid #eee;
+}
+
+.invoice-box table tr.item.last td {
+  border-bottom: none;
+}
+
+.invoice-box table tr.total td:nth-child(2) {
+  border-top: 2px solid #eee;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  .invoice-box table tr.top table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+
+  .invoice-box table tr.information table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+/** RTL **/
+.invoice-box.rtl {
+  direction: rtl;
+  font-family: Tahoma, "Helvetica Neue", "Helvetica", Helvetica, Arial,
+    sans-serif;
+}
+
+.invoice-box.rtl table {
+  text-align: right;
+}
+
+.invoice-box.rtl table tr td:nth-child(2) {
+  text-align: left;
+}

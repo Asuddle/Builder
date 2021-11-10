@@ -379,16 +379,16 @@ function FileAssignment({
                     }}
                     customSubmit={(val) => {
                       console.log("here are some values", val);
-                      toast.success("The files are transferred successfully", {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                      });
-                      history.push("/files");
+                      // toast.success("The files are transferred successfully", {
+                      //   position: "top-right",
+                      //   autoClose: 3000,
+                      //   hideProgressBar: false,
+                      //   closeOnClick: true,
+                      //   pauseOnHover: true,
+                      //   draggable: true,
+                      //   progress: undefined,
+                      // });
+                      history.push("/invoice");
                     }}
                     noCard={true}
                     data={{

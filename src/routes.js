@@ -19,6 +19,8 @@ const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
 const OrdersList = React.lazy(() => import("./views/order/list"));
 
+const Invoice = React.lazy(() => import("./views/invoice/index"));
+
 const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/files", exact: true, name: "Files", component: FilesTable },
@@ -66,6 +68,7 @@ const routes = [
     name: "Permissions",
     component: UserList,
   },
+  { path: "/invoice",exact:true, name: "Invoice", component: Invoice },
 
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
 ];
