@@ -71,7 +71,7 @@ const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "Orders",
-    to: "/permissions",
+    to: "/orders",
     icon: "cil-puzzle",
   },
   // {

@@ -8,21 +8,6 @@ import goldBadge from "../files/svg/gold.svg";
 import bronzeBadge from "../files/svg/bronze.svg";
 import platinumBadge from "../files/svg/platinum.svg";
 import { cilTrash, cilPencil, cilFile, cilCircle } from "@coreui/icons";
-import {
-  CBadge,
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CDataTable,
-  CRow,
-  CFormGroup,
-  CLabel,
-  CSelect,
-  CButton,
-  CPagination,
-  CInput,
-} from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 function UserList(props) {
   const history = useHistory();

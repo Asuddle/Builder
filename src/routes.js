@@ -15,38 +15,9 @@ const EditUser = React.lazy(() => import("./views/user/add"));
 
 const UserList = React.lazy(() => import("./views/user/list"));
 
-const Toaster = React.lazy(() =>
-  import("./views/notifications/toaster/Toaster")
-);
-const Tables = React.lazy(() => import("./views/base/tables/Tables"));
-
-const Breadcrumbs = React.lazy(() =>
-  import("./views/base/breadcrumbs/Breadcrumbs")
-);
-const Cards = React.lazy(() => import("./views/base/cards/Cards"));
-const Carousels = React.lazy(() => import("./views/base/carousels/Carousels"));
-const Collapses = React.lazy(() => import("./views/base/collapses/Collapses"));
-const BasicForms = React.lazy(() => import("./views/base/forms/BasicForms"));
-
-const Jumbotrons = React.lazy(() =>
-  import("./views/base/jumbotrons/Jumbotrons")
-);
-const ListGroups = React.lazy(() =>
-  import("./views/base/list-groups/ListGroups")
-);
-const Navbars = React.lazy(() => import("./views/base/navbars/Navbars"));
-const Navs = React.lazy(() => import("./views/base/navs/Navs"));
-const Paginations = React.lazy(() =>
-  import("./views/base/paginations/Pagnations")
-);
-const Popovers = React.lazy(() => import("./views/base/popovers/Popovers"));
-const ProgressBar = React.lazy(() =>
-  import("./views/base/progress-bar/ProgressBar")
-);
-
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
-
+const OrdersList = React.lazy(() => import("./views/order/list"));
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
@@ -88,6 +59,7 @@ const routes = [
   { path: "/users/:id/edit", exact: true, name: "Edit", component: EditUser },
 
   { path: "/roles", exact: true, name: "Roles", component: UserList },
+  { path: "/orders", exact: true, name: "Orders", component: OrdersList },
   {
     path: "/permissions",
     exact: true,
@@ -96,9 +68,6 @@ const routes = [
   },
 
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
-  // { path: "/theme", name: "Theme", component: Colors, exact: true },
-  // { path: "/theme/colors", name: "Colors", component: Colors },
-  // { path: "/theme/typography", name: "Typography", component: Typography },
 ];
 
 export default routes;
