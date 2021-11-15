@@ -30,6 +30,13 @@ const _nav = [
     to: "/files/assignment",
     icon: "cil-bell",
   },
+
+  {
+    _tag: "CSidebarNavItem",
+    name: "Bulk Files Upload",
+    to: "/files/bulk-transfer",
+    icon: "cil-bell",
+  },
   {
     _tag: "CSidebarNavItem",
     name: "Assignment History",

@@ -19,7 +19,7 @@ import {
   CInput,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+// import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import { ReactComponent as AddIcon } from "./svg/add.svg";
 import usersData from "../users/UsersData";
 import { useDispatch } from "react-redux";
@@ -34,14 +34,22 @@ const getBadge = (status) => {
   switch (status) {
     case "Sold":
       return (
-        <span style={{color:'red'}} color="danger" className="mfs-auto">
+        <span style={{ color: "red" }} color="danger" className="mfs-auto">
           Sold
         </span>
       );
     case "Reserved":
-      return <span  style={{color:'grey'}} color="secondary">Reserved</span>;
+      return (
+        <span style={{ color: "grey" }} color="secondary">
+          Reserved
+        </span>
+      );
     case "Available":
-      return <span  style={{color:'green'}} color="success">Available</span>;
+      return (
+        <span style={{ color: "green" }} color="success">
+          Available
+        </span>
+      );
     default:
       return "primary";
   }
@@ -139,7 +147,10 @@ const FilesTable = ({ isEdit, isDelete }) => {
             {cell}
           </p>
           <hr style={{ margin: "2px" }} />
-          <div className="subtitle" style={{ textAlign: "center",fontSize:'14px' }}>
+          <div
+            className="subtitle"
+            style={{ textAlign: "center", fontSize: "14px" }}
+          >
             {getBadge(row.status)}{" "}
             <CIcon
               content={cilCircle}
@@ -299,7 +310,7 @@ const FilesTable = ({ isEdit, isDelete }) => {
               <CCol xs={3}>
                 <CLabel>Assigned Date</CLabel>
                 <br />
-                <DateRangePicker onChange={onChange} value={value} />
+                {/* <DateRangePicker onChange={onChange} value={value} /> */}
               </CCol>
               <CCol xs={3} style={{ marginTop: "25px" }}>
                 <CButton

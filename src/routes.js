@@ -21,6 +21,11 @@ const OrdersList = React.lazy(() => import("./views/order/list"));
 
 const Invoice = React.lazy(() => import("./views/invoice/index"));
 
+const RolesPermissions = React.lazy(() => import("./views/role/index"));
+const BulkFileTransfer = React.lazy(() =>
+  import("./views/files/bulk-transfer")
+);
+
 const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/files", exact: true, name: "Files", component: FilesTable },
@@ -36,6 +41,12 @@ const routes = [
     exact: true,
     name: "Detail",
     component: FileDetail,
+  },
+  {
+    path: "/files/bulk-transfer",
+    exact: true,
+    name: "Transfer",
+    component: BulkFileTransfer,
   },
   {
     path: "/files/:id/details/notes",
@@ -60,7 +71,7 @@ const routes = [
   { path: "/users/add", exact: true, name: "Add", component: AddUser },
   { path: "/users/:id/edit", exact: true, name: "Edit", component: EditUser },
 
-  { path: "/roles", exact: true, name: "Roles", component: UserList },
+  { path: "/roles", exact: true, name: "Roles", component: RolesPermissions },
   { path: "/orders", exact: true, name: "Orders", component: OrdersList },
   {
     path: "/permissions",
@@ -68,7 +79,7 @@ const routes = [
     name: "Permissions",
     component: UserList,
   },
-  { path: "/invoice",exact:true, name: "Invoice", component: Invoice },
+  { path: "/invoice", exact: true, name: "Invoice", component: Invoice },
 
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
 ];
