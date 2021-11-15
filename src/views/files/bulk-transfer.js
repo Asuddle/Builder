@@ -6,7 +6,7 @@ import Dropzone from "react-dropzone-uploader";
 import { CButton, CCard, CCardBody, CCardHeader, CHeader } from "@coreui/react";
 function BulkFileTransfer(props) {
   const [files, setFiles] = useState([]);
-  console.log("files  ===?:::", files);
+  console.log("files  ===?dd:::", files);
 
   const getUploadParams = () => {
     return { url: "https://httpbin.org/post" };
