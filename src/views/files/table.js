@@ -4,25 +4,20 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { cilTrash, cilPencil, cilFile, cilCircle } from "@coreui/icons";
 import {
-  CBadge,
   CCard,
   CCardBody,
   CCardHeader,
   CCol,
-  CDataTable,
   CRow,
   CFormGroup,
   CLabel,
   CSelect,
   CButton,
-  CPagination,
-  CInput,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-// import DateRangePicker from "@wojtekmaj/react-daterange-picker";
-import { ReactComponent as AddIcon } from "./svg/add.svg";
 import usersData from "../users/UsersData";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 function addCommas(str) {
   return str
@@ -54,39 +49,20 @@ const getBadge = (status) => {
       return "primary";
   }
 };
-const FilesTable = ({ isEdit, isDelete }) => {
+
+const FilesTable = ({ isEdit, isDelete, refresh }) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios.get("http://138.68.66.215/plot-files").then((res) => {
+      console.log("res is here", res.data);
+      setData(res.data);
+    });
+  }, [refresh]);
   const dispatch = useDispatch();
-  const [onSelectClick, setOnSelectClick] = useState([]);
-  const [value, onChange] = useState([new Date(), new Date()]);
-  const selectRow = {
-    mode: "checkbox",
-    onSelect: (data, isSelect, rowIndex, e) => {
-      if (isSelect) {
-        let arr = [...onSelectClick];
-        arr.push(data);
-        setOnSelectClick(arr);
-      } else {
-        let id = data.id;
-        let temp = [...onSelectClick];
-        temp = temp.filter((item) => item.id !== id);
-        setOnSelectClick(temp);
-      }
-    },
-  };
   var SVGComponent = (props) => <svg {...props}>{props.children}</svg>;
   var CircleComponent = (props) => <circle {...props}>{props.children}</circle>;
-
   const actionButtons = (cell, row) => (
     <>
-      {/* <CButton
-        color="secondary"
-        size="sm"
-        onClick={() => {
-          dispatch({type:'setFile',files:row})
-          history.push(`/files/${row.id}/details`)
-        }}
-        style={{ padding: "3px 5px" }}
-      > */}
       <CIcon
         content={cilFile}
         width="20"
@@ -97,13 +73,7 @@ const FilesTable = ({ isEdit, isDelete }) => {
         }}
       />
       {"  "}
-      {/* </CButton> */}{" "}
-      {/* <CButton
-        color="info"
-        size="sm"
-        onClick={() => isEdit(row)}
-        style={{ padding: "3px 5px" }}
-      > */}
+
       <CIcon
         content={cilPencil}
         style={{ cursor: "pointer" }}
@@ -111,13 +81,7 @@ const FilesTable = ({ isEdit, isDelete }) => {
         onClick={() => isEdit(row)}
       />
       {"  "}
-      {/* </CButton>{" "} */}
-      {/* <CButton
-        color="danger"
-        size="sm"
-        onClick={() => isDelete(row)}
-        style={{ padding: "3px 5px" }}
-      > */}
+
       <CIcon
         content={cilTrash}
         style={{ cursor: "pointer" }}
@@ -130,7 +94,7 @@ const FilesTable = ({ isEdit, isDelete }) => {
   );
   const columns = [
     {
-      dataField: "file_name",
+      dataField: "fileNo",
       text: "File Number",
       sort: true,
       headerStyle: (colum, colIndex) => {
@@ -160,18 +124,18 @@ const FilesTable = ({ isEdit, isDelete }) => {
                 borderRadius: "50%",
               }}
             />{" "}
-            {row.type}
+            {row.fileType}
           </div>
         </>
       ),
     },
     {
-      dataField: "security_code",
+      dataField: "fileSecurityNo",
       text: "Security Code",
       sort: true,
     },
     {
-      dataField: "assigned_to",
+      dataField: "projectName",
       text: "File Owner",
       headerStyle: (colum, colIndex) => {
         return { textAlign: "center" };
@@ -224,19 +188,19 @@ const FilesTable = ({ isEdit, isDelete }) => {
       hidden: true,
     },
     {
-      dataField: "assignment_date",
+      dataField: "assignedDate",
       text: "Assigned Date",
       sort: true,
     },
     {
-      dataField: "received_date",
+      dataField: "recievedDate",
       text: "Created Date",
       sort: true,
     },
     {
-      dataField: "price",
+      dataField: "unitPrice",
       text: "Price (Rs)",
-      formatter: (cell) => addCommas(cell),
+      formatter: (cell) => addCommas(JSON.stringify(cell)),
       sort: true,
     },
     {
@@ -308,9 +272,8 @@ const FilesTable = ({ isEdit, isDelete }) => {
                 </CFormGroup>
               </CCol>
               <CCol xs={3}>
-                <CLabel>Assigned Date</CLabel>
+                {/* <CLabel>Assigned Date</CLabel> */}
                 <br />
-                {/* <DateRangePicker onChange={onChange} value={value} /> */}
               </CCol>
               <CCol xs={3} style={{ marginTop: "25px" }}>
                 <CButton
@@ -327,23 +290,6 @@ const FilesTable = ({ isEdit, isDelete }) => {
                   {/* <AddIcon />  */}
                   Add New File
                 </CButton>
-                {!onSelectClick.length == 0 && (
-                  <CButton
-                    style={{
-                      paddingRight: "16px",
-                      marginRight: "10px",
-                    }}
-                    onClick={() => {
-                      dispatch({ type: "setFile", files: onSelectClick });
-                      history.push("/files/transfer");
-                      console.log(onSelectClick);
-                    }}
-                    color="secondary"
-                    size="md"
-                  >
-                    Transfer File
-                  </CButton>
-                )}{" "}
               </CCol>
             </CRow>
             <br />
@@ -353,7 +299,7 @@ const FilesTable = ({ isEdit, isDelete }) => {
               bootstrap4
               hover
               keyField="id"
-              data={usersData}
+              data={data}
               columns={columns}
               // selectRow={selectRow}
               bordered={false}

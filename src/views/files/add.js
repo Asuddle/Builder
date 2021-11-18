@@ -7,11 +7,8 @@ import {
   CCardHeader,
   CCol,
   CFormGroup,
-  CInput,
   CInputRadio,
   CLabel,
-  CSelect,
-  CInvalidFeedback,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { Field, Formik } from "formik";
@@ -20,9 +17,9 @@ import SelectInput from "src/reusable/select";
 import TextFieldComponent from "src/reusable/textfield";
 const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
   let schema = yup.object().shape({
-    file_name: yup.string().required("File Number is a required field"),
-    security_code: yup.string().required("Security Code is a required field"),
-    type: yup.string().required("Type is a required field"),
+    fileNo: yup.string().required("File Number is a required field"),
+    fileSecurityNo: yup.string().required("Security Code is a required field"),
+    fileType: yup.string().required("Type is a required field"),
   });
 
   return (
@@ -37,28 +34,37 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
             validationSchema={schema}
             validateOnBlur
             onSubmit={(values) => {
-              console.log('values here',values)
+              console.log("values here", values);
               handleFormData(values, 1);
             }}
           >
-            {({ errors, touched, handleSubmit, handleChange, values,setFieldValue,handleBlur,setFieldTouched }) => (
+            {({
+              errors,
+              touched,
+              handleSubmit,
+              handleChange,
+              values,
+              setFieldValue,
+              handleBlur,
+              setFieldTouched,
+            }) => (
               <form onSubmit={handleSubmit}>
                 <CCardBody>
                   <TextFieldComponent
                     handleChange={handleChange}
-                    name='file_name'
-                    touched={touched['file_name']}
-                    error={errors['file_name']}
-                    value={values['file_name']}
+                    name="fileNo"
+                    touched={touched["fileNo"]}
+                    error={errors["fileNo"]}
+                    value={values["fileNo"]}
                     required={true}
                     label={"File number"}
                   />
                   <TextFieldComponent
                     handleChange={handleChange}
-                    name='security_code'
-                    touched={touched['security_code']}
-                    error={errors['security_code']}
-                    value={values['security_code']}
+                    name="fileSecurityNo"
+                    touched={touched["fileSecurityNo"]}
+                    error={errors["fileSecurityNo"]}
+                    value={values["fileSecurityNo"]}
                     required={true}
                     label={"Security code"}
                   />
@@ -68,18 +74,18 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
                     </CLabel>
                     <SelectInput
                       handleBlur={setFieldTouched}
-                      touched={touched['type']}
-                      error={errors['type']}
+                      touched={touched["fileType"]}
+                      error={errors["fileType"]}
                       options={[
-                        { value: '5 Marla', label: '5 Marla' },
-                        { value: '10 Marla', label: '10 Marla' },
-                        { value: '15 Marla', label: '15 Marla' }
+                        { value: "5 Marla", label: "5 Marla" },
+                        { value: "10 Marla", label: "10 Marla" },
+                        { value: "15 Marla", label: "15 Marla" },
                       ]}
-                      value={values['type']}
+                      value={values["fileType"]}
                       setValue={setFieldValue}
-                      name='type'
+                      name="fileType"
                     />
-                </CFormGroup>
+                  </CFormGroup>
                   <CFormGroup row>
                     <CCol md="12">
                       <CLabel>Status</CLabel>
@@ -90,8 +96,10 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
                           custom
                           id="inline-radio1"
                           name="status"
-                          onClick={()=>{setFieldValue('status','Sold')}}
-                          checked={values['status']==='Sold'}
+                          onClick={() => {
+                            setFieldValue("status", "Sold");
+                          }}
+                          checked={values["status"] === "Sold"}
                         />
                         <CLabel
                           variant="custom-checkbox"
@@ -106,8 +114,10 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
                           color="primary"
                           id="inline-radio2"
                           name="status"
-                          onClick={()=>{setFieldValue('status','Reserved')}}
-                          checked={values['status']==='Reserved'}
+                          onClick={() => {
+                            setFieldValue("status", "Reserved");
+                          }}
+                          checked={values["status"] === "Reserved"}
                         />
                         <CLabel
                           variant="custom-checkbox"
@@ -121,8 +131,10 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
                           custom
                           id="inline-radio3"
                           name="status"
-                          onClick={()=>{setFieldValue('status','Available')}}
-                          checked={values['status']==='Available'}
+                          onClick={() => {
+                            setFieldValue("status", "Available");
+                          }}
+                          checked={values["status"] === "Available"}
                         />
                         <CLabel
                           variant="custom-checkbox"
@@ -138,22 +150,19 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
                     <SelectInput
                       creatable={true}
                       options={[
-                        { value: 'Bahria', label: 'Bahria' },
-                        { value: 'DHA', label: 'DHA' },
+                        { value: "Bahria", label: "Bahria" },
+                        { value: "DHA", label: "DHA" },
                       ]}
-                      touched={touched['type']}
+                      touched={touched["fileType"]}
                       handleBlur={setFieldTouched}
-                      value={values['project_name']}
+                      value={values["projectName"]}
                       setValue={setFieldValue}
-                      name='project_name'
+                      name="projectName"
                     />
                   </CFormGroup>
                 </CCardBody>
                 <CCardFooter>
-                  <CButton
-                    type="submit"
-                    className="button-color"
-                  >
+                  <CButton type="submit" className="button-color">
                     Next <CIcon name="cil-arrow-right" width={16} />
                   </CButton>
                 </CCardFooter>

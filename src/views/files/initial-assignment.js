@@ -20,18 +20,14 @@ import logo from "../../assets/icons/alfursanlog.png";
 import * as yup from "yup";
 import SelectInput from "src/reusable/select";
 import AlFursanBanner from "./alfursan-banner";
+import AsyncSelect from "src/reusable/asyncSelect";
 const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
   const [receivingSwitch, setReceivingSwitch] = useState(true);
   let schema = yup.object().shape({
-    assignment_date: yup
-      .string()
-      .required("Assignment date is a required field"),
-    received_by: yup.string().required("Received by is a required field"),
-    received_date: yup.string().required("Received date is a required field"),
-    assigned_to: yup
-      .string()
-      .trim()
-      .required("Assigned to is a required field"),
+    assignedDate: yup.string().required("Assignment date is a required field"),
+    recievedBy: yup.string().required("Received by is a required field"),
+    recievedDate: yup.string().required("Received date is a required field"),
+    assignedTo: yup.string().trim().required("Assigned to is a required field"),
   });
   return (
     <>
@@ -60,47 +56,40 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
                 <CCardBody>
                   <AlFursanBanner />
                   <CFormGroup>
-                    <CLabel htmlFor="assigned_to">
+                    <CLabel htmlFor="assignedTo">
                       Assigned To <span className="sterick-field">*</span>
                     </CLabel>
-                    <SelectInput
-                      touched={touched["assigned_to"]}
+                    <AsyncSelect
+                      touched={touched["assignedTo"]}
                       handleBlur={setFieldTouched}
-                      error={errors["assigned_to"]}
-                      value={values["assigned_to"]}
+                      error={errors["assignedTo"]}
+                      value={values["assignedTo"]}
                       setValue={setFieldValue}
-                      customHandleChange={(e) => {
-                        setFieldValue("assigned_to", e.value);
-                        setFieldValue("received_by", e.value);
-                      }}
-                      options={[
-                        { value: "Ali", label: "Ali" },
-                        { value: "Usman", label: "Usman" },
-                        { value: "Daniel", label: "Daniel" },
-                        { value: "Sam", label: "Sam" },
-                      ]}
-                      name="assigned_to"
+                      optionLabel="companyNumber"
+                      name="assignedTo"
                     />
                   </CFormGroup>
                   <CFormGroup>
                     <CLabel htmlFor="vat">Assignment Date </CLabel>
                     <CInput
                       invalid={
-                        touched["assignment_date"] && errors["assignment_date"]
+                        touched["assignedDate"] && errors["assignedDate"]
                       }
-                      value={values["assignment_date"]}
-                      name="assignment_date"
+                      value={values["assignedDate"]}
+                      name="assignedDate"
                       type="date"
                       id="vat"
-                      onChange={handleChange}
+                      onChange={(e) => {
+                        setFieldValue("assignedDate", e.target.value);
+                        setFieldValue("recievedDate", e.target.value);
+                      }}
                       placeholder="ABC12345XTZ"
                     />
-                    {touched["assignment_date"] &&
-                      errors["assignment_date"] && (
-                        <CInvalidFeedback>
-                          {errors["assignment_date"]}
-                        </CInvalidFeedback>
-                      )}
+                    {touched["assignedDate"] && errors["assignedDate"] && (
+                      <CInvalidFeedback>
+                        {errors["assignedDate"]}
+                      </CInvalidFeedback>
+                    )}
                   </CFormGroup>
                   <CFormGroup>
                     <CSwitch
@@ -122,29 +111,17 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
                   {!receivingSwitch && (
                     <>
                       <CFormGroup>
-                        <CLabel htmlFor="received_by">
+                        <CLabel htmlFor="recievedBy">
                           Received By <span className="sterick-field">*</span>
                         </CLabel>
-                        <SelectInput
-                          touched={touched["received_by"]}
+                        <AsyncSelect
+                          touched={touched["recievedBy"]}
                           handleBlur={setFieldTouched}
-                          value={values["received_by"]}
+                          error={errors["recievedBy"]}
+                          value={values["recievedBy"]}
                           setValue={setFieldValue}
-                          options={[
-                            { value: "Ali", label: "Ali" },
-                            { value: "Usman", label: "Usman" },
-                            { value: "Daniel", label: "Daniel" },
-                            { value: "Sam", label: "Sam" },
-                          ]}
-                          customHandleChange={(e) => {
-                            if (e.value === "") {
-                              setFieldValue("assigned_to", "");
-                            } else {
-                              setFieldValue("received_by", e.value);
-                              // handleChange(e);
-                            }
-                          }}
-                          name="received_by"
+                          optionLabel="companyNumber"
+                          name="recievedBy"
                         />
                       </CFormGroup>
 
@@ -155,21 +132,20 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
                         </CLabel>
                         <CInput
                           invalid={
-                            touched["received_date"] && errors["received_date"]
+                            touched["recievedDate"] && errors["recievedDate"]
                           }
-                          value={values["received_date"]}
-                          name="received_date"
+                          value={values["recievedDate"]}
+                          name="recievedDate"
                           onChange={handleChange}
                           type="date"
                           id="vat"
                           placeholder="ABC12345XTZ"
                         />
-                        {touched["received_date"] &&
-                          errors["received_date"] && (
-                            <CInvalidFeedback>
-                              {errors["received_date"]}
-                            </CInvalidFeedback>
-                          )}
+                        {touched["recievedDate"] && errors["recievedDate"] && (
+                          <CInvalidFeedback>
+                            {errors["recievedDate"]}
+                          </CInvalidFeedback>
+                        )}
                       </CFormGroup>
                     </>
                   )}

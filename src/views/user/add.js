@@ -62,9 +62,7 @@ const AddUsers = ({
     }),
   });
   const history = useHistory();
-  function removeCommas(str) {
-    return str.replaceAll(",", "");
-  }
+
   let Form = (
     <>
       {" "}

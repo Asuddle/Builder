@@ -12,26 +12,30 @@ import AddFiles from "./add";
 import { cilArrowRight, cilFile, cilMoney } from "@coreui/icons";
 import AddInitialAssignment from "./initial-assignment";
 import PricingComponent from "./pricing";
+import axios from "axios";
 const FilesComponent = () => {
+  function removeCommas(str) {
+    return str.replaceAll(",", "");
+  }
   const [active, setActive] = React.useState(1);
   const [form, setForm] = React.useState({
     form1: {
-      file_name: "",
-      security_code: "",
-      type: "",
-      project_name: "",
-      status:'Available'
+      fileNo: "",
+      fileSecurityNo: "",
+      fileType: "",
+      projectName: "",
+      status: "Available",
     },
     form2: {
-      assigned_to: "",
+      assignedTo: "",
       assignment_date: new Date().toISOString().split("T")[0],
       received_by: "",
       received_date: new Date().toISOString().split("T")[0],
     },
     form3: {
-      price: "",
-      deposit: "",
-      deposit_percentage: "",
+      unitPrice: "",
+      minimumRequiredDeposit: "",
+      depositPercentage: "",
     },
   });
   const handleNextForm = (act) => {
@@ -43,8 +47,26 @@ const FilesComponent = () => {
     setForm(temp);
     if (num !== 3) {
       setActive(num + 1);
+    } else {
+      console.log(form);
+      let lastForm = { ...form.form3 };
+      lastForm["unitPrice"] = parseInt(removeCommas(lastForm["unitPrice"]));
+      lastForm["depositPercentage"] = parseFloat(
+        removeCommas(lastForm["depositPercentage"])
+      );
+
+      lastForm["minimumRequiredDeposit"] = parseFloat(
+        removeCommas(lastForm["minimumRequiredDeposit"])
+      );
+
+      let finalData = { ...form.form1, ...form.form2, ...lastForm };
+      console.log(finalData);
+      axios
+        .post("http://138.68.66.215/plot-files", { ...finalData })
+        .then((res) => {
+          console.log("console.log", res.data);
+        });
     }
-    console.log(form);
   };
   return (
     <>
@@ -156,73 +178,3 @@ const FilesComponent = () => {
 };
 
 export default FilesComponent;
-{
-  /* <CRow>
-              <CCol xs="12" sm="12">
-                <CRow>
-                  <CCol xs={2}></CCol>
-                  <CCol xs={2}> 
-                    <CCard
-                      className={`icon-cards ${
-                        active == 1 ? "active-class" : ""
-                      }`}
-                      onClick={() => {
-                        setActive(1);
-                      }}
-                    >
-                      <CIcon content={cilFile} height={40} />
-                    </CCard>
-                    <h6 className="align-center">Basic Information</h6>
-                  </CCol>
-                  <CCol xs={1}>
-                    <CIcon
-                      className="arrow-icon"
-                      content={cilArrowRight}
-                      width={35}
-                    />
-                  </CCol>
-                  <CCol xs={2}>
-                    <CCard
-                      className={`icon-cards ${
-                        active == 2 ? "active-class" : ""
-                      }`}
-                      onClick={() => {
-                        if (active !== 1) {
-                          setActive(2);
-                        }
-                      }}
-                    >
-                      <CIcon name="cil-basket" height={40} />
-                    </CCard>
-                    <h6 className="align-center"> Initial Assignment</h6>
-                  </CCol>
-                  <CCol xs={1}>
-                    <CIcon
-                      className="arrow-icon"
-                      content={cilArrowRight}
-                      width={35}
-                    />
-                  </CCol>
-                  <CCol xs={2}>
-                    <CCard
-                      onClick={() => {
-                        // setActive(3);
-                      }}
-                      className={`icon-cards ${
-                        active == 3 ? "active-class" : ""
-                      }`}
-                    >
-                      <CIcon content={cilMoney} height={40} />
-                    </CCard>
-                    <h6 className="align-center">Pricing</h6>
-                  </CCol>
-                </CRow>
-              </CCol>
-            </CRow>*/
-}
-{
-  /* <br /> */
-}
-{
-  /* <br /> */
-}

@@ -9,7 +9,7 @@ String.prototype.toCamelCase = function () {
   });
 };
 
-const Switch = ({setState}) => {
+const Switch = ({ setState }) => {
   const [isChecked, setIsChecked] = useState(true);
   let switchClass = "";
   let id = "Switch One".toCamelCase();
@@ -27,7 +27,7 @@ const Switch = ({setState}) => {
             checked={isChecked}
             onClick={(e) => {
               setIsChecked(e.target.checked);
-              setState(e.target.checked)
+              setState(e.target.checked);
             }}
           />
           <span

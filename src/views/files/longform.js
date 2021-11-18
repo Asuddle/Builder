@@ -11,42 +11,40 @@ import {
   CInput,
   CLabel,
   CInvalidFeedback,
-  CSelect,
   CSwitch,
   CInputRadio,
-  CCardTitle,
-  CRow,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { Field, Formik } from "formik";
 import * as yup from "yup";
 import TextFieldComponent from "src/reusable/textfield";
 import SelectInput from "src/reusable/select";
-import AlFursanBanner from "./alfursan-banner";
 import CustomSwitch from "./switch";
+import AsyncSelect from "src/reusable/asyncSelect";
 function FileLongForm({
-  data={},
+  data = {},
   col = 12,
   handleSubmit = () => {},
   handleClose,
-  hideBasicInfo=false,
-  customSchema=false,
-  disableFields=false
+  hideBasicInfo = false,
+  customSchema = false,
+  disableFields = false,
 }) {
   const [receivingSwitch, setReceivingSwitch] = useState(true);
   const [initialState, setInitialState] = useState(data);
 
   let schema = yup.object().shape({
-    file_name: yup.string().required("File Number is a required field"),
-    security_code: yup.string().required("Security Code is a required field"),
-    type: yup.string().required("Type is a required field"),
-    assignment_date: yup.string().required(),
-    received_by: yup.string().required(),
-    received_date: yup.string().required(),
-    assigned_to: yup.string().required(),
+    fileNo: yup.string().required("File Number is a required field"),
+    fileSecurityNo: yup.string().required("Security Code is a required field"),
+    fileType: yup.string().required("Type is a required field"),
+    assignedDate: yup.string().required(),
+    recievedBy: yup.string().required(),
+    recievedDate: yup.string().required(),
+    assignedTo: yup.string().required(),
   });
-  const [isAlfursan,setIsAlFursan]=useState(true)
+  const [isAlfursan, setIsAlFursan] = useState(true);
   useEffect(() => {
+    console.log("data is here ==?? >>> ", data);
     if (typeof data !== "undefined") {
       setInitialState(data);
     } else {
@@ -54,18 +52,19 @@ function FileLongForm({
     }
   }, [data]);
 
-  const customChecked=(val)=>{
-    setIsAlFursan(val)
-  }
+  const customChecked = (val) => {
+    setIsAlFursan(val);
+  };
+  console.log("isAlfursan", isAlfursan);
   return (
     <div>
       <CCol xs="12" sm={12}>
         {Object.entries(initialState).length > 0 && (
           <Formik
             initialValues={initialState}
-            validationSchema={customSchema?customSchema:schema}
+            validationSchema={customSchema ? customSchema : schema}
             onSubmit={(values) => {
-              handleSubmit(values)
+              handleSubmit(values);
             }}
           >
             {({
@@ -75,125 +74,114 @@ function FileLongForm({
               handleChange,
               values,
               setFieldValue,
-              setFieldTouched 
+              setFieldTouched,
             }) => (
               <form onSubmit={handleSubmit}>
-              {!hideBasicInfo&&<>    <CCardHeader>
-                <strong>Basic Information</strong>
-                </CCardHeader>
-              <CCardBody>
-                <TextFieldComponent
-                    handleChange={handleChange}
-                    name='file_name'
-                    touched={touched['file_name']}
-                    error={errors['file_name']}
-                    value={values['file_name']}
-                    required={true}
-                    disable={disableFields}
-                    label={"File number"}
-                  />
-                   <TextFieldComponent
-                    handleChange={handleChange}
-                    name='security_code'
-                    touched={touched['security_code']}
-                    error={errors['security_code']}
-                    value={values['security_code']}
-                    required={true}
-                    disable={disableFields}
-                    label={"Security code"}
-                  />
-                   <CFormGroup>
-                    <CLabel htmlFor="ccmonth">
-                      Type <span className="sterick-field">*</span>
-                    </CLabel>
-                    <SelectInput
-                      handleBlur={setFieldTouched}
-                      touched={touched['type']}
-                      disable={disableFields}
-                      error={errors['type']}
-                      options={[
-                        { value: '5 Marla', label: '5 Marla' },
-                        { value: '10 Marla', label: '10 Marla' },
-                        { value: '15 Marla', label: '15 Marla' }
-                      ]}
-                      value={values['type']}
-                      setValue={setFieldValue}
-                      name='type'
-                    />
-                </CFormGroup>
-                  <CFormGroup>
-                    <CLabel htmlFor="street">Project Name</CLabel>
-                    <SelectInput
-                      creatable={disableFields?false:true}
-                      options={[
-                        { value: 'Bahria', label: 'Bahria' },
-                        { value: 'DHA', label: 'DHA' },
-                      ]}
-                      touched={touched['type']}
-                      disable={disableFields}
-                      handleBlur={setFieldTouched}
-                      value={values['project_name']}
-                      setValue={setFieldValue}
-                      name='project_name'
-                    />
-                  </CFormGroup>
-                      </CCardBody>
-                      </>}
-                      
+                {!hideBasicInfo && (
+                  <>
+                    {" "}
+                    <CCardHeader>
+                      <strong>Basic Information</strong>
+                    </CCardHeader>
+                    <CCardBody>
+                      <TextFieldComponent
+                        handleChange={handleChange}
+                        name="fileNo"
+                        touched={touched["fileNo"]}
+                        error={errors["fileNo"]}
+                        value={values["fileNo"]}
+                        required={true}
+                        disable={disableFields}
+                        label={"File number"}
+                      />
+                      <TextFieldComponent
+                        handleChange={handleChange}
+                        name="fileSecurityNo"
+                        touched={touched["fileSecurityNo"]}
+                        error={errors["fileSecurityNo"]}
+                        value={values["fileSecurityNo"]}
+                        required={true}
+                        disable={disableFields}
+                        label={"Security code"}
+                      />
+                      <CFormGroup>
+                        <CLabel htmlFor="ccmonth">
+                          Type <span className="sterick-field">*</span>
+                        </CLabel>
+                        <SelectInput
+                          handleBlur={setFieldTouched}
+                          touched={touched["fileType"]}
+                          disable={disableFields}
+                          error={errors["fileType"]}
+                          options={[
+                            { value: "5 Marla", label: "5 Marla" },
+                            { value: "10 Marla", label: "10 Marla" },
+                            { value: "15 Marla", label: "15 Marla" },
+                          ]}
+                          value={values["fileType"]}
+                          setValue={setFieldValue}
+                          name="fileType"
+                        />
+                      </CFormGroup>
+                      <CFormGroup>
+                        <CLabel htmlFor="street">Project Name</CLabel>
+                        <SelectInput
+                          creatable={disableFields ? false : true}
+                          options={[
+                            { value: "Bahria", label: "Bahria" },
+                            { value: "DHA", label: "DHA" },
+                          ]}
+                          touched={touched["fileType"]}
+                          disable={disableFields}
+                          handleBlur={setFieldTouched}
+                          value={values["projectName"]}
+                          setValue={setFieldValue}
+                          name="projectName"
+                        />
+                      </CFormGroup>
+                    </CCardBody>
+                  </>
+                )}
+
                 <CustomSwitch setState={customChecked} />
-                      <CCardHeader>
-                <strong>File Assignment</strong>
+                <CCardHeader>
+                  <strong>File Assignment</strong>
                 </CCardHeader>
                 <CCardBody>
                   <CFormGroup>
-                    <CLabel htmlFor="assigned_to">
+                    <CLabel htmlFor="assignedTo">
                       Assigned To <span className="sterick-field">*</span>
                     </CLabel>
-                    <SelectInput
-                      touched={touched["assigned_to"]}
+
+                    <AsyncSelect
+                      touched={touched["assignedTo"]}
                       handleBlur={setFieldTouched}
-                      error={errors["assigned_to"]}
-                      value={values["assigned_to"]}
+                      error={errors["assignedTo"]}
+                      value={values["assignedTo"]}
                       setValue={setFieldValue}
-                      customHandleChange={(e) => {
-                        setFieldValue("assigned_to", e.value);
-                        if(isAlfursan){
-                        setFieldValue("received_by", e.value);
-                        }
-                      }}
-                      options={isAlfursan?[
-                        { value: "Ali Khan", label: "Ali Khan" },
-                        { value: "Usman", label: "Usman" },
-                        { value: "Daniel", label: "Daniel" },
-                        { value: "Sam", label: "Sam" },
-                      ]:[
-                        { value: "Dealer 1", label: "Dealer 1" },
-                        { value: "Dealer 2", label: "Dealer 2" },
-                        { value: "Dealer 3", label: "Dealer 3" },
-                        { value: "Dealer 4", label: "Dealer 4" },  
-                      ]}
-                      name="assigned_to"
+                      optionLabel="companyNumber"
+                      name="assignedTo"
+                      url={"admin"}
                     />
                   </CFormGroup>
                   <CFormGroup>
                     <CLabel htmlFor="vat">Assignment Date </CLabel>
                     <CInput
                       invalid={
-                        touched["assignment_date"] && errors["assignment_date"]
+                        touched["assignedDate"] && errors["assignedDate"]
                       }
-                      value={values["assignment_date"]}
-                      name="assignment_date"
+                      value={values["assignedDate"]}
+                      name="assignedDate"
                       type="date"
                       id="vat"
                       onChange={handleChange}
                       placeholder="ABC12345XTZ"
                     />
-                    {touched["assignment_date"] &&
-                      errors["assignment_date"] && (
-                        <CInvalidFeedback>
-                          {errors["assignment_date"]}
-                        </CInvalidFeedback>
-                      )}
+                    {touched["assignedDate"] && errors["assignedDate"] && (
+                      <CInvalidFeedback>
+                        {errors["assignedDate"]}
+                      </CInvalidFeedback>
+                    )}
                   </CFormGroup>
                   <CFormGroup row>
                     <CCol md="12">
@@ -205,8 +193,10 @@ function FileLongForm({
                           custom
                           id="inline-radio1"
                           name="status"
-                          onClick={()=>{setFieldValue('status','Sold')}}
-                          checked={values['status']==='Sold'}
+                          onClick={() => {
+                            setFieldValue("status", "Sold");
+                          }}
+                          checked={values["status"] === "Sold"}
                         />
                         <CLabel
                           variant="custom-checkbox"
@@ -221,8 +211,10 @@ function FileLongForm({
                           color="primary"
                           id="inline-radio2"
                           name="status"
-                          onClick={()=>{setFieldValue('status','Reserved')}}
-                          checked={values['status']==='Reserved'}
+                          onClick={() => {
+                            setFieldValue("status", "Reserved");
+                          }}
+                          checked={values["status"] === "Reserved"}
                         />
                         <CLabel
                           variant="custom-checkbox"
@@ -236,8 +228,10 @@ function FileLongForm({
                           custom
                           id="inline-radio3"
                           name="status"
-                          onClick={()=>{setFieldValue('status','Available')}}
-                          checked={values['status']==='Available'}
+                          onClick={() => {
+                            setFieldValue("status", "Available");
+                          }}
+                          checked={values["status"] === "Available"}
                         />
                         <CLabel
                           variant="custom-checkbox"
@@ -268,29 +262,17 @@ function FileLongForm({
                   {!receivingSwitch && (
                     <>
                       <CFormGroup>
-                        <CLabel htmlFor="received_by">
+                        <CLabel htmlFor="recievedBy">
                           Received By <span className="sterick-field">*</span>
                         </CLabel>
-                        <SelectInput
-                          touched={touched["received_by"]}
+                        <AsyncSelect
+                          touched={touched["recievedBy"]}
                           handleBlur={setFieldTouched}
-                          value={values["received_by"]}
+                          error={errors["recievedBy"]}
+                          value={values["recievedBy"]}
                           setValue={setFieldValue}
-                          options={[
-                            { value: "Ali", label: "Ali" },
-                            { value: "Usman", label: "Usman" },
-                            { value: "Daniel", label: "Daniel" },
-                            { value: "Sam", label: "Sam" },
-                          ]}
-                          customHandleChange={(e) => {
-                            if (e.value === "") {
-                              setFieldValue("assigned_to", "");
-                            } else {
-                              setFieldValue("received_by", e.value);
-                              // handleChange(e);
-                            }
-                          }}
-                          name="received_by"
+                          optionLabel="companyNumber"
+                          name="recievedBy"
                         />
                       </CFormGroup>
 
@@ -301,21 +283,20 @@ function FileLongForm({
                         </CLabel>
                         <CInput
                           invalid={
-                            touched["received_date"] && errors["received_date"]
+                            touched["recievedDate"] && errors["recievedDate"]
                           }
-                          value={values["received_date"]}
-                          name="received_date"
+                          value={values["recievedDate"]}
+                          name="recievedDate"
                           onChange={handleChange}
                           type="date"
                           id="vat"
                           placeholder="ABC12345XTZ"
                         />
-                        {touched["received_date"] &&
-                          errors["received_date"] && (
-                            <CInvalidFeedback>
-                              {errors["received_date"]}
-                            </CInvalidFeedback>
-                          )}
+                        {touched["recievedDate"] && errors["recievedDate"] && (
+                          <CInvalidFeedback>
+                            {errors["recievedDate"]}
+                          </CInvalidFeedback>
+                        )}
                       </CFormGroup>
                     </>
                   )}
@@ -324,10 +305,16 @@ function FileLongForm({
                   <CButton type="submit" className="button-color">
                     Next <CIcon name="cil-arrow-right" width={16} />
                   </CButton>
-                  
-                  {!hideBasicInfo&&<CButton color='secondary'className='cancel-button-color' onClick={handleClose}>
-                    Cancel
-                  </CButton>}
+
+                  {!hideBasicInfo && (
+                    <CButton
+                      color="secondary"
+                      className="cancel-button-color"
+                      onClick={handleClose}
+                    >
+                      Cancel
+                    </CButton>
+                  )}
                 </CCardFooter>
               </form>
             )}

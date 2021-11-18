@@ -8,9 +8,6 @@ import {
   CModalHeader,
   CModalTitle,
 } from "@coreui/react";
-import FilesComponent from "./index";
-import AddFiles from "./add";
-import AddInitialAssignment from "./initial-assignment";
 import FileLongForm from "./longform";
 import PricingComponent from "./pricing";
 
