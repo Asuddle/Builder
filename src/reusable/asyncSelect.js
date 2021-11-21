@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Async from "react-select/async";
 
-import CreatableSelect from "react-select/creatable";
-import { CInvalidFeedback } from "@coreui/react";
-import axios from "axios";
+import { handleApi } from "./api";
 function AsyncSelect({
   creatable = false,
   options,
@@ -45,19 +43,24 @@ function AsyncSelect({
       color: error && touched ? "#E64F4F" : "#D8DBE0",
     }),
   };
-  const loadOptions = (inputValue, callback) => {
-    axios.get(`http://138.68.66.215/${targetUrl}`).then((res) => {
-      let arr = [];
-      res.data.forEach((item) => {
-        arr.push({
-          label: item[optionLabel],
-          value:
-            optionValue == "id" ? JSON.stringify(item.id) : item[optionValue],
+  const loadOptions = (inputValue = "", callback) => {
+    console.log(`/${targetUrl}/search?name=${inputValue}`);
+    handleApi("get", `/${targetUrl}/search?name=${inputValue}`)
+      .then((res) => {
+        let arr = [];
+        res.data.forEach((item) => {
+          arr.push({
+            label: item[optionLabel],
+            value:
+              optionValue == "id" ? JSON.stringify(item.id) : item[optionValue],
+          });
         });
+        setOptionData(arr);
+        callback(arr);
+      })
+      .catch((err) => {
+        console.log("err", err);
       });
-      setOptionData(arr);
-      callback(arr);
-    });
   };
   return (
     <>

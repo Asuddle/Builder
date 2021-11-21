@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   CButton,
-  CCard,
   CCardBody,
   CCardFooter,
   CCardHeader,
@@ -44,7 +43,6 @@ function FileLongForm({
   });
   const [isAlfursan, setIsAlFursan] = useState(true);
   useEffect(() => {
-    console.log("data is here ==?? >>> ", data);
     if (typeof data !== "undefined") {
       setInitialState(data);
     } else {
@@ -55,7 +53,6 @@ function FileLongForm({
   const customChecked = (val) => {
     setIsAlFursan(val);
   };
-  console.log("isAlfursan", isAlfursan);
   return (
     <div>
       <CCol xs="12" sm={12}>
@@ -159,7 +156,6 @@ function FileLongForm({
                       error={errors["assignedTo"]}
                       value={values["assignedTo"]}
                       setValue={setFieldValue}
-                      optionLabel="companyNumber"
                       name="assignedTo"
                       url={"admin"}
                     />
@@ -271,7 +267,6 @@ function FileLongForm({
                           error={errors["recievedBy"]}
                           value={values["recievedBy"]}
                           setValue={setFieldValue}
-                          optionLabel="companyNumber"
                           name="recievedBy"
                         />
                       </CFormGroup>

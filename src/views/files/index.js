@@ -7,13 +7,18 @@ import {
   CRow,
   CSwitch,
 } from "@coreui/react";
+
 import CIcon from "@coreui/icons-react";
 import AddFiles from "./add";
 import { cilArrowRight, cilFile, cilMoney } from "@coreui/icons";
 import AddInitialAssignment from "./initial-assignment";
 import PricingComponent from "./pricing";
-import axios from "axios";
+
+import { handleApi } from "src/reusable/api";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router";
 const FilesComponent = () => {
+  const history = useHistory();
   function removeCommas(str) {
     return str.replaceAll(",", "");
   }
@@ -48,23 +53,40 @@ const FilesComponent = () => {
     if (num !== 3) {
       setActive(num + 1);
     } else {
-      console.log(form);
       let lastForm = { ...form.form3 };
-      lastForm["unitPrice"] = parseInt(removeCommas(lastForm["unitPrice"]));
-      lastForm["depositPercentage"] = parseFloat(
-        removeCommas(lastForm["depositPercentage"])
-      );
-
-      lastForm["minimumRequiredDeposit"] = parseFloat(
-        removeCommas(lastForm["minimumRequiredDeposit"])
+      console.log(lastForm);
+      lastForm["unitPrice"] = +removeCommas(lastForm["unitPrice"]);
+      lastForm["depositPercentage"] = parseFloat(lastForm["depositPercentage"]);
+      lastForm["minimumRequiredDeposit"] = +removeCommas(
+        lastForm["minimumRequiredDeposit"]
       );
 
       let finalData = { ...form.form1, ...form.form2, ...lastForm };
-      console.log(finalData);
-      axios
-        .post("http://138.68.66.215/plot-files", { ...finalData })
+      handleApi("post", "/plot-files", { ...finalData })
         .then((res) => {
-          console.log("console.log", res.data);
+          setTimeout(() => {
+            toast.success("The file is added Successfully ! ", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            history.push("/files");
+          }, 1000);
+        })
+        .catch((err) => {
+          toast.error("An Error Occured! ", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         });
     }
   };

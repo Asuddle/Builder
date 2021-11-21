@@ -11,17 +11,16 @@ import CIcon from "@coreui/icons-react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import EditModal from "./edit-modal";
-import axios from "axios";
+import { handleApi } from "src/reusable/api";
 
 const FileDetails = ({ match }) => {
   const data = useSelector((item) => item.files);
+
   const [fileData, setFileData] = useState({});
   useEffect(() => {
-    axios
-      .get(`http://138.68.66.215/plot-files/${match.params.id}`)
-      .then((res) => {
-        setFileData(res.data);
-      });
+    handleApi("get", `/plot-files/${match.params.id}`).then((res) => {
+      setFileData(res.data);
+    });
   }, []);
   const userDetails = fileData
     ? fileData

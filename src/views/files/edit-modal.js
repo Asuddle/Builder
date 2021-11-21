@@ -28,6 +28,7 @@ function EditModal({ open = false, handleClose = () => {}, data }) {
     setIsPricing(false);
     handleClose();
   };
+
   return (
     <div>
       <CModal show={open} onClose={handlingClose}>

@@ -19,8 +19,8 @@ function InvoiceComponent(props) {
     //   >
     <div>
       <CButton
-        size='lg'
-        color='secondary'
+        size="lg"
+        color="secondary"
         onClick={() => {
           window.print();
         }}
@@ -126,7 +126,6 @@ function InvoiceComponent(props) {
         </table>
       </div>
     </div>
-    // </Document>
   );
 }
 

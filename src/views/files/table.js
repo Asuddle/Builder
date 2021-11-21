@@ -15,9 +15,8 @@ import {
   CButton,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import usersData from "../users/UsersData";
 import { useDispatch } from "react-redux";
-import axios from "axios";
+import { handleApi } from "src/reusable/api";
 
 function addCommas(str) {
   return str
@@ -53,8 +52,7 @@ const getBadge = (status) => {
 const FilesTable = ({ isEdit, isDelete, refresh }) => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("http://138.68.66.215/plot-files").then((res) => {
-      console.log("res is here", res.data);
+    handleApi("get", "/plot-files").then((res) => {
       setData(res.data);
     });
   }, [refresh]);

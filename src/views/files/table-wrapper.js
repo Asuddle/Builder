@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FilesTable from "./table";
 import EditModal from "./edit-modal";
 import DeleteFileModal from "./delete-modal";
-import axios from "axios";
+import { handleApi } from "src/reusable/api";
 function TableWrapper(props) {
   const [isEdit, setIsEdit] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -18,7 +18,7 @@ function TableWrapper(props) {
     setIsEdit(!isEdit);
   };
   const handleDelete = () => {
-    axios.delete(`http://138.68.66.215/plot-files/${data.id}`).then((res) => {
+    handleApi("delete", `/plot-files/${data.id}`).then((res) => {
       setDeleteModal(!deleteModal);
       setRefresh(!refresh);
     });

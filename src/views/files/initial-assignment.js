@@ -65,7 +65,6 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
                       error={errors["assignedTo"]}
                       value={values["assignedTo"]}
                       setValue={setFieldValue}
-                      optionLabel="companyNumber"
                       name="assignedTo"
                     />
                   </CFormGroup>
@@ -120,7 +119,6 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
                           error={errors["recievedBy"]}
                           value={values["recievedBy"]}
                           setValue={setFieldValue}
-                          optionLabel="companyNumber"
                           name="recievedBy"
                         />
                       </CFormGroup>

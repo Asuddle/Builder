@@ -17,14 +17,12 @@ import {
   CInputGroup,
 } from "@coreui/react";
 
-import { cilChevronLeft, cilArrowLeft } from "@coreui/icons";
+import { cilArrowLeft } from "@coreui/icons";
 
 import CIcon from "@coreui/icons-react";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { toast } from "react-toastify";
 
-import { useHistory } from "react-router";
 const PricingComponent = ({
   data,
   handleFormData,
@@ -44,7 +42,6 @@ const PricingComponent = ({
       .max(100)
       .min(0),
   });
-  const history = useHistory();
   function addCommas(str) {
     return str
       .replace(/^0+/, "")
@@ -54,6 +51,19 @@ const PricingComponent = ({
   function removeCommas(str) {
     return str.replaceAll(",", "");
   }
+  const handlePriceChange = (e, values, setFieldValue) => {
+    if (values["depositPercentage"] !== "") {
+      let value =
+        (values["depositPercentage"] / 100) * removeCommas(e.target.value);
+      setFieldValue(
+        "minimumRequiredDeposit",
+        value.toFixed(2).toLocaleString()
+      );
+    }
+
+    setFieldValue("total_price", addCommas(e.target.value));
+    setFieldValue("unitPrice", addCommas(e.target.value));
+  };
   let Form = (
     <>
       {" "}
@@ -69,23 +79,6 @@ const PricingComponent = ({
             customSubmit(values);
           } else {
             handleFormData(values, 3);
-            toast.success(
-              noCard
-                ? "The File is Edited Successfully"
-                : "The file is Added! ",
-              {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              }
-            );
-            setTimeout(() => {
-              history.push("/files");
-            }, 1000);
           }
         }}
       >
@@ -104,17 +97,7 @@ const PricingComponent = ({
                 <CInput
                   invalid={touched["unitPrice"] && errors["unitPrice"]}
                   name="unitPrice"
-                  onChange={(e) => {
-                    if (
-                      values["minimumRequiredDeposit"] !== "" ||
-                      values["depositPercentage"] !== ""
-                    ) {
-                      setFieldValue("minimumRequiredDeposit", "");
-                      setFieldValue("depositPercentage", "");
-                    }
-
-                    setFieldValue("unitPrice", addCommas(e.target.value));
-                  }}
+                  onChange={(e) => handlePriceChange(e, values, setFieldValue)}
                   value={values["unitPrice"]}
                   placeholder="Rupees"
                 />
@@ -204,6 +187,7 @@ const PricingComponent = ({
                             touched["total_price"] && errors["total_price"]
                           }
                           name="total_price"
+                          defaultValue={values["unitPrice"]}
                           onChange={(e) => {
                             if (
                               values["minimumRequiredDeposit"] !== "" ||
@@ -217,10 +201,9 @@ const PricingComponent = ({
                               "total_price",
                               addCommas(e.target.value)
                             );
-                            // handleChange(e);
                           }}
                           value={values["total_price"]}
-                          placeholder="123457"
+                          placeholder="Total Price"
                         />
                         {touched["total_price"] && errors["total_price"] && (
                           <CInvalidFeedback>
@@ -236,20 +219,27 @@ const PricingComponent = ({
                           invalid={touched["discount"] && errors["discount"]}
                           onChange={(e) => {
                             if (values["total_price"] !== "") {
+                              setFieldValue(
+                                "discount",
+                                addCommas(e.target.value)
+                              );
                               let val = removeCommas(e.target.value);
-                              let perc =
-                                (val * 100) /
-                                removeCommas(values["total_price"]);
-                              if (!Number.isInteger(perc)) {
-                                perc = parseFloat(perc).toFixed(2);
-                              }
-
-                              setFieldValue("discount", perc);
+                              let temp =
+                                (val / values["minimumRequiredDeposit"]) * 100;
+                              setFieldValue(
+                                "payableDiscountPercentage",
+                                temp.toFixed(2)
+                              );
+                              console.log(
+                                values["unitPrice"],
+                                values["minimumRequiredDeposit"],
+                                +val
+                              );
+                              setFieldValue(
+                                "payable",
+                                values["minimumRequiredDeposit"] - val
+                              );
                             }
-                            setFieldValue(
-                              "discount",
-                              addCommas(e.target.value)
-                            );
                           }}
                           value={values["discount"]}
                           name="discount"
@@ -268,31 +258,25 @@ const PricingComponent = ({
                       <CInputGroup>
                         <CInput
                           invalid={
-                            touched["depositpercentage"] &&
-                            errors["depositpercentage"]
+                            touched["payableDiscountPercentage"] &&
+                            errors["payableDiscountPercentage"]
                           }
                           onChange={(e) => {
                             if (e.target.value < 101) {
-                              if (values["total_price"] !== "") {
-                                let perc =
-                                  (e.target.value / 100) *
-                                  remove(values["total_price"]);
-                                setFieldValue("discount", addCommas(perc + ""));
-                              }
                               handleChange(e);
                             }
                           }}
-                          value={values["depositPercentage"]}
-                          name="depositPercentage"
+                          value={values["payableDiscountPercentage"]}
+                          name="payableDiscountPercentage"
                           placeholder="Percentage"
                         />
                         <CInputGroupAppend>
                           <CInputGroupText>%</CInputGroupText>
                         </CInputGroupAppend>
-                        {touched["depositPercentage"] &&
-                          errors["depositPercentage"] && (
+                        {touched["payableDiscountPercentage"] &&
+                          errors["payableDiscountPercentage"] && (
                             <CInvalidFeedback>
-                              {errors["depositPercentage"]}
+                              {errors["payableDiscountPercentage"]}
                             </CInvalidFeedback>
                           )}
                       </CInputGroup>
