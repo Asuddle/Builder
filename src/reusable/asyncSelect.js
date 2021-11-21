@@ -18,6 +18,7 @@ function AsyncSelect({
   url = "admin",
   optionLabel = "name",
   optionValue = "id",
+  noSameValue = false,
 }) {
   const [optionData, setOptionData] = useState([]);
   const [targetUrl, setTargetUrl] = useState("admin");
@@ -69,7 +70,7 @@ function AsyncSelect({
         defaultOptions
         onChange={(val) => {
           setValue(name, val.value);
-          if (name == "assignedTo") {
+          if (name == "assignedTo" && !noSameValue) {
             setValue("recievedBy", val.value);
           }
         }}

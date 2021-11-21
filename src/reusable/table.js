@@ -26,7 +26,7 @@ import CIcon from "@coreui/icons-react";
 import usersData from "src/views/users/UsersData";
 
 function addCommas(str) {
-  return str
+  return JSON.stringify(str)
     .replace(/^0+/, "")
     .replace(/\D/g, "")
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -35,7 +35,7 @@ var SVGComponent = (props) => <svg {...props}>{props.children}</svg>;
 var CircleComponent = (props) => <circle {...props}>{props.children}</circle>;
 const defaultColumns = [
   {
-    dataField: "file_name",
+    dataField: "fileNo",
     text: "File Number",
     sort: true,
     headerStyle: (colum, colIndex) => {
@@ -52,18 +52,18 @@ const defaultColumns = [
             height={5}
             style={{ background: "darkGrey", borderRadius: "50%" }}
           />{" "}
-          {row.type}
+          {row.fileType}
         </div>
       </>
     ),
   },
   {
-    dataField: "security_code",
+    dataField: "fileSecurityNo",
     text: "Security Code",
     sort: true,
   },
   {
-    dataField: "assigned_to",
+    dataField: "projectName",
     text: "File Owner",
     headerStyle: (colum, colIndex) => {
       return { textAlign: "center" };
@@ -116,17 +116,17 @@ const defaultColumns = [
     hidden: true,
   },
   {
-    dataField: "assignment_date",
+    dataField: "assignedDate",
     text: "Assigned Date",
     sort: true,
   },
   {
-    dataField: "received_date",
+    dataField: "recievedDate",
     text: "Created Date",
     sort: true,
   },
   {
-    dataField: "price",
+    dataField: "unitPrice",
     text: "Price (Rs)",
     formatter: (cell) => addCommas(cell),
     sort: true,
@@ -138,7 +138,7 @@ function TableComponent({
   data = usersData,
   exportCSV = false,
   addButton = false,
-  dataCount=false,
+  dataCount = false,
   callback = () => {},
 }) {
   const { ExportCSVButton } = CSVExport;

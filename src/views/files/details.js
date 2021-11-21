@@ -41,7 +41,6 @@ const FileDetails = ({ match }) => {
     projectName: "Project Name",
     assignedDate: "Assignment Date",
     recievedBy: "Received By",
-    received_date: "Received Date",
     companyName: "Company Name",
     assignedTo: "Assigned To",
     unitPrice: "Price",
@@ -62,7 +61,7 @@ const FileDetails = ({ match }) => {
     "assignedTo",
     "assignedDate",
     "recievedBy",
-    "received_date",
+    "recievedDate",
   ];
   let pricingInformation = [
     "unitPrice",

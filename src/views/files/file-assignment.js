@@ -33,6 +33,8 @@ import FileLongForm from "./longform";
 import { roundToNearestMinutes } from "date-fns/esm";
 import PricingComponent from "./pricing";
 import { useHistory } from "react-router";
+import AsyncSelect from "src/reusable/asyncSelect";
+import { handleApi } from "src/reusable/api";
 function FileAssignment({
   data,
   col = 12,
@@ -40,10 +42,11 @@ function FileAssignment({
   handleClose,
   hideForm = false,
 }) {
-  const history=useHistory()
+  const history = useHistory();
   const [showClass, setShowClass] = useState("");
   const [filter, setFilter] = useState(true);
-  const [isAlfursan, setIsAlFursan] = useState(true);
+  const [tableData, setTableData] = useState([]);
+  const [total, setTotal] = useState(0);
   const [assignmentForm, setAssignmentForm] = useState({});
   const [isPricingForm, setIsPricingForm] = useState(false);
   return (
@@ -53,16 +56,31 @@ function FileAssignment({
           <CCol xs="12" sm={12}>
             <Formik
               initialValues={{
-                file_name: "",
-                security_code: "",
-                type: "",
-                project_name: "",
+                fileNo: "",
+                fileSecurityNo: "",
+                fileType: "",
+                projectName: "",
                 status: "Available",
               }}
               onSubmit={(values) => {
-                handleSubmit(values);
-                setShowClass(true);
-                setFilter(false);
+                console.log("value here :", values);
+                let qString = "";
+                for (const key in values) {
+                  if (values[key] !== "") {
+                    qString = qString + `${key}=${values[key]}&`;
+                  }
+                }
+                console.log("values", qString);
+                handleApi("get", `/plot-files/paginated?${qString}`).then(
+                  (res) => {
+                    console.log("here is the response", res.data);
+                    setTableData(res.data.data);
+                    setTotal(res.data.total);
+
+                    setShowClass(true);
+                    setFilter(false);
+                  }
+                );
               }}
             >
               {({
@@ -102,20 +120,20 @@ function FileAssignment({
                           <CCol sm={4}>
                             <TextFieldComponent
                               handleChange={handleChange}
-                              name="file_name"
-                              touched={touched["file_name"]}
-                              error={errors["file_name"]}
-                              value={values["file_name"]}
+                              name="fileNo"
+                              touched={touched["fileNo"]}
+                              error={errors["fileNo"]}
+                              value={values["fileNo"]}
                               label={"File number"}
                             />
                           </CCol>
                           <CCol sm={3}>
                             <TextFieldComponent
                               handleChange={handleChange}
-                              name="security_code"
-                              touched={touched["security_code"]}
-                              error={errors["security_code"]}
-                              value={values["security_code"]}
+                              name="fileSecurityNo"
+                              touched={touched["fileSecurityNo"]}
+                              error={errors["fileSecurityNo"]}
+                              value={values["fileSecurityNo"]}
                               label={"Security code"}
                             />
                           </CCol>
@@ -124,8 +142,8 @@ function FileAssignment({
                               <CLabel htmlFor="ccmonth">Type</CLabel>
                               <SelectInput
                                 handleBlur={setFieldTouched}
-                                touched={touched["type"]}
-                                error={errors["type"]}
+                                touched={touched["fileType"]}
+                                error={errors["fileType"]}
                                 options={[
                                   {
                                     value: "5 Marla",
@@ -140,9 +158,9 @@ function FileAssignment({
                                     label: "15 Marla",
                                   },
                                 ]}
-                                value={values["type"]}
+                                value={values["fileType"]}
                                 setValue={setFieldValue}
-                                name="type"
+                                name="fileType"
                               />
                             </CFormGroup>
                           </CCol>
@@ -163,105 +181,44 @@ function FileAssignment({
                                 ]}
                                 touched={touched["type"]}
                                 handleBlur={setFieldTouched}
-                                value={values["project_name"]}
+                                value={values["projectName"]}
                                 setValue={setFieldValue}
-                                name="project_name"
+                                name="projectName"
                               />
                             </CFormGroup>
                           </CCol>
-                          <CCol sm={3}>
+                          <CCol sm={5}>
                             <CFormGroup>
-                              <CLabel htmlFor="assigned_to">Assigned To</CLabel>
-                              <SelectInput
-                                touched={touched["assigned_to"]}
+                              <CLabel htmlFor="assignedTo">
+                                Assigned To{" "}
+                                <span className="sterick-field">*</span>
+                              </CLabel>
+
+                              <AsyncSelect
+                                touched={touched["assignedTo"]}
                                 handleBlur={setFieldTouched}
-                                error={errors["assigned_to"]}
-                                value={values["assigned_to"]}
+                                error={errors["assignedTo"]}
+                                value={values["assignedTo"]}
                                 setValue={setFieldValue}
-                                customHandleChange={(e) => {
-                                  setFieldValue("assigned_to", e.value);
-                                  if (isAlfursan) {
-                                    setFieldValue("received_by", e.value);
-                                  }
-                                }}
-                                options={
-                                  isAlfursan
-                                    ? [
-                                        {
-                                          value: "Ali",
-                                          label: "Ali",
-                                        },
-                                        {
-                                          value: "Usman",
-                                          label: "Usman",
-                                        },
-                                        {
-                                          value: "Daniel",
-                                          label: "Daniel",
-                                        },
-                                        {
-                                          value: "Sam",
-                                          label: "Sam",
-                                        },
-                                      ]
-                                    : [
-                                        {
-                                          value: "Dealer 1",
-                                          label: "Dealer 1",
-                                        },
-                                        {
-                                          value: "Dealer 2",
-                                          label: "Dealer 2",
-                                        },
-                                        {
-                                          value: "Dealer 3",
-                                          label: "Dealer 3",
-                                        },
-                                        {
-                                          value: "Dealer 4",
-                                          label: "Dealer 4",
-                                        },
-                                      ]
-                                }
-                                name="assigned_to"
+                                name="assignedTo"
+                                url={"admin"}
+                                noSameValue={true}
                               />
                             </CFormGroup>
                           </CCol>
                           <CCol sm={4}>
                             <CFormGroup>
-                              <CLabel htmlFor="received_by">Received By</CLabel>
-                              <SelectInput
-                                touched={touched["received_by"]}
+                              <CLabel htmlFor="recievedBy">
+                                Received By{" "}
+                                <span className="sterick-field">*</span>
+                              </CLabel>
+                              <AsyncSelect
+                                touched={touched["recievedBy"]}
                                 handleBlur={setFieldTouched}
-                                value={values["received_by"]}
+                                error={errors["recievedBy"]}
+                                value={values["recievedBy"]}
                                 setValue={setFieldValue}
-                                options={[
-                                  {
-                                    value: "Ali",
-                                    label: "Ali",
-                                  },
-                                  {
-                                    value: "Usman",
-                                    label: "Usman",
-                                  },
-                                  {
-                                    value: "Daniel",
-                                    label: "Daniel",
-                                  },
-                                  {
-                                    value: "Sam",
-                                    label: "Sam",
-                                  },
-                                ]}
-                                customHandleChange={(e) => {
-                                  if (e.value === "") {
-                                    setFieldValue("assigned_to", "");
-                                  } else {
-                                    setFieldValue("received_by", e.value);
-                                    // handleChange(e);
-                                  }
-                                }}
-                                name="received_by"
+                                name="recievedBy"
                               />
                             </CFormGroup>
                           </CCol>
@@ -298,10 +255,9 @@ function FileAssignment({
                         <CButton
                           type="submit"
                           className="button-color"
-                          onClick={() => {
-                            setShowClass(true);
-                            setFilter(!filter);
-                          }}
+                          // onClick={() => {
+
+                          // }}
                         >
                           Search
                         </CButton>
@@ -334,8 +290,13 @@ function FileAssignment({
       )}
       {showClass && (
         <>
-          <TableComponent dataCount={true} exportCSV={true} />
-
+          {tableData.length > 0 && (
+            <TableComponent
+              data={tableData}
+              dataCount={true}
+              exportCSV={true}
+            />
+          )}
           <CRow>
             <CCol xs="1"></CCol>
             <CCol xs={10}>
@@ -345,15 +306,15 @@ function FileAssignment({
                     <FileLongForm
                       hideBasicInfo={true}
                       data={{
-                        file_name: "",
-                        security_code: "",
-                        type: "",
-                        project_name: "",
+                        fileNo: "",
+                        fileSecurityNo: "",
+                        fileType: "",
+                        projectName: "",
                         status: "Sold",
                         assigned_to: "",
-                        assignment_date: new Date().toISOString().split("T")[0],
-                        received_by: "",
-                        received_date: new Date().toISOString().split("T")[0],
+                        assignedDate: new Date().toISOString().split("T")[0],
+                        recievedBy: "",
+                        recievedDate: new Date().toISOString().split("T")[0],
                         ...assignmentForm,
                       }}
                       handleSubmit={(val) => {
@@ -379,15 +340,6 @@ function FileAssignment({
                     }}
                     customSubmit={(val) => {
                       console.log("here are some values", val);
-                      // toast.success("The files are transferred successfully", {
-                      //   position: "top-right",
-                      //   autoClose: 3000,
-                      //   hideProgressBar: false,
-                      //   closeOnClick: true,
-                      //   pauseOnHover: true,
-                      //   draggable: true,
-                      //   progress: undefined,
-                      // });
                       history.push("/invoice");
                     }}
                     noCard={true}
