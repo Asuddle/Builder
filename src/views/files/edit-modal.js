@@ -10,15 +10,42 @@ import {
 } from "@coreui/react";
 import FileLongForm from "./longform";
 import PricingComponent from "./pricing";
+import { handleApi } from "src/reusable/api";
 
 function EditModal({ open = false, handleClose = () => {}, data }) {
   const [isPricing, setIsPricing] = useState(false);
+  const [firstForm, setFirstForm] = useState(data);
   const handleSubmitLongForm = (values) => {
+    let temp = { ...values };
+    delete temp["unitPrice"];
+    delete temp["discountPercentage"];
+    delete temp["minimumRequiredDeposit"];
+    setFirstForm(temp);
     setIsPricing(true);
   };
+  function removeCommas(str) {
+    return str.replaceAll(",", "");
+  }
   const handlePricing = (values, num) => {
-    setIsPricing(false);
-    handleClose();
+    // setIsPricing(false);
+    // handleClose();
+    let finalValues = JSON.parse(JSON.stringify({ ...values, ...firstForm }));
+    // finalValues["unitPrice"] = +removeCommas(finalValues["unitPrice"]);
+    finalValues["depositPercentage"] = parseFloat(
+      finalValues["depositPercentage"]
+    );
+    // finalValues["minimumRequiredDeposit"] = +removeCommas(
+    //   finalValues["minimumRequiredDeposit"]
+    // );
+    delete finalValues["total_price"];
+    delete finalValues["discount"];
+    delete finalValues["payable"];
+    delete finalValues["createdAt"];
+    delete finalValues["id"];
+    console.log(finalValues);
+    handleApi("put", `/plot-files/${values.id}`, finalValues).then((res) => {
+      console.log("here is the res", res);
+    });
   };
   const handleBack = () => {
     setIsPricing(!isPricing);
