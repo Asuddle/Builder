@@ -11,8 +11,10 @@ import {
 import FileLongForm from "./longform";
 import PricingComponent from "./pricing";
 import { handleApi } from "src/reusable/api";
+import { useHistory } from "react-router";
 
 function EditModal({ open = false, handleClose = () => {}, data }) {
+  const history = useHistory();
   const [isPricing, setIsPricing] = useState(false);
   const [firstForm, setFirstForm] = useState(data);
   const handleSubmitLongForm = (values) => {
@@ -43,9 +45,10 @@ function EditModal({ open = false, handleClose = () => {}, data }) {
     delete finalValues["createdAt"];
     delete finalValues["id"];
     console.log(finalValues);
-    handleApi("put", `/plot-files/${values.id}`, finalValues).then((res) => {
-      console.log("here is the res", res);
-    });
+    // handleApi("put", `/plot-files/${values.id}`, finalValues).then((res) => {
+    //   console.log("here is the res", res);
+    // });
+    history.push("/invoice");
   };
   const handleBack = () => {
     setIsPricing(!isPricing);

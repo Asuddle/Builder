@@ -350,7 +350,7 @@ function FileAssignment({
                     data={{
                       form3: {
                         unitPrice: "100,000",
-                        deposit: "10,000",
+                        minimumRequiredDeposit: "10,000",
                         depositPercentage: "10",
                         total_price: "1,000,0000",
                         discount: "500,000",
