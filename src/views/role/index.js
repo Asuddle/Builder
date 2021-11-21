@@ -17,6 +17,10 @@ import AsyncSelect from "src/reusable/asyncSelect";
 
 function RolePermissionComponent(props) {
   const [user, setUser] = useState("");
+  const handleGetData = (val) => {
+    setUser(val);
+  };
+  console.log("value here", user);
   return (
     <div>
       <CCard>
@@ -35,6 +39,7 @@ function RolePermissionComponent(props) {
                 error={""}
                 value={user}
                 setValue={setUser}
+                getAllData={handleGetData}
                 name="user"
                 url={"admin"}
               />
@@ -54,29 +59,13 @@ function RolePermissionComponent(props) {
               />
             </CCol>
           </CRow>
+          <table className="table table-striped table-hover">
+            <tbody></tbody>
+          </table>
         </CCardBody>
-        <div></div>
       </CCard>
     </div>
   );
 }
 
 export default RolePermissionComponent;
-{
-  /* <CTabs activeTab="home">
-        <CNav variant="tabs">
-          <CNavItem>
-            <CNavLink data-tab="home">Roles</CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink data-tab="profile">Permissions</CNavLink>
-          </CNavItem>
-        </CNav>
-        <CTabContent>
-          <CCard>
-            <CTabPane data-tab="home">123</CTabPane>
-            <CTabPane data-tab="profile">456</CTabPane>
-          </CCard>
-        </CTabContent>
-      </CTabs> */
-}

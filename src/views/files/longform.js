@@ -52,6 +52,7 @@ function FileLongForm({
 
   const customChecked = (val) => {
     setIsAlFursan(val);
+    console.log(val);
   };
   return (
     <div>
@@ -149,16 +150,28 @@ function FileLongForm({
                     <CLabel htmlFor="assignedTo">
                       Assigned To <span className="sterick-field">*</span>
                     </CLabel>
-
-                    <AsyncSelect
-                      touched={touched["assignedTo"]}
-                      handleBlur={setFieldTouched}
-                      error={errors["assignedTo"]}
-                      value={values["assignedTo"]}
-                      setValue={setFieldValue}
-                      name="assignedTo"
-                      url={"admin"}
-                    />
+                    {isAlfursan && (
+                      <AsyncSelect
+                        touched={touched["assignedTo"]}
+                        handleBlur={setFieldTouched}
+                        error={errors["assignedTo"]}
+                        value={values["assignedTo"]}
+                        setValue={setFieldValue}
+                        name="assignedTo"
+                        url={"admin"}
+                      />
+                    )}
+                    {!isAlfursan && (
+                      <AsyncSelect
+                        touched={touched["assignedTo"]}
+                        handleBlur={setFieldTouched}
+                        error={errors["assignedTo"]}
+                        value={values["assignedTo"]}
+                        setValue={setFieldValue}
+                        name="assignedTo"
+                        url={"dealer"}
+                      />
+                    )}
                   </CFormGroup>
                   <CFormGroup>
                     <CLabel htmlFor="vat">Assignment Date </CLabel>

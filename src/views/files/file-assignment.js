@@ -343,7 +343,6 @@ function FileAssignment({
                       setIsPricingForm(false);
                     }}
                     customSubmit={(val) => {
-                      console.log("here are some values", val);
                       history.push("/invoice");
                     }}
                     noCard={true}

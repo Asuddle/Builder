@@ -19,11 +19,11 @@ function AsyncSelect({
   optionLabel = "name",
   optionValue = "id",
   noSameValue = false,
+  getAllData = false,
 }) {
   const [optionData, setOptionData] = useState([]);
   const [targetUrl, setTargetUrl] = useState("admin");
   useEffect(() => {
-    console.log(url);
     setTargetUrl(url);
   }, [url]);
   const handleBlurEvent = () => {
@@ -46,9 +46,12 @@ function AsyncSelect({
   };
   const loadOptions = (inputValue = "", callback) => {
     console.log(`/${targetUrl}/search?name=${inputValue}`);
-    handleApi("get", `/${targetUrl}/search?name=${inputValue}`)
+    handleApi("get", `/${url}/search?name=${inputValue}`)
       .then((res) => {
         let arr = [];
+        if (getAllData) {
+          getAllData(res.data);
+        }
         res.data.forEach((item) => {
           arr.push({
             label: item[optionLabel],
