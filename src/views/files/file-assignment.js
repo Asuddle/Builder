@@ -63,7 +63,6 @@ function FileAssignment({
                 status: "Available",
               }}
               onSubmit={(values) => {
-                console.log("value here :", values);
                 let qString = "";
                 for (const key in values) {
                   if (values[key] !== "") {
@@ -104,17 +103,27 @@ function FileAssignment({
                             <CLabel htmlFor="assigned_to">
                               Assignment Date
                             </CLabel>
-                            <DateRangePicker>
-                              <input type="text" className="form-control " />
-                            </DateRangePicker>
+                            {/* <DateRangePicker> */}
+                            <input
+                              type="date"
+                              name="assignedDate"
+                              className="form-control"
+                              onChange={handleChange}
+                            />
+                            {/* </DateRangePicker> */}
                             <br />
                           </CCol>
 
                           <CCol sm={6}>
                             <CLabel htmlFor="assigned_to">Received Date</CLabel>
-                            <DateRangePicker>
-                              <input type="text" className="form-control " />
-                            </DateRangePicker>
+                            {/* <DateRangePicker> */}
+                            <input
+                              type="date"
+                              name="recievedDate"
+                              className="form-control"
+                              onChange={handleChange}
+                            />
+                            {/* </DateRangePicker> */}
                             <br />
                           </CCol>
                           <CCol sm={4}>
@@ -252,13 +261,7 @@ function FileAssignment({
                         </CRow>
                       </CCardBody>
                       <CCardFooter>
-                        <CButton
-                          type="submit"
-                          className="button-color"
-                          // onClick={() => {
-
-                          // }}
-                        >
+                        <CButton type="submit" className="button-color">
                           Search
                         </CButton>
                         {"  "}
@@ -318,14 +321,15 @@ function FileAssignment({
                         ...assignmentForm,
                       }}
                       handleSubmit={(val) => {
+                        // console.log("here is the value", val);
                         setAssignmentForm(val);
                         setIsPricingForm(true);
                       }}
                       customSchema={yup.object().shape({
-                        assignment_date: yup.string().required(),
-                        received_by: yup.string().required(),
-                        received_date: yup.string().required(),
-                        assigned_to: yup.string().required(),
+                        assignedDate: yup.string().required(),
+                        recievedBy: yup.string().required(),
+                        recievedDate: yup.string().required(),
+                        assignedTo: yup.string().required(),
                       })}
                     />
                   )}
@@ -345,12 +349,12 @@ function FileAssignment({
                     noCard={true}
                     data={{
                       form3: {
-                        price: "100,000",
+                        unitPrice: "100,000",
                         deposit: "10,000",
-                        deposit_percentage: "10",
+                        depositPercentage: "10",
                         total_price: "1,000,0000",
                         discount: "500,000",
-                        discount_percentage: "5",
+                        depositDiscountPercentage: "5",
                         payable: "950,000",
                         note: "Hey There It is a note",
                       },

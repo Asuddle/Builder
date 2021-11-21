@@ -43,11 +43,9 @@ function InvoiceComponent(props) {
                   </td>
 
                   <td>
-                    Invoice #: 123
+                    Invoice #: {new Date().toISOString().split("T")[0]} - 123
                     <br />
                     Created: {new Date().toISOString().split("T")[0]}
-                    <br />
-                    Due: {new Date().toISOString().split("T")[0]}
                   </td>
                 </tr>
               </table>
@@ -59,58 +57,46 @@ function InvoiceComponent(props) {
               <table>
                 <tr>
                   <td>
-                    Sparksuite, Inc.
-                    <br />
-                    12345 Sunny Road
-                    <br />
-                    Alfursan Properties,Lahore 51310
+                    Office#01, 1st Floor, Plaza# 17,
+                    <br /> Adjacent to hot & chilli,
+                    <br /> Mini Commercial Market,
+                    <br /> Phase 7 Bahria Town , Rawalpindi
                   </td>
 
                   <td>
-                    Acme Corp.
+                    Ch. Saqib
                     <br />
-                    John Doe
-                    <br />
-                    john@example.com
+                    ch.saqib@gmail.com
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
-
           <tr class="heading">
-            <td>Payment Method</td>
-
-            <td>Check #</td>
-          </tr>
-
-          <tr class="details">
-            <td>Check</td>
-
-            <td>1000</td>
-          </tr>
-
-          <tr class="heading">
-            <td>Item</td>
-
-            <td>Price</td>
+            {/* <td> */}
+            <h4>
+              <strong>Summary</strong>
+            </h4>
+            <br />
+            {/* </td> */}
+            {/* <td>Price</td> */}
           </tr>
 
           <tr class="item">
             <td>
-              <strong>4</strong> Files Transfer{" "}
+              No of files :<strong>4</strong>{" "}
             </td>
             <td>Rs 4 * 1,000,000</td>
           </tr>
 
           <tr class="item">
-            <td>Tax</td>
-            <td>Rs 1000</td>
+            <td>Total Payable: 4*7000</td>
+            <td>Rs 28000</td>
           </tr>
 
           <tr class="item">
-            <td>Discount</td>
-            <td>Rs 1000</td>
+            <td>Total Discount</td>
+            <td>30%</td>
           </tr>
           <tr class="item last">
             <td>Registration</td>
@@ -121,7 +107,7 @@ function InvoiceComponent(props) {
           <tr class="total">
             <td></td>
 
-            <td>Total: Rs 4,001,000</td>
+            <td>Total: Rs 4,030,000</td>
           </tr>
         </table>
       </div>
