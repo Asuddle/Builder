@@ -22,16 +22,16 @@ const FileDetails = ({ match }) => {
       setFileData(res.data);
     });
   }, []);
-  const userDetails = fileData
-    ? fileData
-    : [
-        [
-          "id",
-          <span>
-            <CIcon className="text-muted" name="cui-icon-ban" /> Not found
-          </span>,
-        ],
-      ];
+  // const userDetails = fileData
+  //   ? fileData
+  //   : [
+  //       [
+  //         "id",
+  //         <span>
+  //           <CIcon className="text-muted" name="cui-icon-ban" /> Not found
+  //         </span>,
+  //       ],
+  //     ];
   let labelToName = {
     id: "Identificaton Number",
     file_name: "File Name",
@@ -114,7 +114,7 @@ const FileDetails = ({ match }) => {
                   <tr key={index.toString()}>
                     <td>{`${labelToName[item]}:`}</td>
                     <td>
-                      <strong>{userDetails[item]}</strong>
+                      <strong>{fileData[item]}</strong>
                     </td>
                   </tr>
                 ))}
@@ -124,9 +124,23 @@ const FileDetails = ({ match }) => {
                 {assignmentInformation.map((item, index) => (
                   <tr key={index.toString()}>
                     <td>{`${labelToName[item]}:`}</td>
-                    <td>
-                      <strong>{userDetails[item]}</strong>
-                    </td>
+                    {index == 0 || index == 2 ? (
+                      <td>
+                        <strong>
+                          {fileData[item] == "2"
+                            ? "Ch Saqib"
+                            : fileData[item] == "3"
+                            ? "Muhammad Waqas Cheema"
+                            : fileData[item]
+                            ? "Shehroz Khan"
+                            : ""}
+                        </strong>
+                      </td>
+                    ) : (
+                      <td>
+                        <strong>{fileData[item]}</strong>
+                      </td>
+                    )}
                   </tr>
                 ))}
                 <br />
@@ -136,7 +150,7 @@ const FileDetails = ({ match }) => {
                   <tr key={index.toString()}>
                     <td>{`${labelToName[item]}:`}</td>
                     <td>
-                      <strong>{userDetails[item]}</strong>
+                      <strong>{fileData[item]}</strong>
                     </td>
                   </tr>
                 ))}
