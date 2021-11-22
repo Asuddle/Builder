@@ -17,6 +17,9 @@ import {
 import CIcon from "@coreui/icons-react";
 import { useDispatch } from "react-redux";
 import { handleApi } from "src/reusable/api";
+import SelectInput from "src/reusable/select";
+import AsyncSelect from "src/reusable/asyncSelect";
+import TextFieldComponent from "src/reusable/textfield";
 
 function addCommas(str) {
   return str
@@ -51,11 +54,22 @@ const getBadge = (status) => {
 
 const FilesTable = ({ isEdit, isDelete, refresh }) => {
   const [data, setData] = useState([]);
+  const [fileType, setFileType] = useState("");
+  const [status, setStatus] = useState("");
+  const [assignedTo, setAssignedTo] = useState("");
+  const [fileNo, setFileNo] = useState("");
+  const [fileSecurityNo, setFileSecurityNo] = useState("");
+  const [query, setQueryStr] = useState("");
+  const [assignedDate, setAssignedDate] = useState("");
+  // value={assignedDate}
+  //                 onChange={(e) => setAssignedDate(e.target.value)}
   useEffect(() => {
-    handleApi("get", "/plot-files").then((res) => {
-      setData(res.data);
-    });
-  }, [refresh]);
+    handleApi("get", `/plot-files/paginated?_limit=500&${query}`).then(
+      (res) => {
+        setData(res.data.data);
+      }
+    );
+  }, [refresh, query]);
   const dispatch = useDispatch();
   var SVGComponent = (props) => <svg {...props}>{props.children}</svg>;
   var CircleComponent = (props) => <circle {...props}>{props.children}</circle>;
@@ -213,80 +227,166 @@ const FilesTable = ({ isEdit, isDelete, refresh }) => {
     <CRow>
       <CCol xl={12}>
         <CCard>
-          <CCardHeader>Files</CCardHeader>
+          <CCardHeader>
+            <strong>Files</strong>
+          </CCardHeader>
           <CCardBody>
+            <CButton
+              style={{
+                marginRight: "20px",
+                float: "right",
+              }}
+              onClick={() => {
+                history.push("/files/add");
+              }}
+              color="success"
+              size="md"
+            >
+              {/* <AddIcon />  */}
+              Add New File
+            </CButton>
+            <br />
+            <br />
             <CRow>
-              <CCol xs={2}>
+              <CCol sm={4}>
+                <TextFieldComponent
+                  handleChange={(e) => setFileNo(e.target.value)}
+                  name="fileNo"
+                  value={fileNo}
+                  label={"File number"}
+                />
+              </CCol>
+              <CCol xs={5}>
+                <CLabel htmlFor="assigned_to">Assignment Date</CLabel>
+                {/* <DateRangePicker> */}
+                <input
+                  type="date"
+                  value={assignedDate}
+                  onChange={(e) => setAssignedDate(e.target.value)}
+                  name="assignedDate"
+                  className="form-control"
+                />
+              </CCol>
+              <CCol xs={3}>
                 <CFormGroup>
-                  <CLabel>Type</CLabel>
-                  <CSelect
-                    name="type"
-                    onChange={(e) => {}}
-                    custom
-                    name="type"
-                    id="ccmonth"
-                  >
-                    <option value="">Enter Type</option>
-                    <option value="5 Marla">5 Marla</option>
-                    <option value="10 Marla">10 Marla</option>
-                    <option value="15 Marla">15 Marla</option>
-                    <option value="20 Marla">20 Marla</option>
-                  </CSelect>
+                  <CLabel htmlFor="ccmonth">Type</CLabel>
+                  <SelectInput
+                    handleBlur={() => {}}
+                    touched={""}
+                    options={[
+                      {
+                        value: "5 Marla",
+                        label: "5 Marla",
+                      },
+                      {
+                        value: "10 Marla",
+                        label: "10 Marla",
+                      },
+                      {
+                        value: "15 Marla",
+                        label: "15 Marla",
+                      },
+                    ]}
+                    value={fileType}
+                    setValue={(val, val1) => setFileType(val1)}
+                    name="fileType"
+                  />
                 </CFormGroup>
               </CCol>
-              <CCol xs={2}>
-                <CFormGroup>
-                  <CLabel>Status</CLabel>
-                  <CSelect
-                    name="type"
-                    onChange={(e) => {}}
-                    custom
-                    name="type"
-                    id="ccmonth"
-                  >
-                    <option value="">Enter Status</option>
-                    <option value="5 Marla">Sold</option>
-                    <option value="10 Marla">Available</option>
-                    <option value="15 Marla">Reserved</option>
-                  </CSelect>
-                </CFormGroup>
+              <CCol sm={4}>
+                <TextFieldComponent
+                  handleChange={(e) => setFileSecurityNo(e.target.value)}
+                  name="fileSecurityNo"
+                  value={fileSecurityNo}
+                  label={"Security Number"}
+                />
               </CCol>
-              <CCol xs={2}>
+              <CCol xs={4}>
                 <CFormGroup>
                   <CLabel>Assigned To</CLabel>
-                  <CSelect
-                    name="type"
-                    onChange={(e) => {}}
-                    custom
-                    name="type"
-                    id="ccmonth"
-                  >
-                    <option value="">Assigned To</option>
-                    <option value="Ali">Ali</option>
-                    <option value="Usman">Usman</option>
-                    <option value="Daniel">Daniel</option>
-                    <option value="Usman">Usman</option>
-                  </CSelect>
+                  <AsyncSelect
+                    touched={""}
+                    handleBlur={() => {}}
+                    value={assignedTo}
+                    setValue={(val, val1) => setAssignedTo(val1)}
+                    name="assignedTo"
+                    url={"admin"}
+                    noSameValue={true}
+                  />
                 </CFormGroup>
               </CCol>
               <CCol xs={3}>
-                {/* <CLabel>Assigned Date</CLabel> */}
-                <br />
+                <CFormGroup>
+                  <CLabel htmlFor="status">Status</CLabel>
+                  <SelectInput
+                    touched={""}
+                    handleBlur={() => {}}
+                    value={status}
+                    setValue={(val, val1) => setStatus(val1)}
+                    options={[
+                      {
+                        value: "Available",
+                        label: "Available",
+                      },
+                      {
+                        value: "Sold",
+                        label: "Sold",
+                      },
+                      {
+                        value: "Reserved",
+                        label: "Reserved",
+                      },
+                    ]}
+                    name="status"
+                  />
+                </CFormGroup>
               </CCol>
-              <CCol xs={3} style={{ marginTop: "25px" }}>
+              <CCol xs={12}>
                 <CButton
                   style={{
                     marginRight: "20px",
                     float: "right",
                   }}
                   onClick={() => {
-                    history.push("/files/add");
+                    let qString = "";
+                    let arr = [
+                      { label: "fileType", value: fileType },
+                      { label: "status", value: status },
+                      { label: "assignedTo", value: assignedTo },
+                      { value: fileNo, label: "fileNo" },
+                      { value: fileSecurityNo, label: "fileSecurityNo" },
+                      { value: assignedDate, label: "assignedDate" },
+                    ];
+                    arr.map((item) => {
+                      if (item.value !== "") {
+                        qString = qString + `${item.label}=${item.value}`;
+                      }
+                    });
+                    setQueryStr(qString);
                   }}
-                  color="success"
+                  color="secondary"
                   size="md"
                 >
-                  {/* <AddIcon />  */}
-                  Add New File
+                  Filter
+                </CButton>
+                <CButton
+                  style={{
+                    marginRight: "20px",
+                    float: "right",
+                  }}
+                  onClick={() => {
+                    setFileType("");
+                    setStatus("");
+                    setAssignedTo("");
+                    setFileNo("");
+                    setFileSecurityNo("");
+                    setAssignedTo("");
+                    setQueryStr("");
+                  }}
+                  color="secondary"
+                  size="md"
+                >
+                  Reset Filter
                 </CButton>
               </CCol>
             </CRow>

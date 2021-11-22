@@ -72,7 +72,7 @@ const AddUsers = ({
           <div style={{ float: "right" }}>
             {badge === "platinum" && <img src={platinumBadge} width="35" />}
             {badge == "gold" && <img src={goldBadge} width="35" />}
-            {badge == "bronze" && <img src={bronzeBadge} width="35" />}
+            {/* {badge == "bronze" && <img src={bronzeBadge} width="35" />} */}
           </div>
         )}
         {/* <small> Form</small> */}
@@ -332,7 +332,7 @@ const AddUsers = ({
                     />
                   </CCol>
                 )}
-                {typeField !== "End User" && (
+                {typeField !== "End User" && typeField !== "Employee" && (
                   <CCol xs="12">
                     <CFormGroup row>
                       <CCol md="12">
@@ -401,14 +401,6 @@ const AddUsers = ({
                                 }}
                                 checked={values["badge"] === "bronze"}
                               />
-                              <CLabel
-                                variant="custom-checkbox"
-                                htmlFor="inline-radio3"
-                                style={{ display: "grid", textAlign: "center" }}
-                              >
-                                <img src={bronzeBadge} width="40" />
-                                <p>Bronze</p>
-                              </CLabel>
                             </CFormGroup>
                           </CCol>
                         </CRow>
