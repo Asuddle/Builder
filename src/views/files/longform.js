@@ -52,7 +52,6 @@ function FileLongForm({
 
   const customChecked = (val) => {
     setIsAlFursan(val);
-    console.log(val);
   };
   return (
     <div>

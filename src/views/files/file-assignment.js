@@ -46,7 +46,7 @@ function FileAssignment({
   const [showClass, setShowClass] = useState("");
   const [filter, setFilter] = useState(true);
   const [tableData, setTableData] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [queryString, setQueryString] = useState("");
   const [assignmentForm, setAssignmentForm] = useState({});
   const [isPricingForm, setIsPricingForm] = useState(false);
   return (
@@ -69,12 +69,10 @@ function FileAssignment({
                     qString = qString + `${key}=${values[key]}&`;
                   }
                 }
-                console.log("values", qString);
+                setQueryString(qString);
                 handleApi("get", `/plot-files/paginated?${qString}`).then(
                   (res) => {
-                    console.log("here is the response", res.data);
                     setTableData(res.data.data);
-                    setTotal(res.data.total);
 
                     setShowClass(true);
                     setFilter(false);
@@ -341,11 +339,50 @@ function FileAssignment({
                 {isPricingForm && (
                   <PricingComponent
                     handleBack={() => {
-                      console.log("here check");
                       setIsPricingForm(false);
                     }}
                     customSubmit={(val) => {
-                      history.push("/invoice");
+                      console.log(
+                        "here is the value:",
+                        queryString,
+                        assignmentForm,
+                        val
+                      );
+                      handleApi(
+                        "post",
+                        `/plot-files/bulk-assign?_limit=2&_start=0&_sortBy=id&_order=DESC&${queryString}`,
+                        {
+                          assignedTo: assignmentForm.assignedTo,
+                          assignedDate: assignmentForm.assignedDate,
+                          recievedBy: assignmentForm.recievedBy,
+                          recievedDate: assignmentForm.recievedDate,
+                        }
+                      )
+                        .then((res) => {
+                          toast.success("The files are assigned! ", {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                          });
+                          history.push("/invoice");
+                        })
+                        .catch((err) => {
+                          toast.error("Something went error!", {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                          });
+                          console.log(err);
+                        });
+                      // history.push("/invoice");
                     }}
                     noCard={true}
                     data={{

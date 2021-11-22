@@ -54,7 +54,6 @@ const FilesComponent = () => {
       setActive(num + 1);
     } else {
       let lastForm = { ...form.form3 };
-      console.log(lastForm);
       lastForm["unitPrice"] = +removeCommas(lastForm["unitPrice"]);
       lastForm["depositPercentage"] = parseFloat(lastForm["depositPercentage"]);
       lastForm["minimumRequiredDeposit"] = +removeCommas(

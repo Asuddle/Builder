@@ -34,7 +34,6 @@ const AddFiles = ({ nextForm, data, handleFormData, col = 6 }) => {
             validationSchema={schema}
             validateOnBlur
             onSubmit={(values) => {
-              console.log("values here", values);
               handleFormData(values, 1);
             }}
           >

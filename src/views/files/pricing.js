@@ -230,11 +230,7 @@ const PricingComponent = ({
                                 "payableDiscountPercentage",
                                 temp.toFixed(2)
                               );
-                              console.log(
-                                values["unitPrice"],
-                                values["minimumRequiredDeposit"],
-                                +val
-                              );
+
                               setFieldValue(
                                 "payable",
                                 values["minimumRequiredDeposit"] - val

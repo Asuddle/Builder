@@ -46,10 +46,8 @@ function EditModal({ open = false, handleClose = () => {}, data }) {
     delete finalValues["createdAt"];
     delete finalValues["id"];
     delete finalValues["payableDiscountPercentage"];
-    console.log(finalValues);
     handleApi("put", `/plot-files/${values.id}`, finalValues)
       .then((res) => {
-        console.log("here is the res", res);
         toast.success("The file is Edited Successfully ! ", {
           position: "top-right",
           autoClose: 3000,
@@ -63,7 +61,6 @@ function EditModal({ open = false, handleClose = () => {}, data }) {
         history.push("/invoice");
       })
       .catch((err) => {
-        console.log("err", err);
         toast.error("Something went wrong ! ", {
           position: "top-right",
           autoClose: 3000,
@@ -77,7 +74,6 @@ function EditModal({ open = false, handleClose = () => {}, data }) {
   };
   const handleBack = () => {
     setIsPricing(!isPricing);
-    console.log("back");
   };
   const handlingClose = () => {
     setIsPricing(false);

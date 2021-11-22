@@ -23,18 +23,14 @@ function RolePermissionComponent(props) {
   const [detailData, setDetailData] = useState({});
   const [finalData, setFinalData] = useState({});
   const handleGetData = (val) => {
-    console.log(val);
     setDetailData(val);
   };
   const handleUser = (val, val1) => {
     setUser(val1);
-    console.log(val, val1);
-    console.log(detailData);
+
     const temp = detailData.filter((item) => item.id == val1);
-    console.log("here is the temporary thing", temp);
     setFinalData(temp[0]);
   };
-  console.log(finalData);
   let accountRegistrationArray = [
     "End User's Registration",
     "Empoyee's Registration",

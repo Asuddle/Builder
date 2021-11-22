@@ -46,7 +46,6 @@ function AsyncSelect({
     }),
   };
   const loadOptions = (inputValue = "", callback) => {
-    console.log(`/${targetUrl}/search?name=${inputValue}`);
     handleApi("get", `/${url}/search?name=${inputValue}`)
       .then((res) => {
         let arr = [];
