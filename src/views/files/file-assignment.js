@@ -211,6 +211,7 @@ function FileAssignment({
                                 setValue={setFieldValue}
                                 name="assignedTo"
                                 url={"admin"}
+                                defaultVal={values["assignedTo"]}
                                 noSameValue={true}
                               />
                             </CFormGroup>
@@ -226,6 +227,7 @@ function FileAssignment({
                                 handleBlur={setFieldTouched}
                                 error={errors["recievedBy"]}
                                 value={values["recievedBy"]}
+                                defaultVal={values["recievedBy"]}
                                 setValue={setFieldValue}
                                 name="recievedBy"
                               />

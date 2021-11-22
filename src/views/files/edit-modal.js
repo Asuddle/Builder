@@ -12,6 +12,7 @@ import FileLongForm from "./longform";
 import PricingComponent from "./pricing";
 import { handleApi } from "src/reusable/api";
 import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 
 function EditModal({ open = false, handleClose = () => {}, data }) {
   const history = useHistory();
@@ -32,23 +33,47 @@ function EditModal({ open = false, handleClose = () => {}, data }) {
     // setIsPricing(false);
     // handleClose();
     let finalValues = JSON.parse(JSON.stringify({ ...values, ...firstForm }));
-    // finalValues["unitPrice"] = +removeCommas(finalValues["unitPrice"]);
+    finalValues["unitPrice"] = +removeCommas(finalValues["unitPrice"]);
     finalValues["depositPercentage"] = parseFloat(
       finalValues["depositPercentage"]
     );
-    // finalValues["minimumRequiredDeposit"] = +removeCommas(
-    //   finalValues["minimumRequiredDeposit"]
-    // );
+    finalValues["minimumRequiredDeposit"] = +removeCommas(
+      finalValues["minimumRequiredDeposit"]
+    );
     delete finalValues["total_price"];
     delete finalValues["discount"];
     delete finalValues["payable"];
     delete finalValues["createdAt"];
     delete finalValues["id"];
+    delete finalValues["payableDiscountPercentage"];
     console.log(finalValues);
-    // handleApi("put", `/plot-files/${values.id}`, finalValues).then((res) => {
-    //   console.log("here is the res", res);
-    // });
-    history.push("/invoice");
+    handleApi("put", `/plot-files/${values.id}`, finalValues)
+      .then((res) => {
+        console.log("here is the res", res);
+        toast.success("The file is Edited Successfully ! ", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        history.push("/invoice");
+      })
+      .catch((err) => {
+        console.log("err", err);
+        toast.error("Something went wrong ! ", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
   const handleBack = () => {
     setIsPricing(!isPricing);

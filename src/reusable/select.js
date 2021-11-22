@@ -15,9 +15,10 @@ function SelectInput({
   error,
   customHandleChange = false,
   touched,
-  disable=false
+  disable = false,
+  defaultVal = "",
 }) {
-
+  console.log("here is the default Val", defaultVal);
   const handleBlurEvent = () => {
     handleBlur(name, true);
   };
@@ -45,6 +46,7 @@ function SelectInput({
           value={
             options ? options.find((option) => option.value === value) : ""
           }
+          defaultValue={[{ label: defaultVal, value: defaultVal }]}
           isClearable={isClearable}
           isDisabled={disable}
           isSearchable={isSearchable}

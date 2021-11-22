@@ -18,6 +18,7 @@ function AsyncSelect({
   url = "admin",
   optionLabel = "name",
   optionValue = "id",
+  defaultVal = "",
   noSameValue = false,
   getAllData = false,
 }) {
@@ -79,6 +80,7 @@ function AsyncSelect({
         }}
         onBlur={handleBlurEvent}
         name={name}
+        defaultValue={[{ label: defaultVal, value: defaultVal }]}
         value={optionData.filter((item) => item["value"] === value)}
         styles={style}
       />

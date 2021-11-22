@@ -104,6 +104,7 @@ function RolePermissionComponent(props) {
                   handleBlur={() => {}}
                   error={""}
                   value={user}
+                  defaultVal={user}
                   getAllData={handleGetData}
                   setValue={handleUser}
                   name="user"
@@ -115,6 +116,7 @@ function RolePermissionComponent(props) {
                   touched={""}
                   handleBlur={() => {}}
                   error={""}
+                  defaultVal={user}
                   value={user}
                   getAllData={handleGetData}
                   setValue={handleUser}

@@ -129,6 +129,7 @@ function FileLongForm({
                             { value: "Bahria", label: "Bahria" },
                             { value: "DHA", label: "DHA" },
                           ]}
+                          defaultVal={values["projectName"]}
                           touched={touched["fileType"]}
                           disable={disableFields}
                           handleBlur={setFieldTouched}
@@ -158,6 +159,7 @@ function FileLongForm({
                         value={values["assignedTo"]}
                         setValue={setFieldValue}
                         name="assignedTo"
+                        defaultVal={values["assignedTo"]}
                         url={"admin"}
                       />
                     )}
@@ -166,8 +168,10 @@ function FileLongForm({
                         touched={touched["assignedTo"]}
                         handleBlur={setFieldTouched}
                         error={errors["assignedTo"]}
+                        defaultVal={values["assignedTo"]}
                         value={values["assignedTo"]}
                         setValue={setFieldValue}
+                        defaultVal={values["assignedTo"]}
                         name="assignedTo"
                         url={"dealer"}
                       />
@@ -278,6 +282,7 @@ function FileLongForm({
                           touched={touched["recievedBy"]}
                           handleBlur={setFieldTouched}
                           error={errors["recievedBy"]}
+                          defaultVal={values["recievedBy"]}
                           value={values["recievedBy"]}
                           setValue={setFieldValue}
                           name="recievedBy"

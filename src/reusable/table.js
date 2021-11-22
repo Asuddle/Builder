@@ -4,6 +4,8 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import PropTypes from "prop-types";
 import ToolkitProvider, { CSVExport } from "react-bootstrap-table2-toolkit";
+import overlayFactory from "react-bootstrap-table2-overlay";
+
 import { cilTrash, cilPencil, cilFile, cilCircle } from "@coreui/icons";
 import {
   CBadge,
@@ -192,6 +194,7 @@ function TableComponent({
                     data={data}
                     columns={columns}
                     bordered={false}
+                    overlay={overlayFactory({ spinner: true })}
                     pagination={paginationFactory()}
                     exportCSV={{
                       fileName: "custom.csv",

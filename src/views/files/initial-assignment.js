@@ -64,6 +64,7 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
                       handleBlur={setFieldTouched}
                       error={errors["assignedTo"]}
                       value={values["assignedTo"]}
+                      defaultVal={values["assignedTo"]}
                       setValue={setFieldValue}
                       name="assignedTo"
                     />
@@ -118,6 +119,7 @@ const AddInitialAssignment = ({ handleFormData, data, col = 6 }) => {
                           handleBlur={setFieldTouched}
                           error={errors["recievedBy"]}
                           value={values["recievedBy"]}
+                          defaultVal={values["recievedBy"]}
                           setValue={setFieldValue}
                           name="recievedBy"
                         />
